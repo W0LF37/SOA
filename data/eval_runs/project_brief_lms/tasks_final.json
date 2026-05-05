@@ -1,0 +1,323 @@
+{
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Implement course builder with video lessons, quizzes workflow",
+      "description": "The system should provide course builder with video lessons, quizzes, assignments, and rich-text content.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "source": "REQ-01",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T002",
+      "title": "Implement student enrollment, progress tracking, and completion certificates generation workflow",
+      "description": "Actor: Student — The Student should provide student enrollment, progress tracking, and completion certificates generation.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "source": "REQ-02",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T003",
+      "title": "Implement quiz engine with multiple question types workflow",
+      "description": "The system should provide quiz engine with multiple question types, time limits, and auto-grading.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-03",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T004",
+      "title": "Implement discussion forums per course with moderation and notification features workflow",
+      "description": "The system should provide discussion forums per course with moderation and notification features.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T001",
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "source": "REQ-04",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Channel delivery retries and failure handling need testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T005",
+      "title": "Implement live session integration (Zoom/WebRTC) with recording workflow",
+      "description": "The system should provide live session integration (Zoom/WebRTC) with recording and attendance tracking.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 3,
+      "complexity_reason": "Requires authentication or multi-step verification workflow.",
+      "dependencies": [
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "source": "REQ-05",
+      "estimated_hours": 32,
+      "estimated_days": 4,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.0,
+        "integration_overhead": 8,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T006",
+      "title": "Implement learning path builder: prerequisite courses workflow",
+      "description": "The system should provide learning path builder: prerequisite courses and adaptive progression rules.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T008",
+        "T009"
+      ],
+      "source": "REQ-06",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T007",
+      "title": "Implement analytics dashboard",
+      "description": "Actor: Instructor — The Instructor should provide analytics dashboard for instructors: completion rates, quiz scores, engagement.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "source": "REQ-07",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Dashboard usability depends on stable analytics contracts and latency",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T008",
+      "title": "Optimize concurrent user capacity",
+      "description": "The system should maintain responsive performance for concurrent users.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-08",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T009",
+      "title": "Optimize adaptive video streaming quality",
+      "description": "The system should adapt to bandwidth (adaptive bitrate, 360p–1080p).",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-09",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T010",
+      "title": "Enforce accessibility requirements",
+      "description": "The system should meet accessibility requirements.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [],
+      "source": "REQ-10",
+      "estimated_hours": 30,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    }
+  ],
+  "tech_stack": {
+    "frontend": [
+      "accessibility layer"
+    ],
+    "backend": [],
+    "database": [
+      "relational database"
+    ],
+    "devops": [],
+    "external_services": [
+      "lms integration"
+    ],
+    "detected_from": "requirements+inferred"
+  }
+}

@@ -1,0 +1,578 @@
+{
+  "generated_at": "2026-05-01T10:34:19.592675+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/ui_chips/clinic_system/critic_report.json"
+  },
+  "input_file": "data/eval_runs/ui_chips/clinic_system.txt",
+  "tasks_file": "data/eval_runs/ui_chips/clinic_system/tasks.json",
+  "graph_file": "data/eval_runs/ui_chips/clinic_system/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 9,
+    "task_count": 9,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "crud",
+        "count": 3
+      },
+      {
+        "theme": "performance",
+        "count": 2
+      },
+      {
+        "theme": "identity",
+        "count": 1
+      },
+      {
+        "theme": "view",
+        "count": 1
+      },
+      {
+        "theme": "notification",
+        "count": 1
+      },
+      {
+        "theme": "localization",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize system uptime and reliability constraints",
+        "complexity": 4,
+        "source": "REQ-06"
+      },
+      {
+        "id": "T009",
+        "title": "Optimize response time performance constraints",
+        "complexity": 4,
+        "source": "REQ-09"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 9,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should Register new patients using national ID and contact details.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement national ID registration workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should Book and manage patient appointments for available doctors.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement appointment booking workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "Actor: Doctor — The Doctor should Allow doctors to view patient history and record diagnosis.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement patient history and record diagnosis viewing workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should Generate itemized invoices for consultations and lab tests.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement itemized invoices for consultations and lab creation workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should Send appointment reminders to patients via email.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement appointment reminders to patients notification workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should maintain high availability.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Optimize system uptime and reliability constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should meet accessibility requirements.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Enforce accessibility requirements"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should support Arabic and English UI.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Enable Arabic/English RTL/LTR localization support"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-09",
+        "original_requirement": "The system should respond within two seconds for all standard operations.",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Optimize response time performance constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 4,
+        "task_ids": [
+          "T006",
+          "T007",
+          "T008",
+          "T009"
+        ],
+        "headline": "Stage 1 expands localization and experience coverage",
+        "dominant_themes": [
+          "performance",
+          "localization"
+        ],
+        "titles": [
+          "Optimize system uptime and reliability constraints",
+          "Enforce accessibility requirements",
+          "Enable Arabic/English RTL/LTR localization support",
+          "Optimize response time performance constraints"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "headline": "Stage 2 establishes account and identity foundations",
+        "dominant_themes": [
+          "identity"
+        ],
+        "titles": [
+          "Implement national ID registration workflow"
+        ]
+      },
+      {
+        "stage": 3,
+        "task_count": 2,
+        "task_ids": [
+          "T002",
+          "T004"
+        ],
+        "headline": "Stage 3 delivers core product workflows",
+        "dominant_themes": [
+          "crud"
+        ],
+        "titles": [
+          "Implement appointment booking workflow",
+          "Implement itemized invoices for consultations and lab creation workflow"
+        ]
+      },
+      {
+        "stage": 4,
+        "task_count": 2,
+        "task_ids": [
+          "T003",
+          "T005"
+        ],
+        "headline": "Stage 4 delivers user communications and alerting",
+        "dominant_themes": [
+          "view",
+          "notification",
+          "crud"
+        ],
+        "titles": [
+          "Implement patient history and record diagnosis viewing workflow",
+          "Implement appointment reminders to patients notification workflow"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "2 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: hospital operations and clinical workflow management.",
+      "scope_assessment": "Scope includes 5 functional task(s) and 4 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "9 requirements -> 9 atomic tasks across 4 delivery sprints. Critical delivery path: T006 -> T001 -> T002 -> T003 (4 hops, ~10 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Enforce accessibility requirements blocks 5 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 4 tasks can start immediately in Sprint 1. Effort breakdown: 236 estimated hours | FR: 100h | NFR: 136h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: hospital operations and clinical workflow management.",
+    "scope_assessment": "Scope includes 5 functional task(s) and 4 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "9 requirements -> 9 atomic tasks across 4 delivery sprints. Critical delivery path: T006 -> T001 -> T002 -> T003 (4 hops, ~10 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Enforce accessibility requirements blocks 5 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 4 tasks can start immediately in Sprint 1. Effort breakdown: 236 estimated hours | FR: 100h | NFR: 136h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Performance & Reliability Validation",
+      "goal": "Performance, reliability, and scalability targets are validated against realistic load",
+      "tasks": [
+        "T006",
+        "T007",
+        "T008",
+        "T009"
+      ],
+      "total_estimated_hours": 136,
+      "total_points": 14,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer",
+        "Frontend Engineer",
+        "Platform Engineer"
+      ],
+      "focus_themes": [
+        "performance",
+        "localization"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Identity",
+      "goal": "Account identity, authentication, and permission foundations are ready for downstream workflows",
+      "tasks": [
+        "T001"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "identity"
+      ]
+    },
+    {
+      "sprint": 3,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T002",
+        "T004"
+      ],
+      "total_estimated_hours": 40,
+      "total_points": 4,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud"
+      ]
+    },
+    {
+      "sprint": 4,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T003",
+        "T005"
+      ],
+      "total_estimated_hours": 40,
+      "total_points": 4,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "view",
+        "notification",
+        "crud"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 236,
+    "total_estimated_days": 30,
+    "fr_estimated_hours": 100,
+    "nfr_estimated_hours": 136
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007"
+      ],
+      "task_count": 6,
+      "estimated_hours": 130,
+      "focus": "core workflows, identity, information access"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T006",
+        "T009"
+      ],
+      "task_count": 2,
+      "estimated_hours": 76,
+      "focus": "performance"
+    },
+    {
+      "role": "Frontend Engineer",
+      "task_ids": [
+        "T008"
+      ],
+      "task_count": 1,
+      "estimated_hours": 30,
+      "focus": "localization"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 7,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007",
+        "T008"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 2,
+      "task_ids": [
+        "T006",
+        "T009"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 9,
+    "total_dependencies": 19,
+    "fr_count": 5,
+    "nfr_count": 4,
+    "avg_complexity": 2.67,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 5,
+      "3": 2,
+      "4": 2,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 9,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T006",
+        "T001",
+        "T002",
+        "T003"
+      ],
+      "titles": [
+        "Optimize system uptime and reliability constraints",
+        "Implement national ID registration workflow",
+        "Implement appointment booking workflow",
+        "Implement patient history and record diagnosis viewing workflow"
+      ],
+      "total_weight": 6,
+      "length": 4
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T007",
+        "title": "Enforce accessibility requirements",
+        "blocks": 5,
+        "complexity": 3
+      },
+      {
+        "id": "T006",
+        "title": "Optimize system uptime and reliability constraints",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T009",
+        "title": "Optimize response time performance constraints",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T001",
+        "title": "Implement national ID registration workflow",
+        "blocks": 4,
+        "complexity": 2
+      },
+      {
+        "id": "T002",
+        "title": "Implement appointment booking workflow",
+        "blocks": 1,
+        "complexity": 2
+      }
+    ],
+    "root_tasks": [
+      "T006",
+      "T007",
+      "T008",
+      "T009"
+    ],
+    "leaf_tasks": [
+      "T003",
+      "T005",
+      "T008"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T006",
+        "T007",
+        "T008",
+        "T009"
+      ],
+      [
+        "T001"
+      ],
+      [
+        "T002",
+        "T004"
+      ],
+      [
+        "T003",
+        "T005"
+      ]
+    ],
+    "parallel_group_count": 4
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/ui_chips/clinic_system/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/ui_chips/clinic_system/tasks_final.json"
+  }
+}

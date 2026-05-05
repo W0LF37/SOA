@@ -1,0 +1,920 @@
+[
+  {
+    "brief": "project_brief_crm.txt",
+    "input": {
+      "fr_signals": 9,
+      "nfr_signals": 2,
+      "total_bullets": 11,
+      "chars": 1054,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.15,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 6,
+      "nfr": 4,
+      "complexity_avg": 2.9,
+      "complexity_max": 4,
+      "with_dependencies": 4,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [],
+      "backend": [
+        "compliance controls"
+      ],
+      "database": [
+        "relational database"
+      ],
+      "devops": [],
+      "external_services": [],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 2,
+    "plan": {
+      "total_hours": 292,
+      "fr_hours": 138,
+      "nfr_hours": 154,
+      "total_days": 37,
+      "sprint_count": 2,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 2,
+      "is_valid_dag": true,
+      "total_dependencies": 12,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: CRM and sales operations."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 6,
+      "nfr_covered": 4
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "critical",
+      "score": 0.7,
+      "high": 4,
+      "medium": 2,
+      "low": 0,
+      "total": 6,
+      "categories": {
+        "bottleneck": 3,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_ecommerce.txt",
+    "input": {
+      "fr_signals": 9,
+      "nfr_signals": 3,
+      "total_bullets": 12,
+      "chars": 1823,
+      "lines": 43
+    },
+    "elapsed_seconds": 0.19,
+    "error": null,
+    "tasks": {
+      "total": 13,
+      "fr": 7,
+      "nfr": 6,
+      "complexity_avg": 2.77,
+      "complexity_max": 4,
+      "with_dependencies": 7,
+      "low_confidence": 1,
+      "optional": 1,
+      "has_type_reason": 13,
+      "has_complexity_reason": 13
+    },
+    "tech_stack": {
+      "frontend": [
+        "web frontend",
+        "accessibility layer",
+        "i18n localization"
+      ],
+      "backend": [
+        "application api",
+        "auth and authorization"
+      ],
+      "database": [],
+      "devops": [
+        "availability monitoring"
+      ],
+      "external_services": [
+        "payment gateway"
+      ],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 7,
+    "plan": {
+      "total_hours": 356,
+      "fr_hours": 160,
+      "nfr_hours": 196,
+      "total_days": 45,
+      "sprint_count": 3,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 3,
+      "is_valid_dag": true,
+      "total_dependencies": 27,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: commerce and transactional order management."
+    },
+    "coverage": {
+      "requirements": 13,
+      "covered": 13,
+      "fr_covered": 7,
+      "nfr_covered": 6
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "critical",
+      "score": 0.85,
+      "high": 1,
+      "medium": 2,
+      "low": 0,
+      "total": 5,
+      "categories": {
+        "bottleneck": 2,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_fintech.txt",
+    "input": {
+      "fr_signals": 6,
+      "nfr_signals": 5,
+      "total_bullets": 11,
+      "chars": 1015,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.11,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 5,
+      "nfr": 5,
+      "complexity_avg": 2.9,
+      "complexity_max": 4,
+      "with_dependencies": 6,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [],
+      "backend": [
+        "compliance controls"
+      ],
+      "database": [
+        "relational database"
+      ],
+      "devops": [],
+      "external_services": [
+        "payment gateway",
+        "identity verification"
+      ],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 4,
+    "plan": {
+      "total_hours": 294,
+      "fr_hours": 118,
+      "nfr_hours": 176,
+      "total_days": 37,
+      "sprint_count": 4,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 4,
+      "is_valid_dag": true,
+      "total_dependencies": 24,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: fintech, payments, and billing operations."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 5,
+      "nfr_covered": 5
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "critical",
+      "score": 1.0,
+      "high": 1,
+      "medium": 3,
+      "low": 0,
+      "total": 8,
+      "categories": {
+        "bottleneck": 5,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_hard.txt",
+    "input": {
+      "fr_signals": 10,
+      "nfr_signals": 6,
+      "total_bullets": 16,
+      "chars": 2063,
+      "lines": 45
+    },
+    "elapsed_seconds": 0.21,
+    "error": null,
+    "tasks": {
+      "total": 14,
+      "fr": 8,
+      "nfr": 6,
+      "complexity_avg": 2.93,
+      "complexity_max": 4,
+      "with_dependencies": 7,
+      "low_confidence": 1,
+      "optional": 1,
+      "has_type_reason": 14,
+      "has_complexity_reason": 14
+    },
+    "tech_stack": {
+      "frontend": [
+        "web frontend",
+        "responsive web ui",
+        "i18n localization"
+      ],
+      "backend": [
+        "application api",
+        "auth and authorization"
+      ],
+      "database": [
+        "relational database"
+      ],
+      "devops": [
+        "availability monitoring",
+        "horizontal scaling"
+      ],
+      "external_services": [
+        "payment gateway",
+        "email service",
+        "lms integration"
+      ],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 11,
+    "plan": {
+      "total_hours": 372,
+      "fr_hours": 182,
+      "nfr_hours": 190,
+      "total_days": 47,
+      "sprint_count": 4,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 4,
+      "is_valid_dag": true,
+      "total_dependencies": 36,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: education and learning management."
+    },
+    "coverage": {
+      "requirements": 14,
+      "covered": 14,
+      "fr_covered": 8,
+      "nfr_covered": 6
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "critical",
+      "score": 0.9,
+      "high": 1,
+      "medium": 3,
+      "low": 0,
+      "total": 6,
+      "categories": {
+        "bottleneck": 2,
+        "schedule": 3,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_hr_system.txt",
+    "input": {
+      "fr_signals": 8,
+      "nfr_signals": 3,
+      "total_bullets": 11,
+      "chars": 1020,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.12,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 7,
+      "nfr": 3,
+      "complexity_avg": 2.7,
+      "complexity_max": 4,
+      "with_dependencies": 3,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [],
+      "backend": [
+        "auth and authorization"
+      ],
+      "database": [],
+      "devops": [],
+      "external_services": [],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 1,
+    "plan": {
+      "total_hours": 256,
+      "fr_hours": 150,
+      "nfr_hours": 106,
+      "total_days": 32,
+      "sprint_count": 2,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 2,
+      "is_valid_dag": true,
+      "total_dependencies": 6,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: HR and employee operations."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 7,
+      "nfr_covered": 3
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "medium",
+      "score": 0.3,
+      "high": 1,
+      "medium": 3,
+      "low": 0,
+      "total": 4,
+      "categories": {
+        "bottleneck": 1,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_iot_dashboard.txt",
+    "input": {
+      "fr_signals": 7,
+      "nfr_signals": 4,
+      "total_bullets": 11,
+      "chars": 1081,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.11,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 6,
+      "nfr": 4,
+      "complexity_avg": 2.5,
+      "complexity_max": 4,
+      "with_dependencies": 4,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [],
+      "backend": [],
+      "database": [],
+      "devops": [],
+      "external_services": [],
+      "detected_from": "requirements"
+    },
+    "tech_stack_count": 0,
+    "plan": {
+      "total_hours": 248,
+      "fr_hours": 120,
+      "nfr_hours": 128,
+      "total_days": 31,
+      "sprint_count": 2,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 2,
+      "is_valid_dag": true,
+      "total_dependencies": 5,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: IoT monitoring and device operations."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 6,
+      "nfr_covered": 4
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "high",
+      "score": 0.6,
+      "high": 3,
+      "medium": 3,
+      "low": 0,
+      "total": 6,
+      "categories": {
+        "bottleneck": 2,
+        "schedule": 2,
+        "dependency": 1,
+        "resource": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_library.txt",
+    "input": {
+      "fr_signals": 9,
+      "nfr_signals": 1,
+      "total_bullets": 10,
+      "chars": 1620,
+      "lines": 39
+    },
+    "elapsed_seconds": 0.12,
+    "error": null,
+    "tasks": {
+      "total": 9,
+      "fr": 6,
+      "nfr": 3,
+      "complexity_avg": 2.56,
+      "complexity_max": 4,
+      "with_dependencies": 5,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 9,
+      "has_complexity_reason": 9
+    },
+    "tech_stack": {
+      "frontend": [
+        "web frontend"
+      ],
+      "backend": [
+        "application api"
+      ],
+      "database": [
+        "relational database"
+      ],
+      "devops": [
+        "availability monitoring"
+      ],
+      "external_services": [],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 4,
+    "plan": {
+      "total_hours": 226,
+      "fr_hours": 120,
+      "nfr_hours": 106,
+      "total_days": 29,
+      "sprint_count": 3,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 3,
+      "is_valid_dag": true,
+      "total_dependencies": 11,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: library and borrowing management."
+    },
+    "coverage": {
+      "requirements": 9,
+      "covered": 9,
+      "fr_covered": 6,
+      "nfr_covered": 3
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "high",
+      "score": 0.4,
+      "high": 2,
+      "medium": 2,
+      "low": 0,
+      "total": 4,
+      "categories": {
+        "bottleneck": 2,
+        "schedule": 1,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_lms.txt",
+    "input": {
+      "fr_signals": 9,
+      "nfr_signals": 2,
+      "total_bullets": 11,
+      "chars": 1065,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.11,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 7,
+      "nfr": 3,
+      "complexity_avg": 2.6,
+      "complexity_max": 4,
+      "with_dependencies": 6,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [
+        "accessibility layer"
+      ],
+      "backend": [],
+      "database": [
+        "relational database"
+      ],
+      "devops": [],
+      "external_services": [
+        "lms integration"
+      ],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 3,
+    "plan": {
+      "total_hours": 258,
+      "fr_hours": 152,
+      "nfr_hours": 106,
+      "total_days": 33,
+      "sprint_count": 3,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 3,
+      "is_valid_dag": true,
+      "total_dependencies": 18,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: education and learning management."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 7,
+      "nfr_covered": 3
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "high",
+      "score": 0.65,
+      "high": 2,
+      "medium": 1,
+      "low": 0,
+      "total": 4,
+      "categories": {
+        "bottleneck": 2,
+        "schedule": 1,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_saas_billing.txt",
+    "input": {
+      "fr_signals": 9,
+      "nfr_signals": 2,
+      "total_bullets": 11,
+      "chars": 1098,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.13,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 7,
+      "nfr": 3,
+      "complexity_avg": 2.8,
+      "complexity_max": 4,
+      "with_dependencies": 7,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [],
+      "backend": [],
+      "database": [
+        "relational database"
+      ],
+      "devops": [],
+      "external_services": [
+        "stripe"
+      ],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 2,
+    "plan": {
+      "total_hours": 286,
+      "fr_hours": 178,
+      "nfr_hours": 108,
+      "total_days": 36,
+      "sprint_count": 3,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 3,
+      "is_valid_dag": true,
+      "total_dependencies": 18,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: fintech, payments, and billing operations."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 7,
+      "nfr_covered": 3
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "critical",
+      "score": 0.8,
+      "high": 1,
+      "medium": 1,
+      "low": 0,
+      "total": 4,
+      "categories": {
+        "bottleneck": 2,
+        "schedule": 1,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_sample.txt",
+    "input": {
+      "fr_signals": 7,
+      "nfr_signals": 3,
+      "total_bullets": 10,
+      "chars": 1175,
+      "lines": 35
+    },
+    "elapsed_seconds": 0.09,
+    "error": null,
+    "tasks": {
+      "total": 9,
+      "fr": 5,
+      "nfr": 4,
+      "complexity_avg": 2.67,
+      "complexity_max": 4,
+      "with_dependencies": 5,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 9,
+      "has_complexity_reason": 9
+    },
+    "tech_stack": {
+      "frontend": [
+        "web frontend",
+        "accessibility layer",
+        "i18n localization"
+      ],
+      "backend": [
+        "application api"
+      ],
+      "database": [
+        "relational database"
+      ],
+      "devops": [
+        "availability monitoring"
+      ],
+      "external_services": [],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 6,
+    "plan": {
+      "total_hours": 236,
+      "fr_hours": 100,
+      "nfr_hours": 136,
+      "total_days": 30,
+      "sprint_count": 4,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 4,
+      "is_valid_dag": true,
+      "total_dependencies": 19,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: hospital operations and clinical workflow management."
+    },
+    "coverage": {
+      "requirements": 9,
+      "covered": 9,
+      "fr_covered": 5,
+      "nfr_covered": 4
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "critical",
+      "score": 0.7,
+      "high": 4,
+      "medium": 2,
+      "low": 0,
+      "total": 6,
+      "categories": {
+        "bottleneck": 3,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  },
+  {
+    "brief": "project_brief_social_platform.txt",
+    "input": {
+      "fr_signals": 10,
+      "nfr_signals": 1,
+      "total_bullets": 11,
+      "chars": 1065,
+      "lines": 22
+    },
+    "elapsed_seconds": 0.12,
+    "error": null,
+    "tasks": {
+      "total": 10,
+      "fr": 7,
+      "nfr": 3,
+      "complexity_avg": 2.7,
+      "complexity_max": 4,
+      "with_dependencies": 3,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 10,
+      "has_complexity_reason": 10
+    },
+    "tech_stack": {
+      "frontend": [],
+      "backend": [],
+      "database": [],
+      "devops": [
+        "horizontal scaling"
+      ],
+      "external_services": [],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 1,
+    "plan": {
+      "total_hours": 258,
+      "fr_hours": 144,
+      "nfr_hours": 114,
+      "total_days": 33,
+      "sprint_count": 3,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 3,
+      "is_valid_dag": true,
+      "total_dependencies": 7,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: social platform and content moderation."
+    },
+    "coverage": {
+      "requirements": 10,
+      "covered": 10,
+      "fr_covered": 7,
+      "nfr_covered": 3
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "medium",
+      "score": 0.3,
+      "high": 1,
+      "medium": 3,
+      "low": 0,
+      "total": 4,
+      "categories": {
+        "bottleneck": 1,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  }
+]

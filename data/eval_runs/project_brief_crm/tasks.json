@@ -1,0 +1,313 @@
+{
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Implement contact and account management with custom fields and activity timeline dashboard",
+      "description": "The system should provide contact and account management with custom fields and activity timeline.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "source": "REQ-01",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Dashboard usability depends on stable analytics contracts and latency"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T002",
+      "title": "Implement deal pipeline with drag-and-drop stages, probability workflow",
+      "description": "The system should provide deal pipeline with drag-and-drop stages, probability weighting, and forecasting.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-02",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T003",
+      "title": "Implement campaign builder with templates, scheduling, and open/click tracking notification workflow",
+      "description": "The system should provide email campaign builder with templates, scheduling, and open/click tracking.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "source": "REQ-03",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T004",
+      "title": "Implement task and follow-up reminders tied workflow",
+      "description": "The system should provide task and follow-up reminders tied to contacts and deals.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-04",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T005",
+      "title": "Integrate email clients (Gmail/Outlook)",
+      "description": "The system should provide integration with email clients (Gmail/Outlook) for two-way sync.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 4,
+      "complexity_reason": "Requires external API or system integration.",
+      "dependencies": [
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "source": "REQ-05",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.0,
+        "integration_overhead": 8,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T006",
+      "title": "Optimize sales analytics: revenue forecasts, conversion rates performance constraints",
+      "description": "Actor: Sales Rep — The Sales Rep should provide sales analytics: revenue forecasts, conversion rates, rep performance dashboards.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-06",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "data",
+      "suggested_owner_role": "Data Engineer",
+      "risks": [
+        "Performance targets require realistic load testing",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T007",
+      "title": "Optimize ticketing linked to CRM contacts performance constraints",
+      "description": "Actor: Customer Support Agent — The Customer Support Agent should provide customer support ticketing linked to CRM contacts with SLA tracking.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires external API or system integration.",
+      "dependencies": [],
+      "source": "REQ-07",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T008",
+      "title": "Optimize exceed 500ms for all list performance constraints",
+      "description": "The system should not exceed 500ms for all list and detail views.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires advanced integration or architectural coordination.",
+      "dependencies": [],
+      "source": "REQ-08",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T009",
+      "title": "Implement Data import/export for up to 500,000 contact records without timeout workflow",
+      "description": "The system should Data import/export for up to 500,000 contact records without timeout.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "source": "REQ-09",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T010",
+      "title": "Establish GDPR compliance controls",
+      "description": "The system should maintain GDPR compliance.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-10",
+      "estimated_hours": 40,
+      "estimated_days": 5,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    }
+  ],
+  "tech_stack": {
+    "frontend": [],
+    "backend": [
+      "compliance controls"
+    ],
+    "database": [
+      "relational database"
+    ],
+    "devops": [],
+    "external_services": [],
+    "detected_from": "requirements+inferred"
+  }
+}

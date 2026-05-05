@@ -1,0 +1,1150 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "title": "Implement national ID, OTP, biometric, and 2FA registration workflow",
+      "req_type": "FR",
+      "complexity": 3,
+      "source": "REQ-01",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 24,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "OTP and MFA recovery edge cases need coverage"
+      ],
+      "id": "T001"
+    },
+    {
+      "title": "Implement KYC onboarding and manual review workflow",
+      "req_type": "FR",
+      "complexity": 3,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 27,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T002"
+    },
+    {
+      "title": "Implement wallet balance and P2P transfer workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement scheduled and bill payment workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T004"
+    },
+    {
+      "title": "Implement QR merchant payments, refunds, disputes, and receipts workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-04",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T005"
+    },
+    {
+      "title": "Implement merchant dashboard",
+      "req_type": "FR",
+      "complexity": 4,
+      "source": "REQ-05",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 2,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Dashboard usability depends on stable analytics contracts and latency",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "id": "T006"
+    },
+    {
+      "title": "Implement tenant admin portal for limits, fees, roles, white-label branding, and feature flags per bank partner",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-06",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T007"
+    },
+    {
+      "title": "Implement compliance analyst workspace for AML alerts, suspicious activity cases, audit evidence, and SAR export",
+      "req_type": "FR",
+      "complexity": 3,
+      "source": "REQ-07",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T008"
+    },
+    {
+      "title": "Implement customer support console for account lock/unlock, device reset, complaint tracking, and secure notes",
+      "req_type": "FR",
+      "complexity": 3,
+      "source": "REQ-08",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 24,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T009"
+    },
+    {
+      "title": "Implement spending analytics, budget alerts, and personalized offers workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-09",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "data",
+      "suggested_owner_role": "Data Engineer",
+      "risks": [
+        "Aggregated outputs depend on clean source data"
+      ],
+      "id": "T010"
+    },
+    {
+      "title": "Integrate open banking API",
+      "req_type": "FR",
+      "complexity": 4,
+      "source": "REQ-10",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "id": "T011"
+    },
+    {
+      "title": "Enable Arabic/English RTL/LTR localization support",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-11",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T012"
+    },
+    {
+      "title": "Enforce card-data tokenization and storage restrictions",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-12",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T013"
+    },
+    {
+      "title": "Configure sandbox integration testing environment",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-13",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 36,
+      "recommended_team_size": 2,
+      "skill_required": "data",
+      "suggested_owner_role": "ML Engineer",
+      "risks": [
+        "Semantic misclassification can misroute work between teams",
+        "Third-party API dependency"
+      ],
+      "id": "T014"
+    },
+    {
+      "title": "Establish PCI-DSS compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-14",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T015"
+    },
+    {
+      "title": "Establish AML/KYC compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-15",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T016"
+    },
+    {
+      "title": "Establish GDPR compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-16",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T017"
+    },
+    {
+      "title": "Optimize system uptime and reliability constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-17",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T018"
+    },
+    {
+      "title": "Enable mobile-first interface support",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-18",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 37,
+      "recommended_team_size": 2,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T019"
+    },
+    {
+      "title": "Enforce WCAG AA accessibility requirements",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-19",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T020"
+    },
+    {
+      "title": "Enforce encryption at rest for sensitive data",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-20",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Key management and certificate rotation must be validated"
+      ],
+      "id": "T021"
+    },
+    {
+      "title": "Enforce encryption in transit for sensitive data",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-21",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Key management and certificate rotation must be validated"
+      ],
+      "id": "T022"
+    },
+    {
+      "title": "Enable observability with audit logs",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-22",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T023"
+    },
+    {
+      "title": "Enable distributed tracing observability",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-23",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T024"
+    },
+    {
+      "title": "Optimize peak-load responsiveness and capacity",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-24",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 37,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T025"
+    },
+    {
+      "title": "Optimize p95 under 700ms response-time SLO for 50,000 concurrent users",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-25",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 35,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T026"
+    },
+    {
+      "title": "Enable offline capability support",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-26",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 37,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Offline caching, synchronization, and recovery paths need full test coverage"
+      ],
+      "id": "T027"
+    },
+    {
+      "title": "Enable conflict-safe queued payment synchronization",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-27",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 44,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "id": "T028"
+    },
+    {
+      "title": "Enforce idempotent transaction processing",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-28",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T029"
+    },
+    {
+      "title": "Enforce RTO under 30 minutes recovery objectives",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-29",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 37,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T030"
+    },
+    {
+      "title": "Enforce RPO under 5 minutes recovery objectives",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-30",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 37,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T031"
+    },
+    {
+      "title": "Enforce multi-tenant data isolation",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-31",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T032"
+    },
+    {
+      "title": "Configure data retention policy",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-32",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 29,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T033"
+    },
+    {
+      "title": "Optimize fraud scoring throughput for 2,000 events per second",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-33",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 37,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T034"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T010"
+    },
+    {
+      "weight": 3,
+      "source": "T001",
+      "target": "T023"
+    },
+    {
+      "weight": 3,
+      "source": "T001",
+      "target": "T029"
+    },
+    {
+      "weight": 2,
+      "source": "T004",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T004",
+      "target": "T006"
+    },
+    {
+      "weight": 4,
+      "source": "T005",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T005",
+      "target": "T008"
+    },
+    {
+      "weight": 3,
+      "source": "T006",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T013",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T013",
+      "target": "T009"
+    },
+    {
+      "weight": 4,
+      "source": "T013",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T015",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T015",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T015",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T015",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T015",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T015",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T015",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T016",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T016",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T016",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T016",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T016",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T016",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T016",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T017",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T017",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T017",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T017",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T017",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T017",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T017",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T018",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T018",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T018",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T018",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T018",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T018",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T018",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T018",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T020",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T020",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T020",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T020",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T020",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T020",
+      "target": "T007"
+    },
+    {
+      "weight": 3,
+      "source": "T020",
+      "target": "T008"
+    },
+    {
+      "weight": 3,
+      "source": "T020",
+      "target": "T009"
+    },
+    {
+      "weight": 2,
+      "source": "T020",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T020",
+      "target": "T011"
+    },
+    {
+      "weight": 2,
+      "source": "T021",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T021",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T021",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T021",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T021",
+      "target": "T009"
+    },
+    {
+      "weight": 4,
+      "source": "T021",
+      "target": "T011"
+    },
+    {
+      "weight": 2,
+      "source": "T022",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T022",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T022",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T022",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T022",
+      "target": "T009"
+    },
+    {
+      "weight": 4,
+      "source": "T022",
+      "target": "T011"
+    },
+    {
+      "weight": 2,
+      "source": "T023",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T023",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T023",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T023",
+      "target": "T006"
+    },
+    {
+      "weight": 4,
+      "source": "T023",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T025",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T025",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T025",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T025",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T025",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T025",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T025",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T025",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T026",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T026",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T026",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T026",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T026",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T026",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T026",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T026",
+      "target": "T011"
+    },
+    {
+      "weight": 2,
+      "source": "T027",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T027",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T027",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T027",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T027",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T027",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T030",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T030",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T030",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T030",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T030",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T030",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T030",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T030",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T031",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T031",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T031",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T031",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T031",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T031",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T031",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T031",
+      "target": "T011"
+    },
+    {
+      "weight": 3,
+      "source": "T034",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T034",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T034",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T034",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T034",
+      "target": "T006"
+    },
+    {
+      "weight": 3,
+      "source": "T034",
+      "target": "T008"
+    },
+    {
+      "weight": 2,
+      "source": "T034",
+      "target": "T010"
+    },
+    {
+      "weight": 4,
+      "source": "T034",
+      "target": "T011"
+    }
+  ]
+}

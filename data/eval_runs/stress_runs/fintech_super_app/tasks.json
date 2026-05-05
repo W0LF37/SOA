@@ -1,0 +1,1116 @@
+{
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Implement national ID, OTP, biometric, and 2FA registration workflow",
+      "description": "Actor: Retail Customer — The Retail Customer should register with national ID, phone OTP, biometric login, and two-factor authentication.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T025",
+        "T026",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-01",
+      "estimated_hours": 24,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "OTP and MFA recovery edge cases need coverage"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T002",
+      "title": "Implement KYC onboarding and manual review workflow",
+      "description": "The system should provide KYC onboarding with document capture, liveness checks, sanctions screening, and manual review queue.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-02",
+      "estimated_hours": 27,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 92.3,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T003",
+      "title": "Implement wallet balance and P2P transfer workflow",
+      "description": "The system should provide wallet top-up and account balance and transaction history and P2P transfers.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T001",
+        "T013",
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T021",
+        "T022",
+        "T023",
+        "T025",
+        "T026",
+        "T027",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-03",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T004",
+      "title": "Implement scheduled and bill payment workflow",
+      "description": "The system should provide scheduled payments and bill payments.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T001",
+        "T013",
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T021",
+        "T022",
+        "T023",
+        "T025",
+        "T026",
+        "T027",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-03",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T005",
+      "title": "Implement QR merchant payments, refunds, disputes, and receipts workflow",
+      "description": "Actor: Merchant — The Merchant should provide QR code merchant payments, refunds, disputes, chargebacks, and real-time receipt notifications.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T004",
+        "T013",
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T021",
+        "T022",
+        "T023",
+        "T025",
+        "T026",
+        "T027",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-04",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T006",
+      "title": "Implement merchant dashboard",
+      "description": "Actor: Merchant — The Merchant should provide merchant dashboard for catalog, settlement reports, payout reconciliation, and inventory-linked payment status.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 4,
+      "complexity_reason": "Requires external API or system integration.",
+      "dependencies": [
+        "T004",
+        "T005",
+        "T013",
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T021",
+        "T022",
+        "T023",
+        "T025",
+        "T026",
+        "T027",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-05",
+      "estimated_hours": 30,
+      "estimated_days": 4,
+      "recommended_team_size": 2,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Dashboard usability depends on stable analytics contracts and latency",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T007",
+      "title": "Implement tenant admin portal for limits, fees, roles, white-label branding, and feature flags per bank partner",
+      "description": "Actor: Tenant Admin — The Tenant Admin should provide tenant admin portal for limits, fees, roles, white-label branding, and feature flags per bank partner.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T020"
+      ],
+      "source": "REQ-06",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T008",
+      "title": "Implement compliance analyst workspace for AML alerts, suspicious activity cases, audit evidence, and SAR export",
+      "description": "Actor: Compliance Analyst — The Compliance Analyst should provide compliance analyst workspace for AML alerts, suspicious activity cases, audit evidence, and SAR export.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [
+        "T005",
+        "T006",
+        "T018",
+        "T020",
+        "T025",
+        "T026",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-07",
+      "estimated_hours": 40,
+      "estimated_days": 5,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T009",
+      "title": "Implement customer support console for account lock/unlock, device reset, complaint tracking, and secure notes",
+      "description": "Actor: Support Agent — The Support Agent should provide customer support console for account lock/unlock, device reset, complaint tracking, and secure notes.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [
+        "T013",
+        "T020",
+        "T021",
+        "T022"
+      ],
+      "source": "REQ-08",
+      "estimated_hours": 24,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T010",
+      "title": "Implement spending analytics, budget alerts, and personalized offers workflow",
+      "description": "The system should provide spending analytics, budget alerts, personalized offers, and credit pre-approval recommendations.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T001",
+        "T006",
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T025",
+        "T026",
+        "T027",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-09",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "data",
+      "suggested_owner_role": "Data Engineer",
+      "risks": [
+        "Aggregated outputs depend on clean source data"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T011",
+      "title": "Integrate open banking API",
+      "description": "The system should provide open banking API integration for external account aggregation and payment initiation.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 4,
+      "complexity_reason": "Requires external API or system integration.",
+      "dependencies": [
+        "T013",
+        "T015",
+        "T016",
+        "T017",
+        "T018",
+        "T020",
+        "T021",
+        "T022",
+        "T023",
+        "T025",
+        "T026",
+        "T027",
+        "T030",
+        "T031",
+        "T034"
+      ],
+      "source": "REQ-10",
+      "estimated_hours": 40,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.0,
+        "integration_overhead": 8,
+        "rag_adjustment_pct": -21.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T012",
+      "title": "Enable Arabic/English RTL/LTR localization support",
+      "description": "The system should support Arabic and English UI with RTL/LTR layout.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [],
+      "source": "REQ-11",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T013",
+      "title": "Enforce card-data tokenization and storage restrictions",
+      "description": "The system should store card data only through a certified tokenization provider.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-12",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T014",
+      "title": "Configure sandbox integration testing environment",
+      "description": "The system should provide sandbox mode for partner bank integration testing.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [],
+      "source": "REQ-13",
+      "estimated_hours": 36,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "data",
+      "suggested_owner_role": "ML Engineer",
+      "risks": [
+        "Semantic misclassification can misroute work between teams",
+        "Third-party API dependency"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 8,
+        "rag_adjustment_pct": -36.8,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T015",
+      "title": "Establish PCI-DSS compliance controls",
+      "description": "The system should maintain PCI-DSS compliance.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-14",
+      "estimated_hours": 40,
+      "estimated_days": 5,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T016",
+      "title": "Establish AML/KYC compliance controls",
+      "description": "The system should maintain AML/KYC compliance.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-15",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T017",
+      "title": "Establish GDPR compliance controls",
+      "description": "The system should maintain GDPR compliance.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-16",
+      "estimated_hours": 40,
+      "estimated_days": 5,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 33.3,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T018",
+      "title": "Optimize system uptime and reliability constraints",
+      "description": "The system should maintain high availability.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires advanced integration or architectural coordination.",
+      "dependencies": [],
+      "source": "REQ-17",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -3.7,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T019",
+      "title": "Enable mobile-first interface support",
+      "description": "The system should support a mobile-first interface.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires external API or system integration.",
+      "dependencies": [],
+      "source": "REQ-18",
+      "estimated_hours": 37,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -21.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T020",
+      "title": "Enforce WCAG AA accessibility requirements",
+      "description": "The system should meet WCAG AA accessibility requirements.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [],
+      "source": "REQ-19",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T021",
+      "title": "Enforce encryption at rest for sensitive data",
+      "description": "The system should encrypt sensitive data at rest.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-20",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Key management and certificate rotation must be validated"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T022",
+      "title": "Enforce encryption in transit for sensitive data",
+      "description": "The system should encrypt sensitive data in transit.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-21",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Key management and certificate rotation must be validated"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T023",
+      "title": "Enable observability with audit logs",
+      "description": "The system should provide observability with audit logs.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [
+        "T001"
+      ],
+      "source": "REQ-22",
+      "estimated_hours": 40,
+      "estimated_days": 5,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T024",
+      "title": "Enable distributed tracing observability",
+      "description": "The system should provide distributed tracing observability.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [],
+      "source": "REQ-23",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T025",
+      "title": "Optimize peak-load responsiveness and capacity",
+      "description": "The system should maintain responsive performance under peak load.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-24",
+      "estimated_hours": 37,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -25.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T026",
+      "title": "Optimize p95 under 700ms response-time SLO for 50,000 concurrent users",
+      "description": "The system should meet p95 under 700ms response-time SLO for 50,000 concurrent users.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-25",
+      "estimated_hours": 35,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -44.9,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T027",
+      "title": "Enable offline capability support",
+      "description": "The system should support offline capability.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires advanced integration or architectural coordination.",
+      "dependencies": [],
+      "source": "REQ-26",
+      "estimated_hours": 37,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Offline caching, synchronization, and recovery paths need full test coverage"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -21.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T028",
+      "title": "Enable conflict-safe queued payment synchronization",
+      "description": "The system should support queued payments with conflict-safe sync.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires external API or system integration.",
+      "dependencies": [],
+      "source": "REQ-27",
+      "estimated_hours": 44,
+      "estimated_days": 6,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -34.8,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T029",
+      "title": "Enforce idempotent transaction processing",
+      "description": "The system should enforce idempotent transaction processing.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [
+        "T001"
+      ],
+      "source": "REQ-28",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T030",
+      "title": "Enforce RTO under 30 minutes recovery objectives",
+      "description": "The system should meet RTO under 30 minutes.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires advanced integration or architectural coordination.",
+      "dependencies": [],
+      "source": "REQ-29",
+      "estimated_hours": 37,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -21.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T031",
+      "title": "Enforce RPO under 5 minutes recovery objectives",
+      "description": "The system should meet RPO under 5 minutes.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires advanced integration or architectural coordination.",
+      "dependencies": [],
+      "source": "REQ-30",
+      "estimated_hours": 37,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -21.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T032",
+      "title": "Enforce multi-tenant data isolation",
+      "description": "The system should enforce multi-tenant data isolation.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-31",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T033",
+      "title": "Configure data retention policy",
+      "description": "The system should support configurable data retention.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Introduces quality constraints that need implementation safeguards.",
+      "dependencies": [],
+      "source": "REQ-32",
+      "estimated_hours": 29,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -20.0,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T034",
+      "title": "Optimize fraud scoring throughput for 2,000 events per second",
+      "description": "The system should support fraud scoring throughput of 2,000 events per second.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-33",
+      "estimated_hours": 37,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": -21.1,
+        "confidence": "medium"
+      },
+      "optional": false,
+      "confidence": "high"
+    }
+  ],
+  "tech_stack": {
+    "frontend": [
+      "responsive web ui",
+      "accessibility layer",
+      "i18n localization"
+    ],
+    "backend": [
+      "application api",
+      "compliance controls",
+      "auth and authorization"
+    ],
+    "database": [
+      "relational database"
+    ],
+    "devops": [
+      "availability monitoring",
+      "observability",
+      "disaster recovery",
+      "horizontal scaling"
+    ],
+    "external_services": [
+      "payment gateway",
+      "identity verification",
+      "messaging service"
+    ],
+    "detected_from": "requirements+inferred"
+  }
+}

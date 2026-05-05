@@ -1,0 +1,352 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "title": "Implement products browsing workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-01",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T001"
+    },
+    {
+      "title": "Enforce cart and complete secure checkout security controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T002"
+    },
+    {
+      "title": "Implement orders in real time viewing workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement product listings, inventory, and pricing management workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-04",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T004"
+    },
+    {
+      "title": "Implement view sales and revenue reporting workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-05",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "data",
+      "suggested_owner_role": "Data Engineer",
+      "risks": [
+        "Aggregated outputs depend on clean source data"
+      ],
+      "id": "T005"
+    },
+    {
+      "title": "Implement product ratings and written reviews creation workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-06",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T006"
+    },
+    {
+      "title": "Optimize peak traffic during sale events performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-07",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T007"
+    },
+    {
+      "title": "Enforce sensitive data encryption controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-08",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Key management and certificate rotation must be validated"
+      ],
+      "id": "T008"
+    },
+    {
+      "title": "Enforce accessibility requirements",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-09",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T009"
+    },
+    {
+      "title": "Integrate at least one payment gateway",
+      "req_type": "FR",
+      "complexity": 4,
+      "source": "REQ-10",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "id": "T010"
+    },
+    {
+      "title": "Enable Arabic/English RTL/LTR localization support",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-11",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T011"
+    },
+    {
+      "title": "Implement cryptocurrency payments if technically feasible in future phases workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-12",
+      "optional": true,
+      "confidence": "low",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T012"
+    },
+    {
+      "title": "Optimize concurrent user capacity",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-13",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T013"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 4,
+      "source": "T002",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T002",
+      "target": "T012"
+    },
+    {
+      "weight": 2,
+      "source": "T003",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T004",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T006"
+    },
+    {
+      "weight": 4,
+      "source": "T007",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T012"
+    },
+    {
+      "weight": 4,
+      "source": "T008",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T012"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T006"
+    },
+    {
+      "weight": 4,
+      "source": "T009",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T012"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T006"
+    },
+    {
+      "weight": 4,
+      "source": "T013",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T013",
+      "target": "T012"
+    }
+  ]
+}

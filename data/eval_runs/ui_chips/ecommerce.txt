@@ -1,0 +1,15 @@
+Project Title:
+E-Commerce Platform
+
+Project Overview:
+An online shopping platform supporting product listings, cart management, secure checkout, and order tracking.
+
+Main Features:
+- Product catalog with search and filters
+- Shopping cart and wishlist
+- Multi-payment gateway integration
+- Order tracking and notifications
+- Seller dashboard and inventory management
+
+Non-Functional Requirements:
+Scalable to 10,000 concurrent users, PCI-DSS compliant, mobile-first.

@@ -1,0 +1,417 @@
+[
+  {
+    "sample_id": "S01",
+    "description": "Clinic brief — baseline hospital sample (brief format)",
+    "input_file": "data/raw/docs/project_brief_sample.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 4, "task_count_max": 20,
+      "fr_count_min": 4, "nfr_count_min": 1,
+      "req_coverage_min": 0.7,
+      "expected_classifications": {"FR": 0.65, "NFR": 0.35},
+      "task_classifications": [
+        {"title_fragment": "registration", "expected_type": "FR"},
+        {"title_fragment": "appointment", "expected_type": "FR"},
+        {"title_fragment": "authentication", "expected_type": "FR"},
+        {"title_fragment": "security", "expected_type": "NFR"},
+        {"title_fragment": "performance", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,24,16,24,16,24,16,24,16,24,16,24]
+    }
+  },
+  {
+    "sample_id": "S02",
+    "description": "Structured template sample - user account management with NFR constraints",
+    "input_file": "data/raw/docs/requirements_template_sample.txt",
+    "input_format": "template",
+    "expected": {
+      "task_count_min": 5, "task_count_max": 10,
+      "fr_count_min": 3, "nfr_count_min": 2,
+      "req_coverage_min": 0.8,
+      "expected_classifications": {"FR": 0.6, "NFR": 0.4},
+      "task_classifications": [
+        {"title_fragment": "register", "expected_type": "FR"},
+        {"title_fragment": "login", "expected_type": "FR"},
+        {"title_fragment": "manage user", "expected_type": "FR"},
+        {"title_fragment": "response", "expected_type": "NFR"},
+        {"title_fragment": "encrypted", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,16,16,16,40]
+    }
+  },
+  {
+    "sample_id": "S03",
+    "description": "Single-requirement input — planner must produce at least one task",
+    "input_file": "data/evaluation/sample_single.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 1, "task_count_max": 3,
+      "fr_count_min": 1, "nfr_count_min": 0,
+      "req_coverage_min": 0.8,
+      "has_dependency_chain": false,
+      "critical_path_min_length": 1,
+      "forbidden_title_substrings": [],
+      "task_classifications": [
+        {"title_fragment": "medical record", "expected_type": "FR"},
+        {"title_fragment": "patient record", "expected_type": "FR"},
+        {"title_fragment": "history", "expected_type": "FR"}
+      ],
+      "actual_hours_per_task": [8]
+    }
+  },
+  {
+    "sample_id": "S04",
+    "description": "Project brief format — clinic system with 5 features and NFR constraints",
+    "input_file": "data/raw/docs/project_brief_sample.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 4, "task_count_max": 14,
+      "fr_count_min": 4, "nfr_count_min": 1,
+      "req_coverage_min": 0.8,
+      "expected_classifications": {"FR": 0.65, "NFR": 0.35},
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "forbidden_title_substrings": [
+        "Actor:", "system should Register", "system should Allow",
+        "system should Book", "— The Doctor should",
+        "— The Receptionist should", "The system should The system should"
+      ],
+      "task_classifications": [
+        {"title_fragment": "registration", "expected_type": "FR"},
+        {"title_fragment": "appointment", "expected_type": "FR"},
+        {"title_fragment": "authentication", "expected_type": "FR"},
+        {"title_fragment": "security", "expected_type": "NFR"},
+        {"title_fragment": "performance", "expected_type": "NFR"},
+        {"title_fragment": "availability", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,24,16,24,24,16,16,24,16]
+    }
+  },
+  {
+    "sample_id": "S05",
+    "description": "Hard project brief — university portal with 8 features, 4 actors, optional scope, and 6 NFRs",
+    "input_file": "data/raw/docs/project_brief_hard.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 8, "task_count_max": 22,
+      "fr_count_min": 6, "nfr_count_min": 3,
+      "optional_count_min": 1,
+      "req_coverage_min": 0.8,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "forbidden_title_substrings": [
+        "Actor:", "— The Student should", "— The Instructor should",
+        "— The Registrar should", "— The Academic Advisor should",
+        "system should Allow", "system should Register",
+        "The system should The system should"
+      ],
+      "task_classifications": [
+        {"title_fragment": "enrollment", "expected_type": "FR"},
+        {"title_fragment": "grade", "expected_type": "FR"},
+        {"title_fragment": "transcript", "expected_type": "FR"},
+        {"title_fragment": "availability", "expected_type": "NFR"},
+        {"title_fragment": "encryption", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,24,24,16,24,16,16,24,24,16,24,16,16,24,24]
+    }
+  },
+  {
+    "sample_id": "S06",
+    "description": "E-commerce project brief",
+    "input_file": "data/raw/docs/project_brief_ecommerce.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 10, "task_count_max": 25,
+      "fr_count_min": 7, "nfr_count_min": 3,
+      "optional_count_min": 1,
+      "req_coverage_min": 0.75,
+      "task_classifications": [
+        {"title_fragment": "catalog", "expected_type": "FR"},
+        {"title_fragment": "checkout", "expected_type": "FR"},
+        {"title_fragment": "order tracking", "expected_type": "FR"},
+        {"title_fragment": "inventory", "expected_type": "FR"},
+        {"title_fragment": "performance", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [24,16,24,24,16,24,16,24,24,16,24,16,24,16]
+    }
+  },
+  {
+    "sample_id": "S07",
+    "description": "Library management system brief",
+    "input_file": "data/raw/docs/project_brief_library.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 6, "task_count_max": 18,
+      "fr_count_min": 5, "nfr_count_min": 2,
+      "req_coverage_min": 0.75,
+      "task_classifications": [
+        {"title_fragment": "catalog", "expected_type": "FR"},
+        {"title_fragment": "borrowing", "expected_type": "FR"},
+        {"title_fragment": "reservation", "expected_type": "FR"},
+        {"title_fragment": "availability", "expected_type": "NFR"},
+        {"title_fragment": "backup", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,16,24,16,16,24,16,24,16]
+    }
+  },
+  {
+    "sample_id": "S08",
+    "description": "Single NFR — system availability requirement",
+    "input_text": "The system must be available 99.9% of the time with automatic failover and zero-downtime deployments.",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 1, "task_count_max": 4,
+      "fr_count_min": 0, "nfr_count_min": 1,
+      "req_coverage_min": 0.8,
+      "task_classifications": [
+        {"title_fragment": "availability", "expected_type": "NFR"},
+        {"title_fragment": "failover", "expected_type": "NFR"},
+        {"title_fragment": "zero-downtime", "expected_type": "NFR"},
+        {"title_fragment": "uptime", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [40, 24]
+    }
+  },
+  {
+    "sample_id": "S09",
+    "description": "HR management system — leave, payroll, recruitment",
+    "input_file": "data/raw/docs/project_brief_hr_system.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 7, "task_count_max": 18,
+      "fr_count_min": 5, "nfr_count_min": 2,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "onboarding", "expected_type": "FR"},
+        {"title_fragment": "leave", "expected_type": "FR"},
+        {"title_fragment": "payroll", "expected_type": "FR"},
+        {"title_fragment": "availability", "expected_type": "NFR"},
+        {"title_fragment": "access", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [24,24,40,24,40,24,24,24,24,24]
+    }
+  },
+  {
+    "sample_id": "S10",
+    "description": "Fintech payment gateway with KYC and PCI-DSS compliance",
+    "input_file": "data/raw/docs/project_brief_fintech.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 6, "task_count_max": 16,
+      "fr_count_min": 4, "nfr_count_min": 3,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "payment", "expected_type": "FR"},
+        {"title_fragment": "kyc", "expected_type": "FR"},
+        {"title_fragment": "transaction", "expected_type": "FR"},
+        {"title_fragment": "pci", "expected_type": "NFR"},
+        {"title_fragment": "latency", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [40,40,24,40,24,24,40,24,24]
+    }
+  },
+  {
+    "sample_id": "S11",
+    "description": "IoT sensor monitoring dashboard with real-time alerting",
+    "input_file": "data/raw/docs/project_brief_iot_dashboard.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 6, "task_count_max": 16,
+      "fr_count_min": 4, "nfr_count_min": 3,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "ingestion", "expected_type": "FR"},
+        {"title_fragment": "dashboard", "expected_type": "FR"},
+        {"title_fragment": "alert", "expected_type": "FR"},
+        {"title_fragment": "device", "expected_type": "FR"},
+        {"title_fragment": "encryption", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [40,24,24,24,24,40,24,24]
+    }
+  },
+  {
+    "sample_id": "S12",
+    "description": "Learning Management System with quiz engine and certificates",
+    "input_file": "data/raw/docs/project_brief_lms.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 7, "task_count_max": 18,
+      "fr_count_min": 5, "nfr_count_min": 2,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "course", "expected_type": "FR"},
+        {"title_fragment": "enrollment", "expected_type": "FR"},
+        {"title_fragment": "quiz", "expected_type": "FR"},
+        {"title_fragment": "certificate", "expected_type": "FR"},
+        {"title_fragment": "accessibility", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [24,16,24,16,24,24,24,24,16]
+    }
+  },
+  {
+    "sample_id": "S13",
+    "description": "CRM platform with sales pipeline and email automation",
+    "input_file": "data/raw/docs/project_brief_crm.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 7, "task_count_max": 18,
+      "fr_count_min": 5, "nfr_count_min": 2,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "contact", "expected_type": "FR"},
+        {"title_fragment": "pipeline", "expected_type": "FR"},
+        {"title_fragment": "email", "expected_type": "FR"},
+        {"title_fragment": "ticket", "expected_type": "FR"},
+        {"title_fragment": "gdpr", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,24,24,16,24,24,16,24,16]
+    }
+  },
+  {
+    "sample_id": "S14",
+    "description": "SaaS subscription billing with dunning and revenue reporting",
+    "input_file": "data/raw/docs/project_brief_saas_billing.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 7, "task_count_max": 16,
+      "fr_count_min": 5, "nfr_count_min": 2,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "subscription", "expected_type": "FR"},
+        {"title_fragment": "invoice", "expected_type": "FR"},
+        {"title_fragment": "dunning", "expected_type": "FR"},
+        {"title_fragment": "usage", "expected_type": "FR"},
+        {"title_fragment": "audit", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [24,40,24,24,24,16,24,24,24]
+    }
+  },
+  {
+    "sample_id": "S15",
+    "description": "Social networking platform with feed and moderation",
+    "input_file": "data/raw/docs/project_brief_social_platform.txt",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 7, "task_count_max": 18,
+      "fr_count_min": 5, "nfr_count_min": 2,
+      "req_coverage_min": 0.75,
+      "has_dependency_chain": true,
+      "critical_path_min_length": 2,
+      "task_classifications": [
+        {"title_fragment": "profile", "expected_type": "FR"},
+        {"title_fragment": "feed", "expected_type": "FR"},
+        {"title_fragment": "message", "expected_type": "FR"},
+        {"title_fragment": "moderation", "expected_type": "FR"},
+        {"title_fragment": "scaling", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16,24,40,24,24,24,24,40,24]
+    }
+  },
+  {
+    "sample_id": "S16",
+    "description": "Edge case: complex NFR with implied sub-tasks (scalability + caching)",
+    "input_text": "The system must handle 50,000 concurrent users with response times under 200ms, achieved through horizontal auto-scaling, Redis caching, and a CDN for static assets.",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 1, "task_count_max": 5,
+      "fr_count_min": 0, "nfr_count_min": 1,
+      "req_coverage_min": 0.7,
+      "task_classifications": [
+        {"title_fragment": "auto-scaling", "expected_type": "NFR"},
+        {"title_fragment": "caching", "expected_type": "NFR"},
+        {"title_fragment": "cdn", "expected_type": "NFR"},
+        {"title_fragment": "response time", "expected_type": "NFR"},
+        {"title_fragment": "concurrent users", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [40, 24, 16]
+    }
+  },
+  {
+    "sample_id": "S17",
+    "description": "Edge case: minimal MVP (3-sentence brief)",
+    "input_text": "Build a task management app where users can create, assign, and complete tasks. Users must be able to invite team members and set deadlines. The app must work on mobile and desktop browsers.",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 2, "task_count_max": 8,
+      "fr_count_min": 2, "nfr_count_min": 0,
+      "req_coverage_min": 0.7,
+      "task_classifications": [
+        {"title_fragment": "task creation", "expected_type": "FR"},
+        {"title_fragment": "assignment", "expected_type": "FR"},
+        {"title_fragment": "deadline", "expected_type": "FR"},
+        {"title_fragment": "team invite", "expected_type": "FR"},
+        {"title_fragment": "mobile", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16, 8, 16, 8]
+    }
+  },
+  {
+    "sample_id": "S18",
+    "description": "Edge case: numbered list format requirements",
+    "input_text": "1. Users can register and log in with email and password.\n2. Users can upload profile pictures up to 5MB.\n3. Admins can deactivate accounts.\n4. Passwords must be hashed using bcrypt.\n5. The API must respond in under 300ms.",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 3, "task_count_max": 8,
+      "fr_count_min": 2, "nfr_count_min": 1,
+      "req_coverage_min": 0.7,
+      "task_classifications": [
+        {"title_fragment": "registration", "expected_type": "FR"},
+        {"title_fragment": "profile picture", "expected_type": "FR"},
+        {"title_fragment": "deactivate", "expected_type": "FR"},
+        {"title_fragment": "bcrypt", "expected_type": "NFR"},
+        {"title_fragment": "performance", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [16, 8, 8, 16, 16]
+    }
+  },
+  {
+    "sample_id": "S19",
+    "description": "Edge case: medical domain jargon (EHR system)",
+    "input_text": "The EHR system must support SOAP note documentation, ICD-10 coding for diagnoses, and HL7 FHIR integration for inter-facility data exchange. Clinical decision support alerts must fire within 500ms of order entry. HIPAA compliance is mandatory for all PHI storage and transmission.",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 3, "task_count_max": 10,
+      "fr_count_min": 2, "nfr_count_min": 1,
+      "req_coverage_min": 0.7,
+      "task_classifications": [
+        {"title_fragment": "soap", "expected_type": "FR"},
+        {"title_fragment": "icd-10", "expected_type": "FR"},
+        {"title_fragment": "fhir", "expected_type": "FR"},
+        {"title_fragment": "decision support", "expected_type": "FR"},
+        {"title_fragment": "hipaa", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [24, 40, 24, 40, 40]
+    }
+  },
+  {
+    "sample_id": "S20",
+    "description": "Edge case: contradictory requirements (fast + heavy analytics)",
+    "input_text": "The dashboard must load in under 1 second. The system must also compute real-time analytics across all historical data (millions of records) and display results instantly. All pages must be fully rendered server-side.",
+    "input_format": "brief",
+    "expected": {
+      "task_count_min": 2, "task_count_max": 8,
+      "fr_count_min": 1, "nfr_count_min": 1,
+      "req_coverage_min": 0.6,
+      "task_classifications": [
+        {"title_fragment": "analytics", "expected_type": "FR"},
+        {"title_fragment": "historical data", "expected_type": "FR"},
+        {"title_fragment": "server-side", "expected_type": "FR"},
+        {"title_fragment": "performance", "expected_type": "NFR"},
+        {"title_fragment": "load time", "expected_type": "NFR"}
+      ],
+      "actual_hours_per_task": [24, 40, 24]
+    }
+  }
+]

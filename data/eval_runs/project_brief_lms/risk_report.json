@@ -1,0 +1,50 @@
+{
+  "risk_level": "high",
+  "risk_score": 0.65,
+  "total_risks": 4,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T009 'Optimize adaptive video streaming quality' blocks 6 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T009"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "Foundational NFR gates (T008, T010) collectively gate 6 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T008",
+        "T010"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 258h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[CRITICAL] Split task or add a parallel implementation path",
+    "[HIGH] Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-05-01T10:34:04.691842+00:00"
+}

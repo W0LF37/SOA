@@ -1,0 +1,304 @@
+{
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "Implement employee onboarding and profile management with document upload workflow",
+      "description": "Actor: Employee — The Employee should provide employee onboarding and profile management with document upload.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T006",
+        "T008",
+        "T009"
+      ],
+      "source": "REQ-01",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T002",
+      "title": "Implement leave request and approval workflow with balance tracking and calendar view workflow",
+      "description": "The system should provide leave request and approval workflow with balance tracking and calendar view.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-02",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T003",
+      "title": "Implement payroll calculation with tax deductions, allowances workflow",
+      "description": "Actor: Payroll Officer — The Payroll Officer should provide payroll calculation with tax deductions, allowances, and payslip generation.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [
+        "T006",
+        "T009"
+      ],
+      "source": "REQ-03",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T004",
+      "title": "Implement attendance tracking via time-in/time-out with overtime calculation workflow",
+      "description": "The system should provide attendance tracking via time-in/time-out with overtime calculation.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-04",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T005",
+      "title": "Implement recruitment module: job postings, applicant tracking, interview scheduling workflow",
+      "description": "The system should provide recruitment module: job postings, applicant tracking, interview scheduling.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-05",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T006",
+      "title": "Optimize performance review workflow with KPI tracking",
+      "description": "The system should provide performance review workflow with KPI tracking and rating submission.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-06",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "data",
+      "suggested_owner_role": "Data Engineer",
+      "risks": [
+        "Performance targets require realistic load testing",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T007",
+      "title": "Implement organizational chart builder with reporting lines workflow",
+      "description": "The system should provide organizational chart builder with reporting lines and department hierarchy.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 2,
+      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
+      "dependencies": [],
+      "source": "REQ-07",
+      "estimated_hours": 20,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 20,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T008",
+      "title": "Enforce encryption in transit for sensitive data",
+      "description": "The system should be encrypted at rest and in transit (AES-256).",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [],
+      "source": "REQ-08",
+      "estimated_hours": 30,
+      "estimated_days": 4,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Key management and certificate rotation must be validated"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T009",
+      "title": "Optimize system uptime and reliability constraints",
+      "description": "The system should be available 99.9% of the time during business hours.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Includes strict performance or scalability constraints.",
+      "dependencies": [],
+      "source": "REQ-09",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.25,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T010",
+      "title": "Implement role-based access control",
+      "description": "The system should Role-based access: HR Manager sees all data; employees see only their own.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 4,
+      "complexity_reason": "Requires role-based access control across protected features.",
+      "dependencies": [
+        "T008"
+      ],
+      "source": "REQ-10",
+      "estimated_hours": 30,
+      "estimated_days": 4,
+      "recommended_team_size": 2,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Role-permission regressions can block downstream workflows"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    }
+  ],
+  "tech_stack": {
+    "frontend": [],
+    "backend": [
+      "auth and authorization"
+    ],
+    "database": [],
+    "devops": [],
+    "external_services": [],
+    "detected_from": "requirements+inferred"
+  }
+}

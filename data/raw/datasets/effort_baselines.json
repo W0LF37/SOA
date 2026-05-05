@@ -1,0 +1,12 @@
+{
+  "complexity_baselines": {
+    "1": {"min_hours": 4, "max_hours": 12, "median_hours": 8},
+    "2": {"min_hours": 10, "max_hours": 24, "median_hours": 20},
+    "3": {"min_hours": 18, "max_hours": 32, "median_hours": 24},
+    "4": {"min_hours": 24, "max_hours": 48, "median_hours": 30},
+    "5": {"min_hours": 32, "max_hours": 64, "median_hours": 40}
+  },
+  "type_multipliers": {"FR": 1.0, "NFR": 1.25},
+  "integration_overhead_hours": 8,
+  "source": "Curated task-level calibration for academic project planning benchmarks"
+}

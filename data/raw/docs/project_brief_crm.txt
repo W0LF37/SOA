@@ -1,0 +1,21 @@
+Project Brief: Customer Relationship Management (CRM)
+
+Project Overview:
+A CRM platform for sales pipeline management, customer tracking, and marketing automation.
+
+Actors:
+- Sales Rep, Sales Manager, Marketing Specialist, Customer Support Agent
+
+Functional Requirements:
+1. Contact and account management with custom fields and activity timeline.
+2. Deal pipeline with drag-and-drop stages, probability weighting, and forecasting.
+3. Email campaign builder with templates, scheduling, and open/click tracking.
+4. Task and follow-up reminders tied to contacts and deals.
+5. Integration with email clients (Gmail/Outlook) for two-way sync.
+6. Sales analytics: revenue forecasts, conversion rates, rep performance dashboards.
+7. Customer support ticketing linked to CRM contacts with SLA tracking.
+
+Non-Functional Requirements:
+8. API response time must not exceed 500ms for all list and detail views.
+9. Data import/export for up to 500,000 contact records without timeout.
+10. GDPR-compliant data deletion and export on customer request within 72 hours.

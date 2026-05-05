@@ -1,0 +1,21 @@
+Project Brief: SaaS Subscription Billing Platform
+
+Project Overview:
+A billing engine for SaaS products supporting subscription plans, invoicing, and dunning.
+
+Actors:
+- Subscriber, Billing Admin, Finance Manager, Developer (API consumer)
+
+Functional Requirements:
+1. Subscription plan management: create/edit plans with pricing tiers and trial periods.
+2. Payment collection via Stripe with automatic renewal and card retry logic.
+3. Invoice generation with PDF download, VAT calculation, and email delivery.
+4. Dunning management: automated retry schedule and account suspension on failure.
+5. Usage-based billing: metering API for tracking consumption and overage charges.
+6. Customer billing portal: view invoices, update payment method, cancel subscription.
+7. Revenue reporting: MRR, churn rate, LTV dashboards for finance team.
+
+Non-Functional Requirements:
+8. Billing operations must be idempotent to prevent double-charges on retries.
+9. All financial transactions must be logged in an immutable audit trail.
+10. Stripe webhook processing must complete within 10 seconds to avoid timeout.

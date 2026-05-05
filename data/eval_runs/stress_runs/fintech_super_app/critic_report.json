@@ -1,0 +1,13 @@
+{
+  "status": "approved",
+  "score": 0.99,
+  "issues": [
+    {
+      "layer": "logic",
+      "severity": "info",
+      "message": "Many tasks (34). Consider grouping or simplifying."
+    }
+  ],
+  "suggestions": [],
+  "reviewed_at": "2026-04-30T22:49:14.813835+00:00"
+}

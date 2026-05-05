@@ -1,0 +1,46 @@
+{
+  "risk_level": "medium",
+  "risk_score": 0.3,
+  "total_risks": 4,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "medium",
+      "message": "Foundational NFR gates (T007, T008) collectively gate 0 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T007",
+        "T008"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "7 tasks can start simultaneously -- high coordination overhead in first sprint",
+      "affected_tasks": [],
+      "mitigation": "Assign clear task owners before sprint starts",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 236h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-04-30T22:07:37.725305+00:00"
+}

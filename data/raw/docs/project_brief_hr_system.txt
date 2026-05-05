@@ -1,0 +1,21 @@
+Project Brief: HR Management System
+
+Project Overview:
+A Human Resources platform for managing employees, leave, payroll, and recruitment workflows.
+
+Actors:
+- HR Manager, Department Head, Employee, Payroll Officer
+
+Functional Requirements:
+1. Employee onboarding and profile management with document upload.
+2. Leave request and approval workflow with balance tracking and calendar view.
+3. Payroll calculation with tax deductions, allowances, and payslip generation.
+4. Attendance tracking via time-in/time-out with overtime calculation.
+5. Recruitment module: job postings, applicant tracking, interview scheduling.
+6. Performance review workflow with KPI tracking and rating submission.
+7. Organizational chart builder with reporting lines and department hierarchy.
+
+Non-Functional Requirements:
+8. All payroll data must be encrypted at rest and in transit (AES-256).
+9. System must be available 99.9% of the time during business hours.
+10. Role-based access: HR Manager sees all data; employees see only their own.

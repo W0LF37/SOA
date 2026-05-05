@@ -1,0 +1,15 @@
+Project Title:
+Hospital Management System
+
+Project Overview:
+A comprehensive platform for managing patient records, appointments, billing, and pharmacy inventory.
+
+Main Features:
+- Patient registration with national ID and insurance
+- Doctor scheduling and appointment booking
+- Electronic medical records (EMR)
+- Pharmacy stock management and prescriptions
+- Billing and insurance claim processing
+
+Non-Functional Requirements:
+HIPAA-compliant data security, 99.9% uptime, sub-2s response time.

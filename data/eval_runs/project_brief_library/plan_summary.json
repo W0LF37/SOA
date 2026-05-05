@@ -1,0 +1,545 @@
+{
+  "generated_at": "2026-05-01T10:34:04.544308+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/project_brief_library/critic_report.json"
+  },
+  "input_file": "data/raw/docs/project_brief_library.txt",
+  "tasks_file": "data/eval_runs/project_brief_library/tasks.json",
+  "graph_file": "data/eval_runs/project_brief_library/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 9,
+    "task_count": 9,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "crud",
+        "count": 3
+      },
+      {
+        "theme": "view",
+        "count": 3
+      },
+      {
+        "theme": "performance",
+        "count": 2
+      },
+      {
+        "theme": "compliance",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize system uptime and reliability constraints",
+        "complexity": 4,
+        "source": "REQ-06"
+      },
+      {
+        "id": "T009",
+        "title": "Optimize concurrent user capacity",
+        "complexity": 4,
+        "source": "REQ-09"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 9,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "Actor: Member — The Member should Allow members to search and browse the book catalog by title, author, and genre.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement book catalog search workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "Actor: Member — The Member should Allow members to borrow physical books and return them with automated due date tracking.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement borrow physical books and return them with automated due date tracking workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "Actor: Member — The Member should Allow members to reserve books that are currently on loan by other members.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement reserve books that are currently workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "Actor: Member — The Member should Allow members to access and read digital books and e-resources online.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement and read digital books and e-resources workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "Actor: Member — The Member should Allow librarians to manage member accounts, book inventory, and overdue fines.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement member accounts, book inventory, and overdue management workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should maintain high availability.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Optimize system uptime and reliability constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should support barcode scanning for physical book check-in and check-out.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Implement barcode scanning for physical book check- support workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should comply with member data privacy regulations.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Comply with member data privacy regulations"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-09",
+        "original_requirement": "The system should maintain responsive performance for concurrent users.",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Optimize concurrent user capacity"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 4,
+        "task_ids": [
+          "T003",
+          "T006",
+          "T008",
+          "T009"
+        ],
+        "headline": "Stage 1 focuses on performance, compliance",
+        "dominant_themes": [
+          "performance",
+          "compliance"
+        ],
+        "titles": [
+          "Implement reserve books that are currently workflow",
+          "Optimize system uptime and reliability constraints",
+          "Comply with member data privacy regulations",
+          "Optimize concurrent user capacity"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 3,
+        "task_ids": [
+          "T001",
+          "T005",
+          "T007"
+        ],
+        "headline": "Stage 2 delivers core product workflows",
+        "dominant_themes": [
+          "crud",
+          "view"
+        ],
+        "titles": [
+          "Implement book catalog search workflow",
+          "Implement member accounts, book inventory, and overdue management workflow",
+          "Implement barcode scanning for physical book check- support workflow"
+        ]
+      },
+      {
+        "stage": 3,
+        "task_count": 2,
+        "task_ids": [
+          "T002",
+          "T004"
+        ],
+        "headline": "Stage 3 delivers core product workflows",
+        "dominant_themes": [
+          "view"
+        ],
+        "titles": [
+          "Implement borrow physical books and return them with automated due date tracking workflow",
+          "Implement and read digital books and e-resources workflow"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "2 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: library and borrowing management.",
+      "scope_assessment": "Scope includes 6 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "9 requirements -> 9 atomic tasks across 3 delivery sprints. Critical delivery path: T006 -> T001 -> T002 (3 hops, ~8 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Optimize system uptime and reliability constraints blocks 3 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 4 tasks can start immediately in Sprint 1. Effort breakdown: 226 estimated hours | FR: 120h | NFR: 106h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: library and borrowing management.",
+    "scope_assessment": "Scope includes 6 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "9 requirements -> 9 atomic tasks across 3 delivery sprints. Critical delivery path: T006 -> T001 -> T002 (3 hops, ~8 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Optimize system uptime and reliability constraints blocks 3 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 4 tasks can start immediately in Sprint 1. Effort breakdown: 226 estimated hours | FR: 120h | NFR: 106h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Security & Compliance Readiness",
+      "goal": "Security, privacy, and compliance controls are validated for the planned scope",
+      "tasks": [
+        "T003",
+        "T006",
+        "T008",
+        "T009"
+      ],
+      "total_estimated_hours": 126,
+      "total_points": 13,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "performance",
+        "compliance"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T001",
+        "T005",
+        "T007"
+      ],
+      "total_estimated_hours": 60,
+      "total_points": 6,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "view"
+      ]
+    },
+    {
+      "sprint": 3,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T002",
+        "T004"
+      ],
+      "total_estimated_hours": 40,
+      "total_points": 4,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "view"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 226,
+    "total_estimated_days": 29,
+    "fr_estimated_hours": 120,
+    "nfr_estimated_hours": 106
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007"
+      ],
+      "task_count": 6,
+      "estimated_hours": 120,
+      "focus": "core workflows, information access"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T006",
+        "T009"
+      ],
+      "task_count": 2,
+      "estimated_hours": 76,
+      "focus": "performance"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T008"
+      ],
+      "task_count": 1,
+      "estimated_hours": 30,
+      "focus": "compliance"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 6,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 2,
+      "task_ids": [
+        "T006",
+        "T009"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T008"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 9,
+    "total_dependencies": 11,
+    "fr_count": 6,
+    "nfr_count": 3,
+    "avg_complexity": 2.56,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 6,
+      "3": 1,
+      "4": 2,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 9,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T006",
+        "T001",
+        "T002"
+      ],
+      "titles": [
+        "Optimize system uptime and reliability constraints",
+        "Implement book catalog search workflow",
+        "Implement borrow physical books and return them with automated due date tracking workflow"
+      ],
+      "total_weight": 4,
+      "length": 3
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize system uptime and reliability constraints",
+        "blocks": 3,
+        "complexity": 4
+      },
+      {
+        "id": "T009",
+        "title": "Optimize concurrent user capacity",
+        "blocks": 3,
+        "complexity": 4
+      },
+      {
+        "id": "T008",
+        "title": "Comply with member data privacy regulations",
+        "blocks": 3,
+        "complexity": 3
+      },
+      {
+        "id": "T001",
+        "title": "Implement book catalog search workflow",
+        "blocks": 2,
+        "complexity": 2
+      },
+      {
+        "id": "T002",
+        "title": "Implement borrow physical books and return them with automated due date tracking workflow",
+        "blocks": 0,
+        "complexity": 2
+      }
+    ],
+    "root_tasks": [
+      "T003",
+      "T006",
+      "T008",
+      "T009"
+    ],
+    "leaf_tasks": [
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T007"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T003",
+        "T006",
+        "T008",
+        "T009"
+      ],
+      [
+        "T001",
+        "T005",
+        "T007"
+      ],
+      [
+        "T002",
+        "T004"
+      ]
+    ],
+    "parallel_group_count": 3
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/project_brief_library/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/project_brief_library/tasks_final.json"
+  }
+}

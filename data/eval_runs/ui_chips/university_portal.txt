@@ -1,0 +1,14 @@
+Project Title:
+University Student Portal
+
+Project Overview:
+A web-based platform for course enrollment, grade tracking, tuition payments, and advisor communication.
+
+Main Features:
+- Register and enroll in available courses
+- Upload grades and course materials
+- Generate tuition invoices and process online payments
+- Send automated email notifications for deadlines
+
+Expected Benefits:
+The system must be highly available, encrypted, mobile-friendly, and responsive under peak load.

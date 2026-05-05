@@ -1,0 +1,88 @@
+[
+  {
+    "brief": "project_brief_sample.txt",
+    "input": {
+      "fr_signals": 7,
+      "nfr_signals": 3,
+      "total_bullets": 10,
+      "chars": 1175,
+      "lines": 35
+    },
+    "elapsed_seconds": 0.1,
+    "error": null,
+    "tasks": {
+      "total": 9,
+      "fr": 5,
+      "nfr": 4,
+      "complexity_avg": 2.67,
+      "complexity_max": 4,
+      "with_dependencies": 5,
+      "low_confidence": 0,
+      "optional": 0,
+      "has_type_reason": 9,
+      "has_complexity_reason": 9
+    },
+    "tech_stack": {
+      "frontend": [
+        "web frontend",
+        "i18n localization"
+      ],
+      "backend": [
+        "application api"
+      ],
+      "database": [
+        "relational database"
+      ],
+      "devops": [
+        "availability monitoring"
+      ],
+      "external_services": [],
+      "detected_from": "requirements+inferred"
+    },
+    "tech_stack_count": 5,
+    "plan": {
+      "total_hours": 236,
+      "fr_hours": 100,
+      "nfr_hours": 136,
+      "total_days": 30,
+      "sprint_count": 4,
+      "critical_path_length": 4,
+      "bottlenecks": 5,
+      "parallel_groups": 4,
+      "is_valid_dag": true,
+      "total_dependencies": 16,
+      "atomic_task_ratio": 1.0,
+      "used_fallback": true,
+      "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+      "generation_mode": "rule_based_fallback_forced",
+      "domain_inference": "Likely domain: hospital operations and clinical workflow management."
+    },
+    "coverage": {
+      "requirements": 9,
+      "covered": 9,
+      "fr_covered": 5,
+      "nfr_covered": 4
+    },
+    "critic": {
+      "status": "approved",
+      "score": 1.0,
+      "issue_count": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    "risk": {
+      "level": "high",
+      "score": 0.6,
+      "high": 3,
+      "medium": 3,
+      "low": 0,
+      "total": 6,
+      "categories": {
+        "bottleneck": 3,
+        "schedule": 2,
+        "dependency": 1
+      }
+    },
+    "review_queue": 0
+  }
+]

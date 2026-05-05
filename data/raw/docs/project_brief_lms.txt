@@ -1,0 +1,21 @@
+Project Brief: Learning Management System (LMS)
+
+Project Overview:
+An online education platform for course creation, delivery, student tracking, and certification.
+
+Actors:
+- Instructor, Student, Administrator, Content Reviewer
+
+Functional Requirements:
+1. Course builder with video lessons, quizzes, assignments, and rich-text content.
+2. Student enrollment, progress tracking, and completion certificates generation.
+3. Quiz engine with multiple question types, time limits, and auto-grading.
+4. Discussion forums per course with moderation and notification features.
+5. Live session integration (Zoom/WebRTC) with recording and attendance tracking.
+6. Learning path builder: prerequisite courses and adaptive progression rules.
+7. Analytics dashboard for instructors: completion rates, quiz scores, engagement.
+
+Non-Functional Requirements:
+8. Support concurrent access for at least 5000 simultaneous students.
+9. Video streaming must adapt to bandwidth (adaptive bitrate, 360p–1080p).
+10. WCAG 2.1 AA accessibility compliance for all student-facing interfaces.

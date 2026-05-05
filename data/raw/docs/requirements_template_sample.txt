@@ -1,0 +1,27 @@
+[REQ-01]
+Type: Functional
+Description: The user can register an account using email and password
+Actor: User
+Priority: High
+
+[REQ-02]
+Type: Functional
+Description: The user can login and logout of the system securely
+Actor: User
+Priority: High
+
+[REQ-03]
+Type: Functional
+Description: The admin can manage user accounts including suspend and reactivate
+Actor: Admin
+Priority: Medium
+
+[REQ-04]
+Type: Non-Functional
+Description: The system must respond to all requests within 2 seconds under normal load
+Priority: High
+
+[REQ-05]
+Type: Non-Functional
+Description: All user data must be encrypted at rest and in transit using AES-256
+Priority: High

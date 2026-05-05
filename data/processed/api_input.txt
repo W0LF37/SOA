@@ -1,0 +1,15 @@
+Project Title:
+Mobile Banking Application
+
+Project Overview:
+A secure mobile app enabling customers to manage accounts, transfer funds, pay bills, and access financial insights.
+
+Main Features:
+- Biometric login and two-factor authentication
+- Account balance and transaction history
+- Fund transfers and scheduled payments
+- Bill payments and QR code transactions
+- Spending analytics and budget alerts
+
+Non-Functional Requirements:
+Bank-grade encryption, offline capability, PCI-DSS level 1.

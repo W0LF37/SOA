@@ -1,0 +1,230 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "title": "Implement contact and account management with custom fields and activity timeline dashboard",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-01",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Dashboard usability depends on stable analytics contracts and latency"
+      ],
+      "id": "T001"
+    },
+    {
+      "title": "Implement deal pipeline with drag-and-drop stages, probability workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T002"
+    },
+    {
+      "title": "Implement campaign builder with templates, scheduling, and open/click tracking notification workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement task and follow-up reminders tied workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-04",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T004"
+    },
+    {
+      "title": "Integrate email clients (Gmail/Outlook)",
+      "req_type": "FR",
+      "complexity": 4,
+      "source": "REQ-05",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "id": "T005"
+    },
+    {
+      "title": "Optimize sales analytics: revenue forecasts, conversion rates performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-06",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "data",
+      "suggested_owner_role": "Data Engineer",
+      "risks": [
+        "Performance targets require realistic load testing",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "id": "T006"
+    },
+    {
+      "title": "Optimize ticketing linked to CRM contacts performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-07",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T007"
+    },
+    {
+      "title": "Optimize exceed 500ms for all list performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-08",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T008"
+    },
+    {
+      "title": "Implement Data import/export for up to 500,000 contact records without timeout workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-09",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T009"
+    },
+    {
+      "title": "Establish GDPR compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-10",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T010"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T003"
+    },
+    {
+      "weight": 4,
+      "source": "T006",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T009"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T003"
+    },
+    {
+      "weight": 4,
+      "source": "T007",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T009"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T003"
+    },
+    {
+      "weight": 4,
+      "source": "T008",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T009"
+    }
+  ]
+}

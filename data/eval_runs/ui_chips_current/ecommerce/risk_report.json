@@ -1,0 +1,27 @@
+{
+  "risk_level": "medium",
+  "risk_score": 0.2,
+  "total_risks": 2,
+  "risks": [
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 238h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-04-30T22:13:37.623157+00:00"
+}

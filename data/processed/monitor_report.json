@@ -1,0 +1,164 @@
+{
+  "overall_progress": 0.0,
+  "tasks_tracked": 10,
+  "tasks_completed": 0,
+  "tasks_in_progress": 0,
+  "tasks_not_started": 10,
+  "task_progress": [
+    {
+      "task_id": "T001",
+      "task_title": "Implement national ID registration workflow",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T002",
+      "task_title": "Implement appointment booking workflow",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T003",
+      "task_title": "Implement appointment management workflow",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T004",
+      "task_title": "Implement patient history and record diagnosis viewing workflow",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T005",
+      "task_title": "Implement itemized invoices for consultations and lab creation workflow",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T006",
+      "task_title": "Implement appointment reminders to patients notification workflow",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T007",
+      "task_title": "Optimize system uptime and reliability constraints",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T008",
+      "task_title": "Enforce accessibility requirements",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T009",
+      "task_title": "Enable Arabic/English RTL/LTR localization support",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    },
+    {
+      "task_id": "T010",
+      "task_title": "Optimize response time performance constraints",
+      "status": "not_started",
+      "matched_commits": [],
+      "evidence": [],
+      "completion_estimate": 0.0
+    }
+  ],
+  "commits_analyzed": 0,
+  "behind_schedule": [],
+  "generated_at": "2026-05-03T13:07:54.647008+00:00",
+  "task_statuses": [
+    {
+      "task_id": "T001",
+      "task_title": "Implement national ID registration workflow",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T002",
+      "task_title": "Implement appointment booking workflow",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T003",
+      "task_title": "Implement appointment management workflow",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T004",
+      "task_title": "Implement patient history and record diagnosis viewing workflow",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T005",
+      "task_title": "Implement itemized invoices for consultations and lab creation workflow",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T006",
+      "task_title": "Implement appointment reminders to patients notification workflow",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T007",
+      "task_title": "Optimize system uptime and reliability constraints",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T008",
+      "task_title": "Enforce accessibility requirements",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T009",
+      "task_title": "Enable Arabic/English RTL/LTR localization support",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    },
+    {
+      "task_id": "T010",
+      "task_title": "Optimize response time performance constraints",
+      "status": "not_started",
+      "completion_estimate": 0.0,
+      "evidence_commits": []
+    }
+  ]
+}

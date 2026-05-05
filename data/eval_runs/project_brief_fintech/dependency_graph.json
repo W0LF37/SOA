@@ -1,0 +1,290 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "title": "Enforce payment processing supporting credit/debit cards security controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-01",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T001"
+    },
+    {
+      "title": "Establish KYC compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T002"
+    },
+    {
+      "title": "Implement transaction history with filtering, search, and CSV/PDF export workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement merchant dashboard",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-04",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "frontend",
+      "suggested_owner_role": "Frontend Engineer",
+      "risks": [
+        "Dashboard usability depends on stable analytics contracts and latency",
+        "Aggregated outputs depend on clean source data"
+      ],
+      "id": "T004"
+    },
+    {
+      "title": "Implement recurring billing and subscription management with automatic retry on failure workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-05",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T005"
+    },
+    {
+      "title": "Integrate live exchange rate",
+      "req_type": "FR",
+      "complexity": 4,
+      "source": "REQ-06",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "integration",
+      "suggested_owner_role": "Integration Engineer",
+      "risks": [
+        "Third-party API dependency"
+      ],
+      "id": "T006"
+    },
+    {
+      "title": "Establish PCI-DSS compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-07",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T007"
+    },
+    {
+      "title": "Optimize p99 response-time SLO",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-08",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T008"
+    },
+    {
+      "title": "Optimize system performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-09",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T009"
+    },
+    {
+      "title": "Implement limiting and IP allowlisting support workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-10",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T010"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T002",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T002",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T002",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T002",
+      "target": "T006"
+    },
+    {
+      "weight": 4,
+      "source": "T002",
+      "target": "T009"
+    },
+    {
+      "weight": 2,
+      "source": "T002",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T003",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T007",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T008",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T010"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T005"
+    },
+    {
+      "weight": 4,
+      "source": "T009",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T010"
+    }
+  ]
+}

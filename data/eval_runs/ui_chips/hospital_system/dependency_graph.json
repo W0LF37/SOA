@@ -1,0 +1,177 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "title": "Implement patient registration with national ID and insurance workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-01",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T001"
+    },
+    {
+      "title": "Implement doctor scheduling and appointment booking workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T002"
+    },
+    {
+      "title": "Implement electronic medical records (EMR) workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement pharmacy stock management and prescriptions workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-04",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T004"
+    },
+    {
+      "title": "Implement billing and insurance claim processing",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-05",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T005"
+    },
+    {
+      "title": "Establish HIPAA compliance controls",
+      "req_type": "NFR",
+      "complexity": 3,
+      "source": "REQ-06",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 40,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Compliance interpretation should be validated early"
+      ],
+      "id": "T006"
+    },
+    {
+      "title": "Optimize system uptime and reliability constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-07",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T007"
+    },
+    {
+      "title": "Meet response-time SLO",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-08",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T008"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T002"
+    },
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T002"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T005"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T001"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T002"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T005"
+    }
+  ]
+}

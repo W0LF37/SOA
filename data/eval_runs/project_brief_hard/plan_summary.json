@@ -1,0 +1,777 @@
+{
+  "generated_at": "2026-05-01T10:34:04.098783+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/project_brief_hard/critic_report.json"
+  },
+  "input_file": "data/raw/docs/project_brief_hard.txt",
+  "tasks_file": "data/eval_runs/project_brief_hard/tasks.json",
+  "graph_file": "data/eval_runs/project_brief_hard/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 14,
+    "task_count": 14,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "crud",
+        "count": 4
+      },
+      {
+        "theme": "performance",
+        "count": 3
+      },
+      {
+        "theme": "identity",
+        "count": 1
+      },
+      {
+        "theme": "validation",
+        "count": 1
+      },
+      {
+        "theme": "notification",
+        "count": 1
+      },
+      {
+        "theme": "integration",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T008",
+        "title": "Integrate third-party learning management system",
+        "complexity": 4,
+        "source": "REQ-08"
+      },
+      {
+        "id": "T009",
+        "title": "Optimize system uptime and reliability constraints",
+        "complexity": 4,
+        "source": "REQ-09"
+      },
+      {
+        "id": "T010",
+        "title": "Optimize peak-load responsiveness and capacity",
+        "complexity": 4,
+        "source": "REQ-10"
+      },
+      {
+        "id": "T013",
+        "title": "Optimize concurrent user capacity",
+        "complexity": 4,
+        "source": "REQ-13"
+      },
+      {
+        "id": "T014",
+        "title": "Enable mobile-friendly interface support",
+        "complexity": 4,
+        "source": "REQ-14"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 1,
+      "confirmed_task_count": 13,
+      "task_ids": [
+        "T008"
+      ],
+      "titles": [
+        "Integrate third-party learning management system"
+      ],
+      "sources": [
+        "REQ-08"
+      ]
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should Register and enroll in available courses for the upcoming semester.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement student registration and course enrollment workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "Actor: Instructor — The Instructor should Allow instructors to upload grades and course materials for enrolled students.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement grades and course materials for enrolled upload workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "Actor: Student — The Student should Allow academic advisors to review student academic progress and suggest courses.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement student academic progress and suggest courses viewing workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should Generate tuition invoices and process online payment for registered students.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement tuition invoices and process online payment creation workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "Actor: Student — The Student should Send automated email notifications to students for deadlines and grade updates.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement automated email to students notification workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "Actor: Registrar — The Registrar should Allow the registrar to manage course schedules and assign instructors to courses.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Implement course schedules and assign instructors management workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should Support transcript requests and official document generation for graduating students.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Implement transcript requests and official document generation support workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should provide ideally integrate with a third-party learning management system if budget allows.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Integrate third-party learning management system"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-09",
+        "original_requirement": "The system should maintain high availability.",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Optimize system uptime and reliability constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-10",
+        "original_requirement": "The system should maintain responsive performance under peak load.",
+        "task_count": 1,
+        "task_ids": [
+          "T010"
+        ],
+        "task_titles": [
+          "Optimize peak-load responsiveness and capacity"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-11",
+        "original_requirement": "The system should support Arabic and English UI.",
+        "task_count": 1,
+        "task_ids": [
+          "T011"
+        ],
+        "task_titles": [
+          "Enable Arabic/English RTL/LTR localization support"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-12",
+        "original_requirement": "The system should comply with local university data protection regulations.",
+        "task_count": 1,
+        "task_ids": [
+          "T012"
+        ],
+        "task_titles": [
+          "Comply with local university data protection"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-13",
+        "original_requirement": "The system should maintain responsive performance for concurrent users.",
+        "task_count": 1,
+        "task_ids": [
+          "T013"
+        ],
+        "task_titles": [
+          "Optimize concurrent user capacity"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-14",
+        "original_requirement": "The system should support mobile-friendly interfaces.",
+        "task_count": 1,
+        "task_ids": [
+          "T014"
+        ],
+        "task_titles": [
+          "Enable mobile-friendly interface support"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 7,
+        "task_ids": [
+          "T007",
+          "T009",
+          "T010",
+          "T011",
+          "T012",
+          "T013",
+          "T014"
+        ],
+        "headline": "Stage 1 expands localization and experience coverage",
+        "dominant_themes": [
+          "performance",
+          "localization",
+          "compliance"
+        ],
+        "titles": [
+          "Implement transcript requests and official document generation support workflow",
+          "Optimize system uptime and reliability constraints",
+          "Optimize peak-load responsiveness and capacity",
+          "Enable Arabic/English RTL/LTR localization support",
+          "Comply with local university data protection"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 4,
+        "task_ids": [
+          "T001",
+          "T002",
+          "T003",
+          "T006"
+        ],
+        "headline": "Stage 2 establishes account and identity foundations",
+        "dominant_themes": [
+          "crud",
+          "identity",
+          "validation"
+        ],
+        "titles": [
+          "Implement student registration and course enrollment workflow",
+          "Implement grades and course materials for enrolled upload workflow",
+          "Implement student academic progress and suggest courses viewing workflow",
+          "Implement course schedules and assign instructors management workflow"
+        ]
+      },
+      {
+        "stage": 3,
+        "task_count": 2,
+        "task_ids": [
+          "T004",
+          "T008"
+        ],
+        "headline": "Stage 3 delivers core product workflows",
+        "dominant_themes": [
+          "crud",
+          "integration"
+        ],
+        "titles": [
+          "Implement tuition invoices and process online payment creation workflow",
+          "Integrate third-party learning management system"
+        ]
+      },
+      {
+        "stage": 4,
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "headline": "Stage 4 delivers user communications and alerting",
+        "dominant_themes": [
+          "crud",
+          "notification"
+        ],
+        "titles": [
+          "Implement automated email to students notification workflow"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "External integrations are present and will need interface contracts plus vendor coordination.",
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "5 high-complexity tasks sit on the roadmap and deserve early prototyping.",
+      "1 tasks are marked as optional or low-confidence scope and should be planned outside the confirmed delivery baseline."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: education and learning management.",
+      "scope_assessment": "Scope includes 8 functional task(s) and 6 non-functional task(s); 1 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [
+        {
+          "task_id": "T008",
+          "reason": "Task was marked optional and low-confidence because the source wording was hedged or future-scoped.",
+          "original_source": "REQ-08"
+        }
+      ],
+      "assumption_log": [
+        "1 task(s) were marked optional or low-confidence because the planner detected hedge or future-scope language in the source text.",
+        "Dependency sequencing was inferred for 7 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is moderate: 1 task(s) remain low-confidence and should be reviewed before commitment.",
+      "graph_summary": "14 requirements -> 14 atomic tasks across 4 delivery sprints. Critical delivery path: T009 -> T001 -> T008 (3 hops, ~10 story points, estimated 7 weeks with a 2-person team). Coordination hotspot: Optimize system uptime and reliability constraints blocks 7 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 7 tasks can start immediately in Sprint 1. Effort breakdown: 372 estimated hours | FR: 182h | NFR: 190h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: education and learning management.",
+    "scope_assessment": "Scope includes 8 functional task(s) and 6 non-functional task(s); 1 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [
+      {
+        "task_id": "T008",
+        "reason": "Task was marked optional and low-confidence because the source wording was hedged or future-scoped.",
+        "original_source": "REQ-08"
+      }
+    ],
+    "assumption_log": [
+      "1 task(s) were marked optional or low-confidence because the planner detected hedge or future-scope language in the source text.",
+      "Dependency sequencing was inferred for 7 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is moderate: 1 task(s) remain low-confidence and should be reviewed before commitment.",
+    "graph_summary": "14 requirements -> 14 atomic tasks across 4 delivery sprints. Critical delivery path: T009 -> T001 -> T008 (3 hops, ~10 story points, estimated 7 weeks with a 2-person team). Coordination hotspot: Optimize system uptime and reliability constraints blocks 7 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 7 tasks can start immediately in Sprint 1. Effort breakdown: 372 estimated hours | FR: 182h | NFR: 190h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Security & Compliance Readiness",
+      "goal": "Security, privacy, and compliance controls are validated for the planned scope",
+      "tasks": [
+        "T007",
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014"
+      ],
+      "total_estimated_hours": 210,
+      "total_points": 24,
+      "duration_weeks": 3,
+      "owner_roles": [
+        "Backend Engineer",
+        "Frontend Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "performance",
+        "localization",
+        "compliance"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Core Workflow Delivery",
+      "goal": "Account identity, authentication, and permission foundations are ready for downstream workflows",
+      "tasks": [
+        "T001",
+        "T002",
+        "T003",
+        "T006"
+      ],
+      "total_estimated_hours": 84,
+      "total_points": 9,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "identity",
+        "validation"
+      ]
+    },
+    {
+      "sprint": 3,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T004",
+        "T008"
+      ],
+      "total_estimated_hours": 58,
+      "total_points": 6,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer",
+        "Integration Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "integration"
+      ]
+    },
+    {
+      "sprint": 4,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T005"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "notification"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 372,
+    "total_estimated_days": 47,
+    "fr_estimated_hours": 182,
+    "nfr_estimated_hours": 190
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T014"
+      ],
+      "task_count": 8,
+      "estimated_hours": 160,
+      "focus": "core workflows, identity, validation"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T009",
+        "T010",
+        "T013"
+      ],
+      "task_count": 3,
+      "estimated_hours": 114,
+      "focus": "performance"
+    },
+    {
+      "role": "Integration Engineer",
+      "task_ids": [
+        "T008"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "integrations"
+    },
+    {
+      "role": "Frontend Engineer",
+      "task_ids": [
+        "T011"
+      ],
+      "task_count": 1,
+      "estimated_hours": 30,
+      "focus": "localization"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T012"
+      ],
+      "task_count": 1,
+      "estimated_hours": 30,
+      "focus": "compliance"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 8,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T006",
+        "T007",
+        "T011",
+        "T014"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 3,
+      "task_ids": [
+        "T009",
+        "T010",
+        "T013"
+      ]
+    },
+    {
+      "risk": "Channel delivery retries and failure handling need testing",
+      "task_count": 1,
+      "task_ids": [
+        "T005"
+      ]
+    },
+    {
+      "risk": "Third-party API dependency",
+      "task_count": 1,
+      "task_ids": [
+        "T008"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T012"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 14,
+    "total_dependencies": 36,
+    "fr_count": 8,
+    "nfr_count": 6,
+    "avg_complexity": 2.93,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 6,
+      "3": 3,
+      "4": 5,
+      "5": 0
+    },
+    "optional_task_count": 1,
+    "confirmed_task_count": 13,
+    "low_confidence_tasks": [
+      {
+        "id": "T008",
+        "title": "Integrate third-party learning management system",
+        "source": "REQ-08",
+        "confidence": "low",
+        "optional": true
+      }
+    ],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T009",
+        "T001",
+        "T008"
+      ],
+      "titles": [
+        "Optimize system uptime and reliability constraints",
+        "Implement student registration and course enrollment workflow",
+        "Integrate third-party learning management system"
+      ],
+      "total_weight": 6,
+      "length": 3
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T009",
+        "title": "Optimize system uptime and reliability constraints",
+        "blocks": 7,
+        "complexity": 4
+      },
+      {
+        "id": "T010",
+        "title": "Optimize peak-load responsiveness and capacity",
+        "blocks": 7,
+        "complexity": 4
+      },
+      {
+        "id": "T013",
+        "title": "Optimize concurrent user capacity",
+        "blocks": 7,
+        "complexity": 4
+      },
+      {
+        "id": "T014",
+        "title": "Enable mobile-friendly interface support",
+        "blocks": 7,
+        "complexity": 4
+      },
+      {
+        "id": "T012",
+        "title": "Comply with local university data protection",
+        "blocks": 5,
+        "complexity": 3
+      }
+    ],
+    "root_tasks": [
+      "T007",
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014"
+    ],
+    "leaf_tasks": [
+      "T002",
+      "T003",
+      "T005",
+      "T006",
+      "T007",
+      "T008",
+      "T011"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T007",
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014"
+      ],
+      [
+        "T001",
+        "T002",
+        "T003",
+        "T006"
+      ],
+      [
+        "T004",
+        "T008"
+      ],
+      [
+        "T005"
+      ]
+    ],
+    "parallel_group_count": 4
+  },
+  "admin_review": {
+    "status": "pending",
+    "total_flagged": 1,
+    "queue_file": "data/eval_runs/project_brief_hard/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": null
+  }
+}

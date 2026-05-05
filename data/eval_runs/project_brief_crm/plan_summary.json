@@ -1,0 +1,608 @@
+{
+  "generated_at": "2026-05-01T10:34:03.481364+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/project_brief_crm/critic_report.json"
+  },
+  "input_file": "data/raw/docs/project_brief_crm.txt",
+  "tasks_file": "data/eval_runs/project_brief_crm/tasks.json",
+  "graph_file": "data/eval_runs/project_brief_crm/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 10,
+    "task_count": 10,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "view",
+        "count": 4
+      },
+      {
+        "theme": "performance",
+        "count": 3
+      },
+      {
+        "theme": "notification",
+        "count": 2
+      },
+      {
+        "theme": "dashboard",
+        "count": 1
+      },
+      {
+        "theme": "integration",
+        "count": 1
+      },
+      {
+        "theme": "reporting",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T005",
+        "title": "Integrate email clients (Gmail/Outlook)",
+        "complexity": 4,
+        "source": "REQ-05"
+      },
+      {
+        "id": "T006",
+        "title": "Optimize sales analytics: revenue forecasts, conversion rates performance constraints",
+        "complexity": 4,
+        "source": "REQ-06"
+      },
+      {
+        "id": "T007",
+        "title": "Optimize ticketing linked to CRM contacts performance constraints",
+        "complexity": 4,
+        "source": "REQ-07"
+      },
+      {
+        "id": "T008",
+        "title": "Optimize exceed 500ms for all list performance constraints",
+        "complexity": 4,
+        "source": "REQ-08"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 10,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should provide contact and account management with custom fields and activity timeline.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement contact and account management with custom fields and activity timeline dashboard"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should provide deal pipeline with drag-and-drop stages, probability weighting, and forecasting.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement deal pipeline with drag-and-drop stages, probability workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "The system should provide email campaign builder with templates, scheduling, and open/click tracking.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement campaign builder with templates, scheduling, and open/click tracking notification workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should provide task and follow-up reminders tied to contacts and deals.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement task and follow-up reminders tied workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should provide integration with email clients (Gmail/Outlook) for two-way sync.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Integrate email clients (Gmail/Outlook)"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "Actor: Sales Rep — The Sales Rep should provide sales analytics: revenue forecasts, conversion rates, rep performance dashboards.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Optimize sales analytics: revenue forecasts, conversion rates performance constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "Actor: Customer Support Agent — The Customer Support Agent should provide customer support ticketing linked to CRM contacts with SLA tracking.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Optimize ticketing linked to CRM contacts performance constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should not exceed 500ms for all list and detail views.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Optimize exceed 500ms for all list performance constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-09",
+        "original_requirement": "The system should Data import/export for up to 500,000 contact records without timeout..",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Implement Data import/export for up to 500,000 contact records without timeout workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-10",
+        "original_requirement": "The system should maintain GDPR compliance.",
+        "task_count": 1,
+        "task_ids": [
+          "T010"
+        ],
+        "task_titles": [
+          "Establish GDPR compliance controls"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 6,
+        "task_ids": [
+          "T002",
+          "T004",
+          "T006",
+          "T007",
+          "T008",
+          "T010"
+        ],
+        "headline": "Stage 1 validates planner quality metrics and scalability targets",
+        "dominant_themes": [
+          "performance",
+          "view",
+          "reporting"
+        ],
+        "titles": [
+          "Implement deal pipeline with drag-and-drop stages, probability workflow",
+          "Implement task and follow-up reminders tied workflow",
+          "Optimize sales analytics: revenue forecasts, conversion rates performance constraints",
+          "Optimize ticketing linked to CRM contacts performance constraints",
+          "Optimize exceed 500ms for all list performance constraints"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 4,
+        "task_ids": [
+          "T001",
+          "T003",
+          "T005",
+          "T009"
+        ],
+        "headline": "Stage 2 exposes decision visibility and evaluation insights",
+        "dominant_themes": [
+          "notification",
+          "dashboard",
+          "view"
+        ],
+        "titles": [
+          "Implement contact and account management with custom fields and activity timeline dashboard",
+          "Implement campaign builder with templates, scheduling, and open/click tracking notification workflow",
+          "Integrate email clients (Gmail/Outlook)",
+          "Implement Data import/export for up to 500,000 contact records without timeout workflow"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "External integrations are present and will need interface contracts plus vendor coordination.",
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "4 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: CRM and sales operations.",
+      "scope_assessment": "Scope includes 6 functional task(s) and 4 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 4 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "10 requirements -> 10 atomic tasks across 2 delivery sprints. Critical delivery path: T006 -> T005 (2 hops, ~8 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize sales analytics: revenue forecasts, conversion rates performance constraints blocks 4 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 6 tasks can start immediately in Sprint 1. Effort breakdown: 292 estimated hours | FR: 138h | NFR: 154h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: CRM and sales operations.",
+    "scope_assessment": "Scope includes 6 functional task(s) and 4 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 4 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "10 requirements -> 10 atomic tasks across 2 delivery sprints. Critical delivery path: T006 -> T005 (2 hops, ~8 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize sales analytics: revenue forecasts, conversion rates performance constraints blocks 4 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 6 tasks can start immediately in Sprint 1. Effort breakdown: 292 estimated hours | FR: 138h | NFR: 154h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T002",
+        "T004",
+        "T006",
+        "T007",
+        "T008",
+        "T010"
+      ],
+      "total_estimated_hours": 194,
+      "total_points": 19,
+      "duration_weeks": 3,
+      "owner_roles": [
+        "Backend Engineer",
+        "Data Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "performance",
+        "view",
+        "reporting"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T001",
+        "T003",
+        "T005",
+        "T009"
+      ],
+      "total_estimated_hours": 98,
+      "total_points": 10,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer",
+        "Frontend Engineer",
+        "Integration Engineer"
+      ],
+      "focus_themes": [
+        "notification",
+        "dashboard",
+        "view"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 292,
+    "total_estimated_days": 37,
+    "fr_estimated_hours": 138,
+    "nfr_estimated_hours": 154
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T002",
+        "T003",
+        "T004",
+        "T009"
+      ],
+      "task_count": 4,
+      "estimated_hours": 80,
+      "focus": "communications, information access, export"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T007",
+        "T008"
+      ],
+      "task_count": 2,
+      "estimated_hours": 76,
+      "focus": "performance, information access"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T010"
+      ],
+      "task_count": 1,
+      "estimated_hours": 40,
+      "focus": "compliance"
+    },
+    {
+      "role": "Integration Engineer",
+      "task_ids": [
+        "T005"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "communications, integrations"
+    },
+    {
+      "role": "Data Engineer",
+      "task_ids": [
+        "T006"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "performance, information access, reporting"
+    },
+    {
+      "role": "Frontend Engineer",
+      "task_ids": [
+        "T001"
+      ],
+      "task_count": 1,
+      "estimated_hours": 20,
+      "focus": "dashboard visibility"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 4,
+      "task_ids": [
+        "T002",
+        "T003",
+        "T004",
+        "T009"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 3,
+      "task_ids": [
+        "T006",
+        "T007",
+        "T008"
+      ]
+    },
+    {
+      "risk": "Dashboard usability depends on stable analytics contracts and latency",
+      "task_count": 1,
+      "task_ids": [
+        "T001"
+      ]
+    },
+    {
+      "risk": "Third-party API dependency",
+      "task_count": 1,
+      "task_ids": [
+        "T005"
+      ]
+    },
+    {
+      "risk": "Aggregated outputs depend on clean source data",
+      "task_count": 1,
+      "task_ids": [
+        "T006"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T010"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 10,
+    "total_dependencies": 12,
+    "fr_count": 6,
+    "nfr_count": 4,
+    "avg_complexity": 2.9,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 5,
+      "3": 1,
+      "4": 4,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 10,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T006",
+        "T005"
+      ],
+      "titles": [
+        "Optimize sales analytics: revenue forecasts, conversion rates performance constraints",
+        "Integrate email clients (Gmail/Outlook)"
+      ],
+      "total_weight": 4,
+      "length": 2
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize sales analytics: revenue forecasts, conversion rates performance constraints",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T007",
+        "title": "Optimize ticketing linked to CRM contacts performance constraints",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T008",
+        "title": "Optimize exceed 500ms for all list performance constraints",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T005",
+        "title": "Integrate email clients (Gmail/Outlook)",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T010",
+        "title": "Establish GDPR compliance controls",
+        "blocks": 0,
+        "complexity": 3
+      }
+    ],
+    "root_tasks": [
+      "T002",
+      "T004",
+      "T006",
+      "T007",
+      "T008",
+      "T010"
+    ],
+    "leaf_tasks": [
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T009",
+      "T010"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T002",
+        "T004",
+        "T006",
+        "T007",
+        "T008",
+        "T010"
+      ],
+      [
+        "T001",
+        "T003",
+        "T005",
+        "T009"
+      ]
+    ],
+    "parallel_group_count": 2
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/project_brief_crm/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/project_brief_crm/tasks_final.json"
+  }
+}

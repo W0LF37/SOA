@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>CritiPlan — Agent Flow (PowerPoint)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* ── Slide canvas ── */
+  .slide {
+    width: 1366px;
+    height: 560px;
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Top accent bar */
+  .slide::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: linear-gradient(90deg, #6d28d9, #0891b2, #059669, #d97706, #dc2626, #475569);
+  }
+
+  .slide-inner {
+    padding: 18px 28px 20px;
+    height: calc(100% - 5px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Title */
+  .slide-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-shrink: 0;
+  }
+
+  .slide-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: -0.3px;
+  }
+
+  .slide-title span {
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  /* ── Flow row ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
+  }
+
+  /* Arrow between cards */
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .arrow-line {
+    width: 28px;
+    height: 2px;
+    background: #cbd5e1;
+    position: relative;
+  }
+
+  .arrow-line::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    border-left: 8px solid #cbd5e1;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  .arrow-label {
+    font-size: 9px;
+    color: #94a3b8;
+    font-family: 'Consolas', monospace;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+
+  /* ── Agent Card ── */
+  .card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-top: 4px solid var(--c);
+    border-radius: 8px;
+    padding: 10px 12px 10px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 7px;
+  }
+
+  .card-name .ico { font-size: 15px; }
+
+  .card-llm {
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+
+  .llm-opt  { background: #ede9fe; color: #6d28d9; }
+  .llm-none { background: #f1f5f9; color: #64748b; }
+
+  .io-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .io-block { flex: 1; }
+
+  .io-label {
+    font-size: 8.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #94a3b8;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .io-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .io-items li {
+    font-size: 10.5px;
+    color: #475569;
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    line-height: 1.4;
+  }
+
+  .io-items li::before {
+    content: '▸';
+    color: var(--c);
+    font-size: 8px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .io-divider {
+    width: 1px;
+    background: #f1f5f9;
+    flex-shrink: 0;
+  }
+
+  .card-disk {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed #e2e8f0;
+    font-size: 9px;
+    color: #94a3b8;
+    font-family: 'Consolas', monospace;
+  }
+
+  /* ── Special sizes ── */
+  .card-brief {
+    border-radius: 40px;
+    border-top: 1.5px solid #3b82f6;
+    border-left: 1.5px solid #3b82f6;
+    border-right: 1.5px solid #3b82f6;
+    border-bottom: 1.5px solid #3b82f6;
+    padding: 10px 16px;
+    text-align: center;
+    background: #eff6ff;
+    box-shadow: 0 2px 12px #3b82f615;
+  }
+
+  .card-brief .brief-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+  .card-brief .brief-name { font-size: 12px; font-weight: 700; color: #1d4ed8; }
+  .card-brief .brief-sub  { font-size: 9px; color: #60a5fa; margin-top: 2px; }
+
+  /* ── Fork / Merge section ── */
+  .fork-section {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-start;
+  }
+
+  .fork-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fork-connector {
+    position: absolute;
+    left: -30px;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+  }
+
+  .merge-connector {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+  }
+
+  /* ── Output node ── */
+  .output-node {
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 10px 14px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .output-node h4 {
+    font-size: 11px;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .output-file {
+    font-size: 9.5px;
+    font-family: 'Consolas', monospace;
+    color: #64748b;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+    padding: 2px 6px;
+    margin-bottom: 3px;
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #94a3b8;
+  }
+
+  .hint {
+    margin-left: auto;
+    font-size: 10px;
+    color: #cbd5e1;
+    font-style: italic;
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    .slide { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="slide-inner">
+
+    <!-- Title -->
+    <div class="slide-title">
+      <h1>⚙️ CritiPlan — تدفق عمل الـ Agents (Pipeline)</h1>
+      <span>6 Agents · Local Ollama LLM · doc_to_tasks.py</span>
+    </div>
+
+    <!-- Flow -->
+    <div class="flow">
+
+      <!-- Brief -->
+      <div class="card-brief" style="width:90px">
+        <span class="brief-icon">📄</span>
+        <div class="brief-name">Project<br>Brief</div>
+        <div class="brief-sub">text input</div>
+      </div>
+
+      <!-- Arrow 1 -->
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-label">text</div>
+      </div>
+
+      <!-- Planner -->
+      <div class="card" style="--c:#7c3aed;width:168px">
+        <div class="card-name"><span class="ico">🤖</span>PlannerAgent</div>
+        <div class="card-llm llm-opt">🔵 LLM Optional</div>
+        <div class="io-row">
+          <div class="io-block">
+            <div class="io-label">Input</div>
+            <ul class="io-items">
+              <li>Requirements text</li>
+              <li>KB context</li>
+            </ul>
+          </div>
+          <div class="io-divider"></div>
+          <div class="io-block">
+            <div class="io-label">Output</div>
+            <ul class="io-items">
+              <li>TaskList</li>
+              <li>TechStack</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-disk">💾 tasks.json</div>
+      </div>
+
+      <!-- Arrow 2 -->
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-label">TaskList</div>
+      </div>
+
+      <!-- Effort Estimator -->
+      <div class="card" style="--c:#0891b2;width:168px">
+        <div class="card-name"><span class="ico">⚖️</span>EffortEstimator</div>
+        <div class="card-llm llm-none">⚪ No LLM</div>
+        <div class="io-row">
+          <div class="io-block">
+            <div class="io-label">Input</div>
+            <ul class="io-items">
+              <li>TaskList</li>
+              <li>ChromaDB KB</li>
+            </ul>
+          </div>
+          <div class="io-divider"></div>
+          <div class="io-block">
+            <div class="io-label">Output</div>
+            <ul class="io-items">
+              <li>TaskList +</li>
+              <li>Hours / Days</li>
+              <li>Team size</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-disk">📖 ChromaDB</div>
+      </div>
+
+      <!-- Fork arrow -->
+      <div style="position:relative;width:36px;flex-shrink:0;height:240px;display:flex;align-items:center">
+        <svg width="36" height="240" style="position:absolute;left:0;top:0">
+          <!-- center line splits up and down -->
+          <line x1="0" y1="120" x2="18" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+          <!-- upper branch -->
+          <line x1="18" y1="120" x2="18" y2="50" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="18" y1="50" x2="36" y2="50" stroke="#cbd5e1" stroke-width="2"/>
+          <polygon points="30,45 36,50 30,55" fill="#cbd5e1"/>
+          <!-- lower branch -->
+          <line x1="18" y1="120" x2="18" y2="188" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="18" y1="188" x2="36" y2="188" stroke="#cbd5e1" stroke-width="2"/>
+          <polygon points="30,183 36,188 30,193" fill="#cbd5e1"/>
+        </svg>
+      </div>
+
+      <!-- Parallel cards -->
+      <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0">
+
+        <!-- Critic -->
+        <div class="card" style="--c:#d97706;width:168px">
+          <div class="card-name"><span class="ico">🔍</span>CriticAgent</div>
+          <div class="card-llm llm-opt">🔵 LLM Optional</div>
+          <div class="io-row">
+            <div class="io-block">
+              <div class="io-label">Input</div>
+              <ul class="io-items"><li>TaskList</li></ul>
+            </div>
+            <div class="io-divider"></div>
+            <div class="io-block">
+              <div class="io-label">Output</div>
+              <ul class="io-items">
+                <li>CriticReport</li>
+                <li>Score 0–1</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-disk">💾 critic_report.json</div>
+        </div>
+
+        <!-- DependencyGraph -->
+        <div class="card" style="--c:#059669;width:168px">
+          <div class="card-name"><span class="ico">📊</span>DependencyGraph</div>
+          <div class="card-llm llm-none">⚪ No LLM</div>
+          <div class="io-row">
+            <div class="io-block">
+              <div class="io-label">Input</div>
+              <ul class="io-items"><li>TaskList</li></ul>
+            </div>
+            <div class="io-divider"></div>
+            <div class="io-block">
+              <div class="io-label">Output</div>
+              <ul class="io-items">
+                <li>Critical path</li>
+                <li>Bottlenecks</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-disk">💾 dependency_graph.json</div>
+        </div>
+
+      </div>
+
+      <!-- Merge arrow -->
+      <div style="position:relative;width:36px;flex-shrink:0;height:240px;display:flex;align-items:center">
+        <svg width="36" height="240" style="position:absolute;left:0;top:0">
+          <!-- upper branch merges -->
+          <line x1="0" y1="50" x2="18" y2="50" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="18" y1="50" x2="18" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+          <!-- lower branch merges -->
+          <line x1="0" y1="188" x2="18" y2="188" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="18" y1="188" x2="18" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+          <!-- out center -->
+          <line x1="18" y1="120" x2="36" y2="120" stroke="#cbd5e1" stroke-width="2"/>
+          <polygon points="30,115 36,120 30,125" fill="#cbd5e1"/>
+        </svg>
+      </div>
+
+      <!-- Risk Analyzer -->
+      <div class="card" style="--c:#dc2626;width:168px">
+        <div class="card-name"><span class="ico">⚠️</span>RiskAnalyzer</div>
+        <div class="card-llm llm-opt">🔵 LLM Optional</div>
+        <div class="io-row">
+          <div class="io-block">
+            <div class="io-label">Input</div>
+            <ul class="io-items">
+              <li>TaskList</li>
+              <li>CriticReport</li>
+              <li>Graph stats</li>
+            </ul>
+          </div>
+          <div class="io-divider"></div>
+          <div class="io-block">
+            <div class="io-label">Output</div>
+            <ul class="io-items">
+              <li>RiskReport</li>
+              <li>Risk level</li>
+              <li>Mitigations</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-disk">💾 risk_report.json</div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-label">RiskReport</div>
+      </div>
+
+      <!-- Monitor -->
+      <div class="card" style="--c:#475569;width:168px">
+        <div class="card-name"><span class="ico">📡</span>MonitorAgent</div>
+        <div class="card-llm llm-none">⚪ No LLM</div>
+        <div class="io-row">
+          <div class="io-block">
+            <div class="io-label">Input</div>
+            <ul class="io-items">
+              <li>TaskList</li>
+              <li>Git repo</li>
+            </ul>
+          </div>
+          <div class="io-divider"></div>
+          <div class="io-block">
+            <div class="io-label">Output</div>
+            <ul class="io-items">
+              <li>Progress %</li>
+              <li>Task status</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-disk">💾 progress_report.json</div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arrow">
+        <div class="arrow-line"></div>
+        <div class="arrow-label">report</div>
+      </div>
+
+      <!-- Output files -->
+      <div class="output-node" style="width:110px">
+        <h4>📁 Outputs</h4>
+        <span class="output-file">tasks.json</span>
+        <span class="output-file">critic_report.json</span>
+        <span class="output-file">risk_report.json</span>
+        <span class="output-file">plan_summary.json</span>
+        <span class="output-file">progress_report.json</span>
+      </div>
+
+    </div><!-- /flow -->
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><span style="background:#ede9fe;color:#6d28d9;padding:2px 7px;border-radius:8px;font-size:9px;font-weight:600">🔵 LLM Optional</span> يستدعي Ollama إن وُجد، وإلا يستخدم Rules</div>
+      <div class="legend-item"><span style="background:#f1f5f9;color:#64748b;padding:2px 7px;border-radius:8px;font-size:9px;font-weight:600">⚪ No LLM</span> خوارزمي بالكامل</div>
+      <div class="legend-item"><span style="background:#fef9c3;color:#92400e;padding:2px 7px;border-radius:8px;font-size:9px;font-weight:600">💾 يكتب ملف JSON</span></div>
+      <div class="hint">أخذ Screenshot ثم إدراج في PowerPoint · أو Ctrl+P للطباعة كـ PDF</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

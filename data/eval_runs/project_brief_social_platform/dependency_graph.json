@@ -1,0 +1,204 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "title": "Implement user profile with bio, avatar, followers/following workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-01",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T001"
+    },
+    {
+      "title": "Implement creation supporting text, images, and videos creation workflow",
+      "req_type": "FR",
+      "complexity": 3,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 24,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T002"
+    },
+    {
+      "title": "Implement news feed algorithm based on follows workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement communities (groups) with public/private modes, membership management, and pinned posts workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-04",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T004"
+    },
+    {
+      "title": "Implement direct messaging with read receipts workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-05",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T005"
+    },
+    {
+      "title": "Implement content moderation: reporting, automated spam detection workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-06",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "id": "T006"
+    },
+    {
+      "title": "Implement center: likes, comments, mentions, follows — real-time and digest email notification workflow",
+      "req_type": "FR",
+      "complexity": 2,
+      "source": "REQ-07",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 20,
+      "recommended_team_size": 1,
+      "skill_required": "backend",
+      "suggested_owner_role": "Backend Engineer",
+      "risks": [
+        "Channel delivery retries and failure handling need testing"
+      ],
+      "id": "T007"
+    },
+    {
+      "title": "Optimize p95 under 300ms response-time SLO",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-08",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T008"
+    },
+    {
+      "title": "Optimize concurrent user capacity",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-09",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T009"
+    },
+    {
+      "title": "Optimize system performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-10",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
+      "risks": [
+        "Performance targets require realistic load testing"
+      ],
+      "id": "T010"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 2,
+      "source": "T001",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T002",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T004",
+      "target": "T006"
+    },
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T007"
+    },
+    {
+      "weight": 2,
+      "source": "T008",
+      "target": "T007"
+    },
+    {
+      "weight": 2,
+      "source": "T009",
+      "target": "T007"
+    },
+    {
+      "weight": 2,
+      "source": "T010",
+      "target": "T007"
+    }
+  ]
+}

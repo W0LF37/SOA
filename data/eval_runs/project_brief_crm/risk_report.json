@@ -1,0 +1,66 @@
+{
+  "risk_level": "critical",
+  "risk_score": 0.7,
+  "total_risks": 6,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "T006 'Optimize sales analytics: revenue forecasts, conversion rates performance constraints' blocks 4 downstream tasks",
+      "affected_tasks": [
+        "T006"
+      ],
+      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "T007 'Optimize ticketing linked to CRM contacts performance constraints' blocks 4 downstream tasks",
+      "affected_tasks": [
+        "T007"
+      ],
+      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "T008 'Optimize exceed 500ms for all list performance constraints' blocks 4 downstream tasks",
+      "affected_tasks": [
+        "T008"
+      ],
+      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 292h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "NFR work (154h) exceeds FR work (138h) -- quality engineering dominates timeline",
+      "affected_tasks": [],
+      "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[HIGH] Prioritize early delivery; unblock dependencies ASAP",
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-05-01T10:34:03.484114+00:00"
+}

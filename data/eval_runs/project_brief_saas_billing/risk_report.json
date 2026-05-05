@@ -1,0 +1,48 @@
+{
+  "risk_level": "critical",
+  "risk_score": 0.8,
+  "total_risks": 4,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T010 'Optimize system performance constraints' blocks 7 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T010"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T009 'Enforce audit logs for privileged actions compliance requirements' blocks 7 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T009"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 286h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[CRITICAL] Split task or add a parallel implementation path",
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-05-01T10:34:04.860405+00:00"
+}

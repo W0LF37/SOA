@@ -1,0 +1,614 @@
+{
+  "generated_at": "2026-05-01T10:34:19.766194+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/ui_chips/ecommerce/critic_report.json"
+  },
+  "input_file": "data/eval_runs/ui_chips/ecommerce.txt",
+  "tasks_file": "data/eval_runs/ui_chips/ecommerce/tasks.json",
+  "graph_file": "data/eval_runs/ui_chips/ecommerce/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 8,
+    "task_count": 8,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "view",
+        "count": 2
+      },
+      {
+        "theme": "crud",
+        "count": 2
+      },
+      {
+        "theme": "integration",
+        "count": 1
+      },
+      {
+        "theme": "notification",
+        "count": 1
+      },
+      {
+        "theme": "dashboard",
+        "count": 1
+      },
+      {
+        "theme": "reporting",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T003",
+        "title": "Integrate payment gateway",
+        "complexity": 4,
+        "source": "REQ-03"
+      },
+      {
+        "id": "T006",
+        "title": "Optimize scalability for 10,000 concurrent users",
+        "complexity": 4,
+        "source": "REQ-06"
+      },
+      {
+        "id": "T008",
+        "title": "Enable mobile-first interface support",
+        "complexity": 4,
+        "source": "REQ-08"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 8,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should provide product catalog with search and filters.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement product catalog with search and filters workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should provide shopping cart and wishlist.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement shopping cart and wishlist workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "The system should provide multi-payment gateway integration.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Integrate payment gateway"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should provide order tracking and notifications.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement order tracking and notifications workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should provide seller dashboard and inventory management.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement seller dashboard and inventory management"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should scale to 10,000 concurrent users.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Optimize scalability for 10,000 concurrent users"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should maintain PCI-DSS compliance.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Establish PCI-DSS compliance controls"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should support a mobile-first interface.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Enable mobile-first interface support"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 4,
+        "task_ids": [
+          "T002",
+          "T006",
+          "T007",
+          "T008"
+        ],
+        "headline": "Stage 1 focuses on performance, compliance",
+        "dominant_themes": [
+          "performance",
+          "compliance"
+        ],
+        "titles": [
+          "Implement shopping cart and wishlist workflow",
+          "Optimize scalability for 10,000 concurrent users",
+          "Establish PCI-DSS compliance controls",
+          "Enable mobile-first interface support"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 2,
+        "task_ids": [
+          "T001",
+          "T003"
+        ],
+        "headline": "Stage 2 delivers core product workflows",
+        "dominant_themes": [
+          "view",
+          "integration",
+          "crud"
+        ],
+        "titles": [
+          "Implement product catalog with search and filters workflow",
+          "Integrate payment gateway"
+        ]
+      },
+      {
+        "stage": 3,
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "headline": "Stage 3 delivers user communications and alerting",
+        "dominant_themes": [
+          "notification",
+          "view",
+          "crud"
+        ],
+        "titles": [
+          "Implement order tracking and notifications workflow"
+        ]
+      },
+      {
+        "stage": 4,
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "headline": "Stage 4 exposes decision visibility and evaluation insights",
+        "dominant_themes": [
+          "dashboard",
+          "reporting"
+        ],
+        "titles": [
+          "Implement seller dashboard and inventory management"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "External integrations are present and will need interface contracts plus vendor coordination.",
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "3 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: commerce and transactional order management.",
+      "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 4 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "8 requirements -> 8 atomic tasks across 4 delivery sprints. Critical delivery path: T006 -> T003 -> T004 -> T005 (4 hops, ~12 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize scalability for 10,000 concurrent users blocks 4 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 4 tasks can start immediately in Sprint 1. Effort breakdown: 236 estimated hours | FR: 120h | NFR: 116h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: commerce and transactional order management.",
+    "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 4 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "8 requirements -> 8 atomic tasks across 4 delivery sprints. Critical delivery path: T006 -> T003 -> T004 -> T005 (4 hops, ~12 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize scalability for 10,000 concurrent users blocks 4 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 4 tasks can start immediately in Sprint 1. Effort breakdown: 236 estimated hours | FR: 120h | NFR: 116h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Security & Compliance Readiness",
+      "goal": "Security, privacy, and compliance controls are validated for the planned scope",
+      "tasks": [
+        "T002",
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "total_estimated_hours": 136,
+      "total_points": 13,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "performance",
+        "compliance"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T001",
+        "T003"
+      ],
+      "total_estimated_hours": 60,
+      "total_points": 6,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer",
+        "Integration Engineer"
+      ],
+      "focus_themes": [
+        "view",
+        "integration",
+        "crud"
+      ]
+    },
+    {
+      "sprint": 3,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T004"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "notification",
+        "view",
+        "crud"
+      ]
+    },
+    {
+      "sprint": 4,
+      "name": "Reporting & Decision Visibility",
+      "goal": "Stakeholders can inspect operational outputs, reports, and decision evidence",
+      "tasks": [
+        "T005"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Frontend Engineer"
+      ],
+      "focus_themes": [
+        "dashboard",
+        "reporting"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 236,
+    "total_estimated_days": 30,
+    "fr_estimated_hours": 120,
+    "nfr_estimated_hours": 116
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T004",
+        "T008"
+      ],
+      "task_count": 4,
+      "estimated_hours": 98,
+      "focus": "information access, communications, core workflows"
+    },
+    {
+      "role": "Integration Engineer",
+      "task_ids": [
+        "T003"
+      ],
+      "task_count": 1,
+      "estimated_hours": 40,
+      "focus": "integrations, core workflows"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T007"
+      ],
+      "task_count": 1,
+      "estimated_hours": 40,
+      "focus": "compliance"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T006"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "performance"
+    },
+    {
+      "role": "Frontend Engineer",
+      "task_ids": [
+        "T005"
+      ],
+      "task_count": 1,
+      "estimated_hours": 20,
+      "focus": "dashboard visibility, reporting"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 4,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T004",
+        "T008"
+      ]
+    },
+    {
+      "risk": "Third-party API dependency",
+      "task_count": 1,
+      "task_ids": [
+        "T003"
+      ]
+    },
+    {
+      "risk": "Dashboard usability depends on stable analytics contracts and latency",
+      "task_count": 1,
+      "task_ids": [
+        "T005"
+      ]
+    },
+    {
+      "risk": "Aggregated outputs depend on clean source data",
+      "task_count": 1,
+      "task_ids": [
+        "T005"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 1,
+      "task_ids": [
+        "T006"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T007"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 8,
+    "total_dependencies": 9,
+    "fr_count": 5,
+    "nfr_count": 3,
+    "avg_complexity": 2.88,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 4,
+      "3": 1,
+      "4": 3,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 8,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T006",
+        "T003",
+        "T004",
+        "T005"
+      ],
+      "titles": [
+        "Optimize scalability for 10,000 concurrent users",
+        "Integrate payment gateway",
+        "Implement order tracking and notifications workflow",
+        "Implement seller dashboard and inventory management"
+      ],
+      "total_weight": 8,
+      "length": 4
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize scalability for 10,000 concurrent users",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T007",
+        "title": "Establish PCI-DSS compliance controls",
+        "blocks": 3,
+        "complexity": 3
+      },
+      {
+        "id": "T003",
+        "title": "Integrate payment gateway",
+        "blocks": 1,
+        "complexity": 4
+      },
+      {
+        "id": "T004",
+        "title": "Implement order tracking and notifications workflow",
+        "blocks": 1,
+        "complexity": 2
+      },
+      {
+        "id": "T008",
+        "title": "Enable mobile-first interface support",
+        "blocks": 0,
+        "complexity": 4
+      }
+    ],
+    "root_tasks": [
+      "T002",
+      "T006",
+      "T007",
+      "T008"
+    ],
+    "leaf_tasks": [
+      "T001",
+      "T002",
+      "T005",
+      "T008"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T002",
+        "T006",
+        "T007",
+        "T008"
+      ],
+      [
+        "T001",
+        "T003"
+      ],
+      [
+        "T004"
+      ],
+      [
+        "T005"
+      ]
+    ],
+    "parallel_group_count": 4
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/ui_chips/ecommerce/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/ui_chips/ecommerce/tasks_final.json"
+  }
+}

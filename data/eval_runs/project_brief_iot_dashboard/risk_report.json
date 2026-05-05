@@ -1,0 +1,65 @@
+{
+  "risk_level": "high",
+  "risk_score": 0.6,
+  "total_risks": 6,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "T008 'Optimize system performance constraints' blocks 3 downstream tasks",
+      "affected_tasks": [
+        "T008"
+      ],
+      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "medium",
+      "message": "Foundational NFR gates (T010) collectively gate 2 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T010"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 248h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "NFR work (128h) exceeds FR work (120h) -- quality engineering dominates timeline",
+      "affected_tasks": [],
+      "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    },
+    {
+      "category": "resource",
+      "severity": "high",
+      "message": "Backend Engineer carries 65% of total effort -- resource concentration risk",
+      "affected_tasks": [],
+      "mitigation": "Cross-train team members or redistribute workload",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[HIGH] Prioritize early delivery; unblock dependencies ASAP",
+    "[HIGH] Review scope or negotiate timeline with stakeholders",
+    "[HIGH] Cross-train team members or redistribute workload"
+  ],
+  "generated_at": "2026-05-01T10:34:04.396437+00:00"
+}

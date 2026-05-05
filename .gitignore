@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Local runtime and logs
+run_logs/
+storage/logs/
+*.log
+*.out
+*.err
+frontend/*.log
+
+# Generated/runtime storage
+tmp/
+case_study/
+storage/chroma/
+storage/*.log
+storage/*.err
+storage/*.json
+
+# Large local model files
+models/*.gguf
+
+# Local app/editor files
+.streamlit/
+.playwright-cli/
+.claude/
+.codex-api.out.log
+frontend/.codex-frontend.out.log
+
+# Office/temp artifacts
+~$*
+*.tmp

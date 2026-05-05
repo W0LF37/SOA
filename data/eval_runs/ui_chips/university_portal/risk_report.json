@@ -1,0 +1,48 @@
+{
+  "risk_level": "medium",
+  "risk_score": 0.3,
+  "total_risks": 4,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "medium",
+      "message": "Foundational NFR gates (T005, T007, T008, T006) collectively gate 4 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T005",
+        "T007",
+        "T008",
+        "T006"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 202h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "NFR work (122h) exceeds FR work (80h) -- quality engineering dominates timeline",
+      "affected_tasks": [],
+      "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-05-01T10:34:19.651453+00:00"
+}

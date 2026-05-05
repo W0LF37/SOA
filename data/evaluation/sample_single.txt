@@ -1,0 +1,5 @@
+[REQ-01]
+Type: Functional
+Description: The system must allow doctors to view the patient medical record
+Actor: Doctor
+Priority: High

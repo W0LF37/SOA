@@ -1,0 +1,605 @@
+{
+  "generated_at": "2026-05-01T10:34:04.248870+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/project_brief_hr_system/critic_report.json"
+  },
+  "input_file": "data/raw/docs/project_brief_hr_system.txt",
+  "tasks_file": "data/eval_runs/project_brief_hr_system/tasks.json",
+  "graph_file": "data/eval_runs/project_brief_hr_system/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 10,
+    "task_count": 10,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "view",
+        "count": 4
+      },
+      {
+        "theme": "crud",
+        "count": 2
+      },
+      {
+        "theme": "performance",
+        "count": 2
+      },
+      {
+        "theme": "validation",
+        "count": 1
+      },
+      {
+        "theme": "reporting",
+        "count": 1
+      },
+      {
+        "theme": "security",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize performance review workflow with KPI tracking",
+        "complexity": 4,
+        "source": "REQ-06"
+      },
+      {
+        "id": "T009",
+        "title": "Optimize system uptime and reliability constraints",
+        "complexity": 4,
+        "source": "REQ-09"
+      },
+      {
+        "id": "T010",
+        "title": "Implement role-based access control",
+        "complexity": 4,
+        "source": "REQ-10"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 10,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "Actor: Employee — The Employee should provide employee onboarding and profile management with document upload.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement employee onboarding and profile management with document upload workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should provide leave request and approval workflow with balance tracking and calendar view.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement leave request and approval workflow with balance tracking and calendar view workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "Actor: Payroll Officer — The Payroll Officer should provide payroll calculation with tax deductions, allowances, and payslip generation.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement payroll calculation with tax deductions, allowances workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should provide attendance tracking via time-in/time-out with overtime calculation.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement attendance tracking via time-in/time-out with overtime calculation workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should provide recruitment module: job postings, applicant tracking, interview scheduling.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement recruitment module: job postings, applicant tracking, interview scheduling workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should provide performance review workflow with KPI tracking and rating submission.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Optimize performance review workflow with KPI tracking"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should provide organizational chart builder with reporting lines and department hierarchy.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Implement organizational chart builder with reporting lines workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should be encrypted at rest and in transit (AES-256)..",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Enforce encryption in transit for sensitive data"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-09",
+        "original_requirement": "The system should be available 99.9% of the time during business hours.",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Optimize system uptime and reliability constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-10",
+        "original_requirement": "The system should Role-based access: HR Manager sees all data; employees see only their own..",
+        "task_count": 1,
+        "task_ids": [
+          "T010"
+        ],
+        "task_titles": [
+          "Implement role-based access control"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 7,
+        "task_ids": [
+          "T002",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008",
+          "T009"
+        ],
+        "headline": "Stage 1 delivers core product workflows",
+        "dominant_themes": [
+          "view",
+          "performance",
+          "validation"
+        ],
+        "titles": [
+          "Implement leave request and approval workflow with balance tracking and calendar view workflow",
+          "Implement attendance tracking via time-in/time-out with overtime calculation workflow",
+          "Implement recruitment module: job postings, applicant tracking, interview scheduling workflow",
+          "Optimize performance review workflow with KPI tracking",
+          "Implement organizational chart builder with reporting lines workflow"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 3,
+        "task_ids": [
+          "T001",
+          "T003",
+          "T010"
+        ],
+        "headline": "Stage 2 establishes role-based permissions",
+        "dominant_themes": [
+          "crud",
+          "access_control"
+        ],
+        "titles": [
+          "Implement employee onboarding and profile management with document upload workflow",
+          "Implement payroll calculation with tax deductions, allowances workflow",
+          "Implement role-based access control"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "3 high-complexity tasks sit on the roadmap and deserve early prototyping.",
+      "Some non-root workflow tasks are still structurally isolated and should be reviewed before scheduling."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: HR and employee operations.",
+      "scope_assessment": "Scope includes 7 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 3 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "10 requirements -> 10 atomic tasks across 2 delivery sprints. Critical delivery path: T008 -> T010 (2 hops, ~7 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Optimize performance review workflow with KPI tracking blocks 2 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 7 tasks can start immediately in Sprint 1. Effort breakdown: 256 estimated hours | FR: 150h | NFR: 106h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: HR and employee operations.",
+    "scope_assessment": "Scope includes 7 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 3 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "10 requirements -> 10 atomic tasks across 2 delivery sprints. Critical delivery path: T008 -> T010 (2 hops, ~7 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Optimize performance review workflow with KPI tracking blocks 2 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 7 tasks can start immediately in Sprint 1. Effort breakdown: 256 estimated hours | FR: 150h | NFR: 106h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T002",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008",
+        "T009"
+      ],
+      "total_estimated_hours": 186,
+      "total_points": 19,
+      "duration_weeks": 3,
+      "owner_roles": [
+        "Backend Engineer",
+        "Data Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "view",
+        "performance",
+        "validation"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Authentication & Access Control",
+      "goal": "Authentication and role-based access controls are enforced before protected workflows proceed",
+      "tasks": [
+        "T001",
+        "T003",
+        "T010"
+      ],
+      "total_estimated_hours": 70,
+      "total_points": 8,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "access_control"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 256,
+    "total_estimated_days": 32,
+    "fr_estimated_hours": 150,
+    "nfr_estimated_hours": 106
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007"
+      ],
+      "task_count": 6,
+      "estimated_hours": 120,
+      "focus": "information access, core workflows"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T008",
+        "T010"
+      ],
+      "task_count": 2,
+      "estimated_hours": 60,
+      "focus": "security, access control"
+    },
+    {
+      "role": "Data Engineer",
+      "task_ids": [
+        "T006"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "validation, information access, reporting"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T009"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "performance"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 6,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 2,
+      "task_ids": [
+        "T006",
+        "T009"
+      ]
+    },
+    {
+      "risk": "Aggregated outputs depend on clean source data",
+      "task_count": 1,
+      "task_ids": [
+        "T006"
+      ]
+    },
+    {
+      "risk": "Key management and certificate rotation must be validated",
+      "task_count": 1,
+      "task_ids": [
+        "T008"
+      ]
+    },
+    {
+      "risk": "Role-permission regressions can block downstream workflows",
+      "task_count": 1,
+      "task_ids": [
+        "T010"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 10,
+    "total_dependencies": 6,
+    "fr_count": 7,
+    "nfr_count": 3,
+    "avg_complexity": 2.7,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 6,
+      "3": 1,
+      "4": 3,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 10,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T008",
+        "T010"
+      ],
+      "titles": [
+        "Enforce encryption in transit for sensitive data",
+        "Implement role-based access control"
+      ],
+      "total_weight": 4,
+      "length": 2
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T006",
+        "title": "Optimize performance review workflow with KPI tracking",
+        "blocks": 2,
+        "complexity": 4
+      },
+      {
+        "id": "T009",
+        "title": "Optimize system uptime and reliability constraints",
+        "blocks": 2,
+        "complexity": 4
+      },
+      {
+        "id": "T008",
+        "title": "Enforce encryption in transit for sensitive data",
+        "blocks": 2,
+        "complexity": 3
+      },
+      {
+        "id": "T010",
+        "title": "Implement role-based access control",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T001",
+        "title": "Implement employee onboarding and profile management with document upload workflow",
+        "blocks": 0,
+        "complexity": 2
+      }
+    ],
+    "root_tasks": [
+      "T002",
+      "T004",
+      "T005",
+      "T006",
+      "T007",
+      "T008",
+      "T009"
+    ],
+    "leaf_tasks": [
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T007",
+      "T010"
+    ],
+    "suspicious_isolated_tasks": [
+      {
+        "id": "T002",
+        "title": "Implement leave request and approval workflow with balance tracking and calendar view workflow",
+        "source": "REQ-02",
+        "tags": [
+          "view"
+        ]
+      },
+      {
+        "id": "T004",
+        "title": "Implement attendance tracking via time-in/time-out with overtime calculation workflow",
+        "source": "REQ-04",
+        "tags": [
+          "view"
+        ]
+      },
+      {
+        "id": "T005",
+        "title": "Implement recruitment module: job postings, applicant tracking, interview scheduling workflow",
+        "source": "REQ-05",
+        "tags": [
+          "view"
+        ]
+      }
+    ],
+    "validation_warnings": [
+      "Task T002 (Implement leave request and approval workflow with balance tracking and calendar view workflow) is isolated despite depending on upstream workflow artifacts.",
+      "Task T004 (Implement attendance tracking via time-in/time-out with overtime calculation workflow) is isolated despite depending on upstream workflow artifacts.",
+      "Task T005 (Implement recruitment module: job postings, applicant tracking, interview scheduling workflow) is isolated despite depending on upstream workflow artifacts."
+    ],
+    "parallel_groups": [
+      [
+        "T002",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008",
+        "T009"
+      ],
+      [
+        "T001",
+        "T003",
+        "T010"
+      ]
+    ],
+    "parallel_group_count": 2
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/project_brief_hr_system/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/project_brief_hr_system/tasks_final.json"
+  }
+}

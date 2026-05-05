@@ -1,0 +1,40 @@
+Project Title:
+Fintech Super-App for Multi-Tenant Digital Banking and Merchant Payments
+
+Project Overview:
+A mobile-first financial platform for retail customers, merchants, support agents, compliance analysts, and tenant admins. It combines onboarding, wallet services, bank transfers, QR payments, merchant settlement, lending offers, dispute handling, and analytics in one regulated platform.
+
+Problem Statement:
+The bank currently uses separate systems for onboarding, payments, merchant operations, fraud review, and customer support. This creates duplicated customer records, slow compliance reviews, delayed settlements, inconsistent audit evidence, and poor mobile customer experience during peak salary-payment and holiday-shopping periods.
+
+Target Users:
+- Retail Customer
+- Merchant
+- Support Agent
+- Compliance Analyst
+- Tenant Admin
+
+Main Features:
+- Customers register with national ID, phone OTP, biometric login, and two-factor authentication
+- KYC onboarding with document capture, liveness checks, sanctions screening, and manual review queue
+- Wallet top-up, account balance, transaction history, P2P transfers, scheduled payments, and bill payments
+- QR code merchant payments, refunds, disputes, chargebacks, and real-time receipt notifications
+- Merchant dashboard for catalog, settlement reports, payout reconciliation, and inventory-linked payment status
+- Tenant admin portal for limits, fees, roles, white-label branding, and feature flags per bank partner
+- Compliance analyst workspace for AML alerts, suspicious activity cases, audit evidence, and SAR export
+- Customer support console for account lock/unlock, device reset, complaint tracking, and secure notes
+- Spending analytics, budget alerts, personalized offers, and credit pre-approval recommendations
+- Open banking API integration for external account aggregation and payment initiation
+
+Expected Benefits:
+Launch a unified mobile-first banking and merchant experience that is highly available, responsive under peak load, encrypted, compliant, observable, accessible, and easier for compliance teams to audit.
+
+Non-Functional Requirements:
+The platform must be PCI-DSS level 1, AML/KYC compliant, GDPR-ready, highly available, mobile-first, accessible to WCAG AA, encrypted at rest and in transit, observable with audit logs and distributed tracing, resilient under peak load, and responsive at p95 under 700ms for 50,000 concurrent users.
+It must support offline read-only balances and queued payments with conflict-safe sync, idempotent transaction processing, RTO under 30 minutes, RPO under 5 minutes, multi-tenant data isolation, configurable data retention, and fraud scoring throughput of 2,000 events per second.
+
+Constraints or Special Notes:
+- Arabic and English UI with RTL/LTR support
+- Do not store raw card data unless tokenized by a certified provider
+- Sandbox mode for partner banks is required for integration testing
+- Crypto trading is out of scope for v1

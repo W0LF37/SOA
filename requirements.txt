@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+requests
+chromadb
+networkx
+numpy
+plotly
+reportlab
+sentence-transformers
+sse-starlette
+streamlit
+streamlit-autorefresh
+openpyxl

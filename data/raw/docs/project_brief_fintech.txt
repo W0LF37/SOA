@@ -1,0 +1,21 @@
+Project Brief: Digital Payment Gateway
+
+Project Overview:
+A secure fintech platform enabling online payments, KYC verification, and transaction management.
+
+Actors:
+- Customer, Merchant, Compliance Officer, System Admin
+
+Functional Requirements:
+1. Payment processing supporting credit/debit cards and bank transfers with 3D Secure.
+2. KYC (Know Your Customer) verification with document upload and identity checks.
+3. Transaction history with filtering, search, and CSV/PDF export.
+4. Merchant dashboard for settlements, chargebacks, and revenue analytics.
+5. Recurring billing and subscription management with automatic retry on failure.
+6. Multi-currency conversion with live exchange rate integration.
+
+Non-Functional Requirements:
+7. PCI-DSS Level 1 compliance for all card data storage and transmission.
+8. Transaction processing latency must not exceed 3 seconds (p99).
+9. Fraud detection scoring must run in under 500ms per transaction.
+10. All API endpoints must support rate limiting and IP allowlisting.

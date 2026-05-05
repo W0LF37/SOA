@@ -1,0 +1,491 @@
+{
+  "generated_at": "2026-04-30T22:07:37.722542+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "llm_with_fallback_available",
+  "llm_used": true,
+  "llm_attempted": true,
+  "llm_accepted": true,
+  "llm_model": "ai-project-manager-planner",
+  "used_fallback": false,
+  "fallback_reason": null,
+  "retrieved_kb_context": "## Retrieved KB Context for LLM Planning\nUse these similar projects as calibration signals for task scope, FR/NFR classification, complexity levels, and dependency hints. Do not copy tasks unless they are implied by the new requirements.\nHard constraints for this run: emit one task per requirement line, do not merge repeated source lines, keep security/performance/compliance/availability/mobile/localization/privacy constraints as NFRs, and keep titles action-oriented (Implement/Integrate for FR; Enforce/Optimize/Enable for NFR).\n\n### HOSPITAL project, critic_score=0.93:\n  - Implement Patient Triage Queue (FR, C4)\n  - Implement Appointment Scheduling (FR, C3)\n  - Implement EHR Patient Record Access (FR, C4)\n  - Implement Lab Order Workflow (FR, C4)\n  - Implement Discharge Summary Generation (FR, C3)\n  - Implement Role-Based Clinical Access (FR, C4)\n  - HIPAA Audit Trail NFR (NFR, C4)\n  - Clinical Data Availability NFR (NFR, C4)\n\n### CLINIC project, critic_score=0.92:\n  - Implement Patient Registration (FR, C3)\n  - Implement Appointment Booking (FR, C3)\n  - Implement Doctor Consultation View (FR, C2)\n  - Implement Invoice Generation (FR, C3)\n  - Implement Email Reminder Service (FR, C3)\n  - Implement User Authentication (FR, C2)\n  - System Performance NFR - 2s response (NFR, C3)\n  - Data Security and Access Control NFR (NFR, C3)\n\nApply similar FR/NFR classification and complexity levels to the new requirements below, while preserving exact source references and the one-line-to-one-task mapping.",
+  "kb_document_count": 100,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": true,
+    "accepted": true,
+    "used_fallback": false,
+    "fallback_reason": null,
+    "kb_enabled": true,
+    "retrieved_kb_context_chars": 1517,
+    "kb_document_count": 100
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/ui_chips_current/hospital_system/critic_report.json"
+  },
+  "input_file": "data/eval_runs/ui_chips/hospital_system.txt",
+  "tasks_file": "data/eval_runs/ui_chips_current/hospital_system/tasks.json",
+  "graph_file": "data/eval_runs/ui_chips_current/hospital_system/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": true,
+    "force_fallback": false,
+    "use_kb": true
+  },
+  "plan_highlights": {
+    "requirement_count": 8,
+    "task_count": 8,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "performance",
+        "count": 2
+      },
+      {
+        "theme": "identity",
+        "count": 1
+      },
+      {
+        "theme": "crud",
+        "count": 1
+      },
+      {
+        "theme": "compliance",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T007",
+        "title": "Optimize system uptime and reliability constraints",
+        "complexity": 4,
+        "source": "REQ-07"
+      },
+      {
+        "id": "T008",
+        "title": "Optimize API latency and concurrency performance",
+        "complexity": 4,
+        "source": "REQ-08"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 8,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should provide patient registration with national ID and insurance.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement Patient Registration with National ID and Insurance"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should provide doctor scheduling and appointment booking.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement Doctor Scheduling and Appointment Booking"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "The system should provide electronic medical records (EMR).",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement Electronic Medical Records (EMR) Management"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should provide pharmacy stock management and prescriptions.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement pharmacy stock management and prescriptions workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should provide billing and insurance claim processing.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement billing and insurance claim processing"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should maintain HIPAA compliance.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Establish HIPAA compliance controls"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should maintain high availability.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Optimize system uptime and reliability constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should maintain sub-2s response time.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Optimize API latency and concurrency performance"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 7,
+        "task_ids": [
+          "T001",
+          "T003",
+          "T004",
+          "T005",
+          "T006",
+          "T007",
+          "T008"
+        ],
+        "headline": "Stage 1 establishes account and identity foundations",
+        "dominant_themes": [
+          "performance",
+          "identity",
+          "crud"
+        ],
+        "titles": [
+          "Implement Patient Registration with National ID and Insurance",
+          "Implement Electronic Medical Records (EMR) Management",
+          "Implement pharmacy stock management and prescriptions workflow",
+          "Implement billing and insurance claim processing",
+          "Establish HIPAA compliance controls"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "headline": "Stage 2 focuses on general delivery",
+        "dominant_themes": [],
+        "titles": [
+          "Implement Doctor Scheduling and Appointment Booking"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "2 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: hospital operations and clinical workflow management.",
+      "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 1 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "8 requirements -> 8 atomic tasks across 2 delivery sprints. Critical delivery path: T001 -> T002 (2 hops, ~4 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Implement Patient Registration with National ID and Insurance blocks 1 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 7 tasks can start immediately in Sprint 1. Effort breakdown: 236 estimated hours | FR: 119h | NFR: 117h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: hospital operations and clinical workflow management.",
+    "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 1 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "8 requirements -> 8 atomic tasks across 2 delivery sprints. Critical delivery path: T001 -> T002 (2 hops, ~4 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Implement Patient Registration with National ID and Insurance blocks 1 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 7 tasks can start immediately in Sprint 1. Effort breakdown: 236 estimated hours | FR: 119h | NFR: 117h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Account Foundation",
+      "goal": "Account identity, authentication, and permission foundations are ready for downstream workflows",
+      "tasks": [
+        "T001",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "total_estimated_hours": 216,
+      "total_points": 19,
+      "duration_weeks": 3,
+      "owner_roles": [
+        "Backend Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "performance",
+        "identity",
+        "crud"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Sprint 2 Delivery",
+      "goal": "Parallel delivery work is completed for this stage",
+      "tasks": [
+        "T002"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": []
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 236,
+    "total_estimated_days": 30,
+    "fr_estimated_hours": 119,
+    "nfr_estimated_hours": 117
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005"
+      ],
+      "task_count": 5,
+      "estimated_hours": 119,
+      "focus": "identity, core workflows"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T007",
+        "T008"
+      ],
+      "task_count": 2,
+      "estimated_hours": 77,
+      "focus": "performance"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T006"
+      ],
+      "task_count": 1,
+      "estimated_hours": 40,
+      "focus": "compliance"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 5,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 2,
+      "task_ids": [
+        "T007",
+        "T008"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T006"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 8,
+    "total_dependencies": 1,
+    "fr_count": 5,
+    "nfr_count": 3,
+    "avg_complexity": 2.62,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 5,
+      "3": 1,
+      "4": 2,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 8,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T001",
+        "T002"
+      ],
+      "titles": [
+        "Implement Patient Registration with National ID and Insurance",
+        "Implement Doctor Scheduling and Appointment Booking"
+      ],
+      "total_weight": 2,
+      "length": 2
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T001",
+        "title": "Implement Patient Registration with National ID and Insurance",
+        "blocks": 1,
+        "complexity": 2
+      },
+      {
+        "id": "T007",
+        "title": "Optimize system uptime and reliability constraints",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T008",
+        "title": "Optimize API latency and concurrency performance",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T006",
+        "title": "Establish HIPAA compliance controls",
+        "blocks": 0,
+        "complexity": 3
+      },
+      {
+        "id": "T002",
+        "title": "Implement Doctor Scheduling and Appointment Booking",
+        "blocks": 0,
+        "complexity": 2
+      }
+    ],
+    "root_tasks": [
+      "T001",
+      "T003",
+      "T004",
+      "T005",
+      "T006",
+      "T007",
+      "T008"
+    ],
+    "leaf_tasks": [
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T006",
+      "T007",
+      "T008"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T001",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008"
+      ],
+      [
+        "T002"
+      ]
+    ],
+    "parallel_group_count": 2
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/ui_chips_current/hospital_system/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/ui_chips_current/hospital_system/tasks_final.json"
+  }
+}

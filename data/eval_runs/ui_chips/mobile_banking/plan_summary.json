@@ -1,0 +1,579 @@
+{
+  "generated_at": "2026-05-01T10:34:19.824673+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/ui_chips/mobile_banking/critic_report.json"
+  },
+  "input_file": "data/eval_runs/ui_chips/mobile_banking.txt",
+  "tasks_file": "data/eval_runs/ui_chips/mobile_banking/tasks.json",
+  "graph_file": "data/eval_runs/ui_chips/mobile_banking/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 8,
+    "task_count": 8,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "crud",
+        "count": 3
+      },
+      {
+        "theme": "view",
+        "count": 2
+      },
+      {
+        "theme": "auth",
+        "count": 1
+      },
+      {
+        "theme": "reporting",
+        "count": 1
+      },
+      {
+        "theme": "security",
+        "count": 1
+      },
+      {
+        "theme": "offline_operation",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T007",
+        "title": "Enable offline capability support",
+        "complexity": 4,
+        "source": "REQ-07"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 8,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should provide biometric login and two-factor authentication.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement biometric login and two-factor authentication workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should provide account balance and transaction history.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Implement account balance and transaction history workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "The system should provide fund transfers and scheduled payments.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement fund transfers and scheduled payments workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should provide bill payments and QR code transactions.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement bill payments and QR code transactions workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should provide spending analytics and budget alerts.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Implement spending analytics workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should encrypt sensitive data.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Enforce sensitive data encryption controls"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should support offline capability.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Enable offline capability support"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should maintain PCI-DSS compliance.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Establish PCI-DSS compliance controls"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 3,
+        "task_ids": [
+          "T006",
+          "T007",
+          "T008"
+        ],
+        "headline": "Stage 1 hardens offline resilience and synchronization constraints",
+        "dominant_themes": [
+          "security",
+          "offline_operation",
+          "compliance"
+        ],
+        "titles": [
+          "Enforce sensitive data encryption controls",
+          "Enable offline capability support",
+          "Establish PCI-DSS compliance controls"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "headline": "Stage 2 hardens authentication and account security",
+        "dominant_themes": [
+          "auth"
+        ],
+        "titles": [
+          "Implement biometric login and two-factor authentication workflow"
+        ]
+      },
+      {
+        "stage": 3,
+        "task_count": 3,
+        "task_ids": [
+          "T002",
+          "T003",
+          "T004"
+        ],
+        "headline": "Stage 3 delivers core product workflows",
+        "dominant_themes": [
+          "crud",
+          "view"
+        ],
+        "titles": [
+          "Implement account balance and transaction history workflow",
+          "Implement fund transfers and scheduled payments workflow",
+          "Implement bill payments and QR code transactions workflow"
+        ]
+      },
+      {
+        "stage": 4,
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "headline": "Stage 4 delivers analytics and reporting visibility",
+        "dominant_themes": [
+          "view",
+          "reporting"
+        ],
+        "titles": [
+          "Implement spending analytics workflow"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "Offline capability requires secure local storage, synchronization, and recovery-path validation.",
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "1 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: fintech, payments, and billing operations.",
+      "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "8 requirements -> 8 atomic tasks across 4 delivery sprints. Critical delivery path: T008 -> T001 -> T004 -> T005 (4 hops, ~10 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Establish PCI-DSS compliance controls blocks 5 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. Operational constraint: 1 offline requirement should be validated for secure caching, synchronization, and recovery behavior before release. Effort breakdown: 212 estimated hours | FR: 104h | NFR: 108h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: fintech, payments, and billing operations.",
+    "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "8 requirements -> 8 atomic tasks across 4 delivery sprints. Critical delivery path: T008 -> T001 -> T004 -> T005 (4 hops, ~10 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Establish PCI-DSS compliance controls blocks 5 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. Operational constraint: 1 offline requirement should be validated for secure caching, synchronization, and recovery behavior before release. Effort breakdown: 212 estimated hours | FR: 104h | NFR: 108h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Security & Compliance Readiness",
+      "goal": "Security, privacy, and compliance controls are validated for the planned scope",
+      "tasks": [
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "total_estimated_hours": 108,
+      "total_points": 10,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "security",
+        "offline_operation",
+        "compliance"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Authentication & Access Control",
+      "goal": "Authentication and role-based access controls are enforced before protected workflows proceed",
+      "tasks": [
+        "T001"
+      ],
+      "total_estimated_hours": 24,
+      "total_points": 3,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "auth"
+      ]
+    },
+    {
+      "sprint": 3,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T002",
+        "T003",
+        "T004"
+      ],
+      "total_estimated_hours": 60,
+      "total_points": 6,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "view"
+      ]
+    },
+    {
+      "sprint": 4,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T005"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Data Engineer"
+      ],
+      "focus_themes": [
+        "view",
+        "reporting"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 212,
+    "total_estimated_days": 27,
+    "fr_estimated_hours": 104,
+    "nfr_estimated_hours": 108
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004"
+      ],
+      "task_count": 4,
+      "estimated_hours": 84,
+      "focus": "core workflows, authentication, information access"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T006",
+        "T008"
+      ],
+      "task_count": 2,
+      "estimated_hours": 70,
+      "focus": "security, compliance"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T007"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "offline operation"
+    },
+    {
+      "role": "Data Engineer",
+      "task_ids": [
+        "T005"
+      ],
+      "task_count": 1,
+      "estimated_hours": 20,
+      "focus": "information access, reporting"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 4,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004"
+      ]
+    },
+    {
+      "risk": "Aggregated outputs depend on clean source data",
+      "task_count": 1,
+      "task_ids": [
+        "T005"
+      ]
+    },
+    {
+      "risk": "Key management and certificate rotation must be validated",
+      "task_count": 1,
+      "task_ids": [
+        "T006"
+      ]
+    },
+    {
+      "risk": "Offline caching, synchronization, and recovery paths need full test coverage",
+      "task_count": 1,
+      "task_ids": [
+        "T007"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T008"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 8,
+    "total_dependencies": 17,
+    "fr_count": 5,
+    "nfr_count": 3,
+    "avg_complexity": 2.62,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 4,
+      "3": 3,
+      "4": 1,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 8,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T008",
+        "T001",
+        "T004",
+        "T005"
+      ],
+      "titles": [
+        "Establish PCI-DSS compliance controls",
+        "Implement biometric login and two-factor authentication workflow",
+        "Implement bill payments and QR code transactions workflow",
+        "Implement spending analytics workflow"
+      ],
+      "total_weight": 7,
+      "length": 4
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T008",
+        "title": "Establish PCI-DSS compliance controls",
+        "blocks": 5,
+        "complexity": 3
+      },
+      {
+        "id": "T007",
+        "title": "Enable offline capability support",
+        "blocks": 4,
+        "complexity": 4
+      },
+      {
+        "id": "T001",
+        "title": "Implement biometric login and two-factor authentication workflow",
+        "blocks": 4,
+        "complexity": 3
+      },
+      {
+        "id": "T006",
+        "title": "Enforce sensitive data encryption controls",
+        "blocks": 3,
+        "complexity": 3
+      },
+      {
+        "id": "T004",
+        "title": "Implement bill payments and QR code transactions workflow",
+        "blocks": 1,
+        "complexity": 2
+      }
+    ],
+    "root_tasks": [
+      "T006",
+      "T007",
+      "T008"
+    ],
+    "leaf_tasks": [
+      "T002",
+      "T003",
+      "T005"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T006",
+        "T007",
+        "T008"
+      ],
+      [
+        "T001"
+      ],
+      [
+        "T002",
+        "T003",
+        "T004"
+      ],
+      [
+        "T005"
+      ]
+    ],
+    "parallel_group_count": 4
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/ui_chips/mobile_banking/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/ui_chips/mobile_banking/tasks_final.json"
+  }
+}

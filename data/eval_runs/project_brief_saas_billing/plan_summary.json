@@ -1,0 +1,616 @@
+{
+  "generated_at": "2026-05-01T10:34:04.858076+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "rule_based_fallback_forced",
+  "llm_used": false,
+  "llm_attempted": false,
+  "llm_accepted": false,
+  "llm_model": "rule-based-fallback",
+  "used_fallback": true,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": false,
+    "accepted": false,
+    "used_fallback": true,
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+    "kb_enabled": false,
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/project_brief_saas_billing/critic_report.json"
+  },
+  "input_file": "data/raw/docs/project_brief_saas_billing.txt",
+  "tasks_file": "data/eval_runs/project_brief_saas_billing/tasks.json",
+  "graph_file": "data/eval_runs/project_brief_saas_billing/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": false,
+    "force_fallback": true,
+    "use_kb": false
+  },
+  "plan_highlights": {
+    "requirement_count": 10,
+    "task_count": 10,
+    "atomic_task_ratio": 1.0,
+    "theme_breakdown": [
+      {
+        "theme": "crud",
+        "count": 7
+      },
+      {
+        "theme": "integration",
+        "count": 2
+      },
+      {
+        "theme": "view",
+        "count": 2
+      },
+      {
+        "theme": "export",
+        "count": 1
+      },
+      {
+        "theme": "notification",
+        "count": 1
+      },
+      {
+        "theme": "reporting",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T002",
+        "title": "Integrate payment collection",
+        "complexity": 4,
+        "source": "REQ-02"
+      },
+      {
+        "id": "T005",
+        "title": "Integrate usage-based billing: metering API",
+        "complexity": 4,
+        "source": "REQ-05"
+      },
+      {
+        "id": "T010",
+        "title": "Optimize system performance constraints",
+        "complexity": 4,
+        "source": "REQ-10"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 10,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should provide subscription plan management: create/edit plans with pricing tiers and trial periods.",
+        "task_count": 1,
+        "task_ids": [
+          "T001"
+        ],
+        "task_titles": [
+          "Implement subscription plan management: create/edit plans with pricing tiers and trial periods workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should provide payment collection via Stripe with automatic renewal and card retry logic.",
+        "task_count": 1,
+        "task_ids": [
+          "T002"
+        ],
+        "task_titles": [
+          "Integrate payment collection"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "The system should provide invoice generation with PDF download, VAT calculation, and email delivery.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement invoice generation with PDF download, VAT calculation, and email delivery notification workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should provide dunning management: automated retry schedule and account suspension on failure.",
+        "task_count": 1,
+        "task_ids": [
+          "T004"
+        ],
+        "task_titles": [
+          "Implement dunning management: automated retry schedule and account suspension on failure workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "Actor: Billing Admin — The Billing Admin should provide usage-based billing: metering API for tracking consumption and overage charges.",
+        "task_count": 1,
+        "task_ids": [
+          "T005"
+        ],
+        "task_titles": [
+          "Integrate usage-based billing: metering API"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "Actor: Billing Admin — The Billing Admin should provide customer billing portal: view invoices, update payment method, cancel subscription.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Implement customer billing portal: view invoices, update payment method, cancel subscription"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should provide revenue reporting: MRR, churn rate, LTV dashboards for finance team.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Implement revenue reporting: MRR, churn rate, LTV workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should enforce idempotent operations.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Enforce idempotent billing operations"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-09",
+        "original_requirement": "The system should keep audit logs for privileged actions.",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Enforce audit logs for privileged actions compliance requirements"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-10",
+        "original_requirement": "The system should complete within 10 seconds to avoid timeout..",
+        "task_count": 1,
+        "task_ids": [
+          "T010"
+        ],
+        "task_titles": [
+          "Optimize system performance constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 3,
+        "task_ids": [
+          "T008",
+          "T009",
+          "T010"
+        ],
+        "headline": "Stage 1 focuses on compliance, performance",
+        "dominant_themes": [
+          "compliance",
+          "performance"
+        ],
+        "titles": [
+          "Enforce idempotent billing operations",
+          "Enforce audit logs for privileged actions compliance requirements",
+          "Optimize system performance constraints"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 5,
+        "task_ids": [
+          "T001",
+          "T002",
+          "T004",
+          "T005",
+          "T007"
+        ],
+        "headline": "Stage 2 delivers core product workflows",
+        "dominant_themes": [
+          "crud",
+          "integration",
+          "view"
+        ],
+        "titles": [
+          "Implement subscription plan management: create/edit plans with pricing tiers and trial periods workflow",
+          "Integrate payment collection",
+          "Implement dunning management: automated retry schedule and account suspension on failure workflow",
+          "Integrate usage-based billing: metering API",
+          "Implement revenue reporting: MRR, churn rate, LTV workflow"
+        ]
+      },
+      {
+        "stage": 3,
+        "task_count": 2,
+        "task_ids": [
+          "T003",
+          "T006"
+        ],
+        "headline": "Stage 3 delivers user communications and alerting",
+        "dominant_themes": [
+          "crud",
+          "export",
+          "notification"
+        ],
+        "titles": [
+          "Implement invoice generation with PDF download, VAT calculation, and email delivery notification workflow",
+          "Implement customer billing portal: view invoices, update payment method, cancel subscription"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "External integrations are present and will need interface contracts plus vendor coordination.",
+      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "3 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: fintech, payments, and billing operations.",
+      "scope_assessment": "Scope includes 7 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 7 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "10 requirements -> 10 atomic tasks across 3 delivery sprints. Critical delivery path: T009 -> T002 -> T003 (3 hops, ~9 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize system performance constraints blocks 7 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. External dependencies: 1 third-party services (Stripe) should be contract-ready before Sprint 2. Effort breakdown: 286 estimated hours | FR: 178h | NFR: 108h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: fintech, payments, and billing operations.",
+    "scope_assessment": "Scope includes 7 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 7 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "10 requirements -> 10 atomic tasks across 3 delivery sprints. Critical delivery path: T009 -> T002 -> T003 (3 hops, ~9 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize system performance constraints blocks 7 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. External dependencies: 1 third-party services (Stripe) should be contract-ready before Sprint 2. Effort breakdown: 286 estimated hours | FR: 178h | NFR: 108h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Security & Compliance Readiness",
+      "goal": "Security, privacy, and compliance controls are validated for the planned scope",
+      "tasks": [
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "total_estimated_hours": 108,
+      "total_points": 10,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "compliance",
+        "performance"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T001",
+        "T002",
+        "T004",
+        "T005",
+        "T007"
+      ],
+      "total_estimated_hours": 138,
+      "total_points": 14,
+      "duration_weeks": 2,
+      "owner_roles": [
+        "Backend Engineer",
+        "Data Engineer",
+        "Integration Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "integration",
+        "view"
+      ]
+    },
+    {
+      "sprint": 3,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T003",
+        "T006"
+      ],
+      "total_estimated_hours": 40,
+      "total_points": 4,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "export",
+        "notification"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 286,
+    "total_estimated_days": 36,
+    "fr_estimated_hours": 178,
+    "nfr_estimated_hours": 108
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T003",
+        "T004",
+        "T006",
+        "T008"
+      ],
+      "task_count": 5,
+      "estimated_hours": 110,
+      "focus": "core workflows, export, communications"
+    },
+    {
+      "role": "Integration Engineer",
+      "task_ids": [
+        "T002",
+        "T005"
+      ],
+      "task_count": 2,
+      "estimated_hours": 78,
+      "focus": "core workflows, integrations, information access"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T009"
+      ],
+      "task_count": 1,
+      "estimated_hours": 40,
+      "focus": "compliance"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T010"
+      ],
+      "task_count": 1,
+      "estimated_hours": 38,
+      "focus": "performance"
+    },
+    {
+      "role": "Data Engineer",
+      "task_ids": [
+        "T007"
+      ],
+      "task_count": 1,
+      "estimated_hours": 20,
+      "focus": "core workflows, reporting"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 5,
+      "task_ids": [
+        "T001",
+        "T003",
+        "T004",
+        "T006",
+        "T008"
+      ]
+    },
+    {
+      "risk": "Third-party API dependency",
+      "task_count": 2,
+      "task_ids": [
+        "T002",
+        "T005"
+      ]
+    },
+    {
+      "risk": "Aggregated outputs depend on clean source data",
+      "task_count": 1,
+      "task_ids": [
+        "T007"
+      ]
+    },
+    {
+      "risk": "Compliance interpretation should be validated early",
+      "task_count": 1,
+      "task_ids": [
+        "T009"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 1,
+      "task_ids": [
+        "T010"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 10,
+    "total_dependencies": 18,
+    "fr_count": 7,
+    "nfr_count": 3,
+    "avg_complexity": 2.8,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 5,
+      "3": 2,
+      "4": 3,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 10,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T009",
+        "T002",
+        "T003"
+      ],
+      "titles": [
+        "Enforce audit logs for privileged actions compliance requirements",
+        "Integrate payment collection",
+        "Implement invoice generation with PDF download, VAT calculation, and email delivery notification workflow"
+      ],
+      "total_weight": 6,
+      "length": 3
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T010",
+        "title": "Optimize system performance constraints",
+        "blocks": 7,
+        "complexity": 4
+      },
+      {
+        "id": "T009",
+        "title": "Enforce audit logs for privileged actions compliance requirements",
+        "blocks": 7,
+        "complexity": 3
+      },
+      {
+        "id": "T002",
+        "title": "Integrate payment collection",
+        "blocks": 2,
+        "complexity": 4
+      },
+      {
+        "id": "T005",
+        "title": "Integrate usage-based billing: metering API",
+        "blocks": 1,
+        "complexity": 4
+      },
+      {
+        "id": "T001",
+        "title": "Implement subscription plan management: create/edit plans with pricing tiers and trial periods workflow",
+        "blocks": 1,
+        "complexity": 2
+      }
+    ],
+    "root_tasks": [
+      "T008",
+      "T009",
+      "T010"
+    ],
+    "leaf_tasks": [
+      "T003",
+      "T004",
+      "T006",
+      "T007",
+      "T008"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T008",
+        "T009",
+        "T010"
+      ],
+      [
+        "T001",
+        "T002",
+        "T004",
+        "T005",
+        "T007"
+      ],
+      [
+        "T003",
+        "T006"
+      ]
+    ],
+    "parallel_group_count": 3
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/project_brief_saas_billing/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/project_brief_saas_billing/tasks_final.json"
+  }
+}

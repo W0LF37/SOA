@@ -1,0 +1,48 @@
+{
+  "risk_level": "high",
+  "risk_score": 0.5,
+  "total_risks": 4,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "T006 'Optimize scalability for 10,000 concurrent users' blocks 4 downstream tasks",
+      "affected_tasks": [
+        "T006"
+      ],
+      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "T007 'Establish PCI-DSS compliance controls' blocks 3 downstream tasks",
+      "affected_tasks": [
+        "T007"
+      ],
+      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "high",
+      "message": "Total effort 236h may exceed team capacity",
+      "affected_tasks": [],
+      "mitigation": "Review scope or negotiate timeline with stakeholders",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[HIGH] Prioritize early delivery; unblock dependencies ASAP",
+    "[HIGH] Review scope or negotiate timeline with stakeholders"
+  ],
+  "generated_at": "2026-05-01T10:34:19.768162+00:00"
+}

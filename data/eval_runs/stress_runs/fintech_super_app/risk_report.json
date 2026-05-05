@@ -1,0 +1,94 @@
+{
+  "risk_level": "critical",
+  "risk_score": 1.0,
+  "total_risks": 8,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T026 'Optimize p95 under 700ms response-time SLO for 50,000 concurrent users' blocks 8 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T026"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T030 'Enforce RTO under 30 minutes recovery objectives' blocks 8 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T030"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "Foundational NFR gates (T020, T018, T025) collectively gate 10 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T020",
+        "T018",
+        "T025"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "22 tasks can start simultaneously -- high coordination overhead in first sprint",
+      "affected_tasks": [],
+      "mitigation": "Assign clear task owners before sprint starts",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "critical",
+      "message": "Total effort 1070h is very high -- delivery risk",
+      "affected_tasks": [],
+      "mitigation": "Reduce scope to MVP or extend timeline significantly",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "NFR work (785h) exceeds FR work (285h) -- quality engineering dominates timeline",
+      "affected_tasks": [],
+      "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "high",
+      "message": "Critical path spans 7 tasks -- any delay cascades to project end",
+      "affected_tasks": [
+        "T015",
+        "T001",
+        "T023",
+        "T004",
+        "T005",
+        "T006",
+        "T008"
+      ],
+      "mitigation": "Add parallel tracks or fast-track critical path tasks",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[CRITICAL] Split task or add a parallel implementation path",
+    "[HIGH] Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+    "[CRITICAL] Reduce scope to MVP or extend timeline significantly",
+    "[HIGH] Add parallel tracks or fast-track critical path tasks"
+  ],
+  "generated_at": "2026-04-30T22:49:14.899674+00:00"
+}

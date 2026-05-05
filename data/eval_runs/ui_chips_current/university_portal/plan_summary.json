@@ -1,0 +1,530 @@
+{
+  "generated_at": "2026-04-30T22:10:07.390639+00:00",
+  "model": "ai-project-manager-planner",
+  "provider": "ollama",
+  "generation_mode": "llm_with_fallback_available",
+  "llm_used": true,
+  "llm_attempted": true,
+  "llm_accepted": true,
+  "llm_model": "ai-project-manager-planner",
+  "used_fallback": false,
+  "fallback_reason": null,
+  "retrieved_kb_context": "## Retrieved KB Context for LLM Planning\nUse these similar projects as calibration signals for task scope, FR/NFR classification, complexity levels, and dependency hints. Do not copy tasks unless they are implied by the new requirements.\nHard constraints for this run: emit one task per requirement line, do not merge repeated source lines, keep security/performance/compliance/availability/mobile/localization/privacy constraints as NFRs, and keep titles action-oriented (Implement/Integrate for FR; Enforce/Optimize/Enable for NFR).\n\n### EDUCATION project, critic_score=0.89:\n  - Implement Course Enrollment and Waitlist (FR, C3)\n  - Implement Schedule Builder with Conflict Detection (FR, C4)\n  - Implement Fee Payment Gateway (FR, C4)\n  - Implement Transcript Request Workflow (FR, C3)\n  - Implement Student Self-Service Portal (FR, C3)\n  - Implement Faculty Load Management (FR, C3)\n  - Multi-Language Support Arabic and English NFR (NFR, C3)\n  - High Concurrency During Registration Period NFR (NFR, C4)\n\n### EDUCATION project, critic_score=0.91:\n  - Implement Course Enrollment (FR, C3)\n  - Implement Schedule Conflict Detection (FR, C4)\n  - Integrate Tuition Payment Gateway (FR, C4)\n  - Implement Transcript Request Workflow (FR, C3)\n  - Implement Advisor Approval Workflow (FR, C3)\n  - Implement Student Notification Center (FR, C3)\n  - Arabic and English Localization NFR (NFR, C3)\n  - Registration Peak Load NFR (NFR, C4)\n\nApply similar FR/NFR classification and complexity levels to the new requirements below, while preserving exact source references and the one-line-to-one-task mapping.",
+  "kb_document_count": 100,
+  "llm_planning_trace": {
+    "role": "LLM Planning Reasoner",
+    "attempted": true,
+    "accepted": true,
+    "used_fallback": false,
+    "fallback_reason": null,
+    "kb_enabled": true,
+    "retrieved_kb_context_chars": 1602,
+    "kb_document_count": 100
+  },
+  "critic": {
+    "status": "approved",
+    "score": 1.0,
+    "issues_count": 0,
+    "report_file": "data/eval_runs/ui_chips_current/university_portal/critic_report.json"
+  },
+  "input_file": "data/eval_runs/ui_chips/university_portal.txt",
+  "tasks_file": "data/eval_runs/ui_chips_current/university_portal/tasks.json",
+  "graph_file": "data/eval_runs/ui_chips_current/university_portal/dependency_graph.json",
+  "pipeline_config": {
+    "allow_fallback": true,
+    "allow_decomposition": true,
+    "force_fallback": false,
+    "use_kb": true
+  },
+  "plan_highlights": {
+    "requirement_count": 8,
+    "task_count": 10,
+    "atomic_task_ratio": 1.25,
+    "theme_breakdown": [
+      {
+        "theme": "crud",
+        "count": 4
+      },
+      {
+        "theme": "identity",
+        "count": 2
+      },
+      {
+        "theme": "performance",
+        "count": 2
+      },
+      {
+        "theme": "notification",
+        "count": 1
+      },
+      {
+        "theme": "security",
+        "count": 1
+      }
+    ],
+    "high_complexity_tasks": [
+      {
+        "id": "T007",
+        "title": "Optimize system uptime and reliability constraints",
+        "complexity": 4,
+        "source": "REQ-05"
+      },
+      {
+        "id": "T009",
+        "title": "Enable Mobile-Friendly Interfaces",
+        "complexity": 4,
+        "source": "REQ-07"
+      },
+      {
+        "id": "T010",
+        "title": "Optimize peak-load responsiveness and capacity",
+        "complexity": 4,
+        "source": "REQ-08"
+      }
+    ],
+    "optional_scope": {
+      "task_count": 0,
+      "confirmed_task_count": 10,
+      "task_ids": [],
+      "titles": [],
+      "sources": []
+    },
+    "coverage_by_requirement": [
+      {
+        "source": "REQ-01",
+        "original_requirement": "The system should Register and enroll in available courses.",
+        "task_count": 2,
+        "task_ids": [
+          "T001",
+          "T002"
+        ],
+        "task_titles": [
+          "Implement course registration workflow",
+          "Implement course enrollment workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-02",
+        "original_requirement": "The system should Upload grades and course materials.",
+        "task_count": 1,
+        "task_ids": [
+          "T003"
+        ],
+        "task_titles": [
+          "Implement Grade and Material Upload"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-03",
+        "original_requirement": "The system should Generate tuition invoices and process online payments.",
+        "task_count": 2,
+        "task_ids": [
+          "T004",
+          "T005"
+        ],
+        "task_titles": [
+          "Implement tuition invoices creation workflow",
+          "Implement online payments handling workflow"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-04",
+        "original_requirement": "The system should Send automated email notifications for deadlines.",
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "task_titles": [
+          "Implement Automated Email Notifications"
+        ],
+        "req_types": [
+          "FR"
+        ],
+        "max_complexity": 2
+      },
+      {
+        "source": "REQ-05",
+        "original_requirement": "The system should maintain high availability.",
+        "task_count": 1,
+        "task_ids": [
+          "T007"
+        ],
+        "task_titles": [
+          "Optimize system uptime and reliability constraints"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-06",
+        "original_requirement": "The system should encrypt sensitive data.",
+        "task_count": 1,
+        "task_ids": [
+          "T008"
+        ],
+        "task_titles": [
+          "Enforce Data Encryption"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 3
+      },
+      {
+        "source": "REQ-07",
+        "original_requirement": "The system should support mobile-friendly interfaces.",
+        "task_count": 1,
+        "task_ids": [
+          "T009"
+        ],
+        "task_titles": [
+          "Enable Mobile-Friendly Interfaces"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      },
+      {
+        "source": "REQ-08",
+        "original_requirement": "The system should maintain responsive performance under peak load.",
+        "task_count": 1,
+        "task_ids": [
+          "T010"
+        ],
+        "task_titles": [
+          "Optimize peak-load responsiveness and capacity"
+        ],
+        "req_types": [
+          "NFR"
+        ],
+        "max_complexity": 4
+      }
+    ],
+    "stage_summaries": [
+      {
+        "stage": 1,
+        "task_count": 9,
+        "task_ids": [
+          "T001",
+          "T002",
+          "T003",
+          "T004",
+          "T005",
+          "T007",
+          "T008",
+          "T009",
+          "T010"
+        ],
+        "headline": "Stage 1 establishes account and identity foundations",
+        "dominant_themes": [
+          "crud",
+          "identity",
+          "performance"
+        ],
+        "titles": [
+          "Implement course registration workflow",
+          "Implement course enrollment workflow",
+          "Implement Grade and Material Upload",
+          "Implement tuition invoices creation workflow",
+          "Implement online payments handling workflow"
+        ]
+      },
+      {
+        "stage": 2,
+        "task_count": 1,
+        "task_ids": [
+          "T006"
+        ],
+        "headline": "Stage 2 delivers user communications and alerting",
+        "dominant_themes": [
+          "crud",
+          "notification"
+        ],
+        "titles": [
+          "Implement Automated Email Notifications"
+        ]
+      }
+    ],
+    "risk_signals": [
+      "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
+      "3 high-complexity tasks sit on the roadmap and deserve early prototyping."
+    ],
+    "committee_brief": {
+      "domain_inference": "Likely domain: education and learning management.",
+      "scope_assessment": "Scope includes 6 functional task(s) and 4 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "ambiguity_register": [],
+      "assumption_log": [
+        "Dependency sequencing was inferred for 1 task(s) to produce an executable implementation order beyond the raw prose order."
+      ],
+      "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+      "graph_summary": "8 requirements -> 10 atomic tasks across 2 delivery sprints. Critical delivery path: T005 -> T006 (2 hops, ~4 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Implement online payments handling workflow blocks 1 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 9 tasks can start immediately in Sprint 1. Effort breakdown: 240 estimated hours | FR: 120h | NFR: 120h."
+    }
+  },
+  "committee_brief": {
+    "domain_inference": "Likely domain: education and learning management.",
+    "scope_assessment": "Scope includes 6 functional task(s) and 4 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "ambiguity_register": [],
+    "assumption_log": [
+      "Dependency sequencing was inferred for 1 task(s) to produce an executable implementation order beyond the raw prose order."
+    ],
+    "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
+    "graph_summary": "8 requirements -> 10 atomic tasks across 2 delivery sprints. Critical delivery path: T005 -> T006 (2 hops, ~4 story points, estimated 4 weeks with a 2-person team). Coordination hotspot: Implement online payments handling workflow blocks 1 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 9 tasks can start immediately in Sprint 1. Effort breakdown: 240 estimated hours | FR: 120h | NFR: 120h."
+  },
+  "sprint_plan": [
+    {
+      "sprint": 1,
+      "name": "Account Foundation",
+      "goal": "Account identity, authentication, and permission foundations are ready for downstream workflows",
+      "tasks": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007",
+        "T008",
+        "T009",
+        "T010"
+      ],
+      "total_estimated_hours": 220,
+      "total_points": 25,
+      "duration_weeks": 3,
+      "owner_roles": [
+        "Backend Engineer",
+        "Platform Engineer",
+        "Security Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "identity",
+        "performance"
+      ]
+    },
+    {
+      "sprint": 2,
+      "name": "Core Workflow Delivery",
+      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "tasks": [
+        "T006"
+      ],
+      "total_estimated_hours": 20,
+      "total_points": 2,
+      "duration_weeks": 1,
+      "owner_roles": [
+        "Backend Engineer"
+      ],
+      "focus_themes": [
+        "crud",
+        "notification"
+      ]
+    }
+  ],
+  "effort_summary": {
+    "total_estimated_hours": 240,
+    "total_estimated_days": 30,
+    "fr_estimated_hours": 120,
+    "nfr_estimated_hours": 120
+  },
+  "team_allocation": [
+    {
+      "role": "Backend Engineer",
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T009"
+      ],
+      "task_count": 7,
+      "estimated_hours": 136,
+      "focus": "core workflows, identity, communications"
+    },
+    {
+      "role": "Platform Engineer",
+      "task_ids": [
+        "T007",
+        "T010"
+      ],
+      "task_count": 2,
+      "estimated_hours": 75,
+      "focus": "performance"
+    },
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T008"
+      ],
+      "task_count": 1,
+      "estimated_hours": 29,
+      "focus": "security"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "Workflow edge cases need end-to-end validation",
+      "task_count": 6,
+      "task_ids": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T009"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 2,
+      "task_ids": [
+        "T007",
+        "T010"
+      ]
+    },
+    {
+      "risk": "Channel delivery retries and failure handling need testing",
+      "task_count": 1,
+      "task_ids": [
+        "T006"
+      ]
+    },
+    {
+      "risk": "Key management and certificate rotation must be validated",
+      "task_count": 1,
+      "task_ids": [
+        "T008"
+      ]
+    }
+  ],
+  "graph_analytics": {
+    "total_tasks": 10,
+    "total_dependencies": 1,
+    "fr_count": 6,
+    "nfr_count": 4,
+    "avg_complexity": 2.7,
+    "complexity_distribution": {
+      "1": 0,
+      "2": 6,
+      "3": 1,
+      "4": 3,
+      "5": 0
+    },
+    "optional_task_count": 0,
+    "confirmed_task_count": 10,
+    "low_confidence_tasks": [],
+    "is_valid_dag": true,
+    "cycle_issues": [],
+    "critical_path": {
+      "task_ids": [
+        "T005",
+        "T006"
+      ],
+      "titles": [
+        "Implement online payments handling workflow",
+        "Implement Automated Email Notifications"
+      ],
+      "total_weight": 2,
+      "length": 2
+    },
+    "bottleneck_tasks": [
+      {
+        "id": "T005",
+        "title": "Implement online payments handling workflow",
+        "blocks": 1,
+        "complexity": 2
+      },
+      {
+        "id": "T007",
+        "title": "Optimize system uptime and reliability constraints",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T009",
+        "title": "Enable Mobile-Friendly Interfaces",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T010",
+        "title": "Optimize peak-load responsiveness and capacity",
+        "blocks": 0,
+        "complexity": 4
+      },
+      {
+        "id": "T008",
+        "title": "Enforce Data Encryption",
+        "blocks": 0,
+        "complexity": 3
+      }
+    ],
+    "root_tasks": [
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T007",
+      "T008",
+      "T009",
+      "T010"
+    ],
+    "leaf_tasks": [
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T006",
+      "T007",
+      "T008",
+      "T009",
+      "T010"
+    ],
+    "suspicious_isolated_tasks": [],
+    "validation_warnings": [],
+    "parallel_groups": [
+      [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T007",
+        "T008",
+        "T009",
+        "T010"
+      ],
+      [
+        "T006"
+      ]
+    ],
+    "parallel_group_count": 2
+  },
+  "admin_review": {
+    "status": "empty",
+    "total_flagged": 0,
+    "queue_file": "data/eval_runs/ui_chips_current/university_portal/admin_review_queue.json",
+    "reviewed_at": null,
+    "approved": 0,
+    "edited": 0,
+    "rejected": 0,
+    "skipped": 0,
+    "tasks_final_file": "data/eval_runs/ui_chips_current/university_portal/tasks_final.json"
+  }
+}

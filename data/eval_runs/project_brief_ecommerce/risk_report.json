@@ -1,0 +1,60 @@
+{
+  "risk_level": "critical",
+  "risk_score": 0.85,
+  "total_risks": 5,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T007 'Optimize peak traffic during sale events performance constraints' blocks 7 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T007"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "Foundational NFR gates (T013, T009, T002, T008) collectively gate 7 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T013",
+        "T009",
+        "T002",
+        "T008"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "critical",
+      "message": "Total effort 356h is very high -- delivery risk",
+      "affected_tasks": [],
+      "mitigation": "Reduce scope to MVP or extend timeline significantly",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "NFR work (196h) exceeds FR work (160h) -- quality engineering dominates timeline",
+      "affected_tasks": [],
+      "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[CRITICAL] Split task or add a parallel implementation path",
+    "[HIGH] Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+    "[CRITICAL] Reduce scope to MVP or extend timeline significantly"
+  ],
+  "generated_at": "2026-05-01T10:34:03.713117+00:00"
+}

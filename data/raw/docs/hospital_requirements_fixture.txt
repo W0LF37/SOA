@@ -1,0 +1,33 @@
+Project Title:
+Hospital Information System
+
+Project Overview:
+A web-based system for managing hospital operations including patient records,
+radiology, staff management, audit trails, and secure access control.
+
+Target Users:
+- Doctor
+- Nurse
+- Radiologist
+- Admin
+
+Main Features:
+- Secure hospital data across all patient workflows and sensitive records
+- Register and manage patient records including medical history and demographics
+- Allow doctors to upload radiology reports and attach file links to patient records
+- Enable staff to view attachments or file links associated with patient cases
+- Generate management dashboard showing operational data and hospital statistics
+- Implement role-based access control for all staff roles and departments
+- Maintain audit logs for all data modifications and access events
+- Process billing and generate invoices for patient services
+- Send automated notifications for critical patient events
+
+Expected Benefits:
+The system must maintain audit logs to ensure compliance and traceability.
+All sensitive operations must be protected by role-based access control.
+Secure hospital data must be encrypted at rest and in transit.
+
+Constraints or Special Notes:
+- Must comply with healthcare data protection regulations
+- System must respond within two seconds for all standard operations
+- Management dashboard must depend on operational data from patient and billing modules

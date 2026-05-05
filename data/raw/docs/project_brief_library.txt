@@ -1,0 +1,38 @@
+Project Title:
+Digital Library Management System
+
+Project Overview:
+A web-based system to manage library operations including book cataloging,
+member borrowing and returns, seat reservations, and digital content access
+for members and librarians.
+
+Problem Statement:
+Library staff currently manage book records and borrowing on paper-based
+ledgers, leading to lost records, overdue tracking errors, and no visibility
+into available inventory for members.
+
+Proposed Solution:
+Build a unified digital platform where members can search the catalog, borrow
+books, and access digital resources, while librarians manage inventory,
+overdue tracking, and member accounts from a single dashboard.
+
+Target Users:
+- Member
+- Librarian
+
+Main Features:
+- Allow members to search and browse the book catalog by title, author, and genre
+- Allow members to borrow physical books and return them with automated due date tracking
+- Allow members to reserve books that are currently on loan by other members
+- Allow members to access and read digital books and e-resources online
+- Allow librarians to manage member accounts, book inventory, and overdue fines
+
+Expected Benefits:
+The system should be available during all library operating hours with no
+unplanned downtime. All member records and borrowing history must be backed up
+daily and recoverable within one hour in case of system failure.
+
+Constraints or Special Notes:
+- Must support barcode scanning for physical book check-in and check-out
+- System must comply with member data privacy regulations
+- Must support at least two hundred concurrent members during peak usage hours

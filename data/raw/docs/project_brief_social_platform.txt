@@ -1,0 +1,21 @@
+Project Brief: Social Networking Platform
+
+Project Overview:
+A social platform enabling users to create content, follow others, and engage in communities.
+
+Actors:
+- Regular User, Content Creator, Moderator, Platform Admin
+
+Functional Requirements:
+1. User profile with bio, avatar, followers/following lists, and activity feed.
+2. Post creation supporting text, images, and videos with tagging and hashtags.
+3. News feed algorithm based on follows, engagement, and recency scoring.
+4. Communities (groups) with public/private modes, membership management, and pinned posts.
+5. Direct messaging with read receipts and media sharing.
+6. Content moderation: reporting, automated spam detection, and moderator review queue.
+7. Notification center: likes, comments, mentions, follows — real-time and digest email.
+
+Non-Functional Requirements:
+8. Feed generation for any user must complete within 300ms (p95).
+9. Support horizontal scaling to 100,000 concurrent active users.
+10. All user content must be stored in geo-redundant object storage with 99.999% durability.

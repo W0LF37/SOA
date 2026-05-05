@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CritiPlan — Agent I/O Flow Diagram</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  padding: 48px 24px 80px;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+
+header .subtitle {
+  color: #475569;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+header .subtitle span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pipeline {
+  max-width: 940px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Start/End Nodes ─── */
+.start-node {
+  background: #1e293b;
+  border: 2px solid #3b82f6;
+  border-radius: 40px;
+  padding: 13px 36px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #93c5fd;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 24px #3b82f620;
+}
+
+.end-node {
+  width: 100%;
+  max-width: 940px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-top: 2px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.end-node-header {
+  padding: 14px 24px;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* ─── Arrows ─── */
+.arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 2px 0;
+  position: relative;
+}
+
+.arrow .vline {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, #334155, #475569);
+}
+
+.arrow .data-label {
+  font-size: 11px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  color: #64748b;
+  background: #1e293b;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid #334155;
+  white-space: nowrap;
+  margin: 3px 0;
+}
+
+.arrow .arrowhead {
+  color: #475569;
+  font-size: 13px;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+/* ─── Agent Card ─── */
+.agent-card {
+  width: 100%;
+  max-width: 940px;
+  background: #1e293b;
+  border: 1px solid #2d3f55;
+  border-top: 3px solid var(--color, #64748b);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.03);
+  transition: box-shadow 0.2s;
+}
+
+.agent-card:hover {
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5), 0 0 0 1px var(--color, #64748b)33;
+}
+
+.card-header {
+  padding: 15px 24px;
+  background: linear-gradient(135deg, var(--color, #475569)18 0%, transparent 60%);
+  border-bottom: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.agent-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.agent-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.agent-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.agent-file {
+  font-size: 11px;
+  font-family: 'Consolas', monospace;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge-llm-opt  { background: #1d4ed815; color: #93c5fd; border: 1px solid #1d4ed840; }
+.badge-llm-none { background: #33415515; color: #64748b;  border: 1px solid #33415540; }
+.badge-llm-req  { background: #16a34a15; color: #86efac; border: 1px solid #16a34a40; }
+
+/* ─── IO Body ─── */
+.card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.io-col {
+  padding: 18px 24px;
+}
+
+.io-col.left  { border-right: 1px solid #334155; }
+
+.col-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #475569;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.io-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.io-list li {
+  font-size: 13px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  line-height: 1.5;
+}
+
+.io-list li::before {
+  content: '▸';
+  color: var(--color, #64748b);
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.tag-opt {
+  font-size: 10px;
+  color: #64748b;
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'Consolas', monospace;
+  margin-left: 2px;
+}
+
+.sub-note {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed #334155;
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.type-tree {
+  margin: 6px 0 0 20px;
+  font-size: 11px;
+  color: #64748b;
+  font-family: 'Consolas', monospace;
+  line-height: 1.8;
+  list-style: none;
+}
+
+/* ─── Card Footer ─── */
+.card-footer {
+  padding: 10px 24px;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid #334155;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.disk-badge {
+  font-size: 11px;
+  font-family: 'Consolas', monospace;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+.disk-write { background: #78350f18; color: #fbbf24; border: 1px solid #78350f40; }
+.disk-read  { background: #1e40af18; color: #93c5fd; border: 1px solid #1e40af40; }
+
+.footer-note {
+  font-size: 11px;
+  color: #334155;
+  margin-left: auto;
+}
+
+/* ─── Split Section ─── */
+.split-section {
+  width: 100%;
+  max-width: 940px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.branch-down {
+  width: 100%;
+  display: flex;
+  height: 24px;
+}
+
+.branch-down .left-arm {
+  flex: 1;
+  border-bottom: 2px solid #334155;
+  border-right: 2px solid #334155;
+  border-radius: 0 0 10px 0;
+  margin-right: 10px;
+}
+
+.branch-down .right-arm {
+  flex: 1;
+  border-bottom: 2px solid #334155;
+  border-left: 2px solid #334155;
+  border-radius: 0 0 0 10px;
+  margin-left: 10px;
+}
+
+.branch-up {
+  width: 100%;
+  display: flex;
+  height: 24px;
+}
+
+.branch-up .left-arm {
+  flex: 1;
+  border-top: 2px solid #334155;
+  border-right: 2px solid #334155;
+  border-radius: 0 10px 0 0;
+  margin-right: 10px;
+}
+
+.branch-up .right-arm {
+  flex: 1;
+  border-top: 2px solid #334155;
+  border-left: 2px solid #334155;
+  border-radius: 10px 0 0 0;
+  margin-left: 10px;
+}
+
+.split-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.split-cards .agent-card {
+  max-width: 100%;
+}
+
+/* ─── Output table ─── */
+.out-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.out-table th {
+  text-align: left;
+  padding: 9px 16px;
+  color: #475569;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-bottom: 1px solid #334155;
+  font-weight: 700;
+}
+
+.out-table td {
+  padding: 8px 16px;
+  border-bottom: 1px solid #1e293b;
+  color: #cbd5e1;
+  vertical-align: middle;
+}
+
+.out-table tr:last-child td { border-bottom: none; }
+.out-table code { color: #fbbf24; font-family: 'Consolas', monospace; font-size: 12px; }
+
+.writer-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-style: italic;
+}
+
+/* ─── Legend ─── */
+.legend {
+  max-width: 940px;
+  width: 100%;
+  margin-top: 48px;
+  padding: 20px 28px;
+  background: #1e293b;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.legend-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #334155;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+@media (max-width: 700px) {
+  .card-body { grid-template-columns: 1fr; }
+  .io-col.left { border-right: none; border-bottom: 1px solid #334155; }
+  .split-cards { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { background: white; color: #111; padding: 20px; }
+  .agent-card { page-break-inside: avoid; border: 1px solid #ccc; }
+  .card-header { background: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙️ CritiPlan — Agent I/O Flow Diagram</h1>
+  <div class="subtitle">
+    <span>📋 Pipeline: <code style="font-size:11px;color:#64748b">src/pipelines/doc_to_tasks.py</code></span>
+    <span>•</span>
+    <span>6 Agents · Sequential execution · Local Ollama LLM</span>
+  </div>
+</header>
+
+<div class="pipeline">
+
+  <!-- ═══ START NODE ═══ -->
+  <div class="start-node">
+    📄 Project Brief
+    <span style="font-size:12px;font-weight:400;color:#3b82f6aa">·  raw text input</span>
+  </div>
+
+  <div class="arrow">
+    <div class="vline"></div>
+    <div class="data-label">requirements_text: str</div>
+    <div class="arrowhead">▼</div>
+  </div>
+
+  <!-- ═══ PLANNER AGENT ═══ -->
+  <div class="agent-card" style="--color:#8b5cf6">
+    <div class="card-header">
+      <div class="agent-title">
+        <span class="agent-icon">🤖</span>
+        <div>
+          <div class="agent-name">PlannerAgent</div>
+          <div class="agent-file">src/agents/planner.py · plan_from_requirements()</div>
+        </div>
+      </div>
+      <span class="badge badge-llm-opt">🔵 LLM Optional</span>
+    </div>
+
+    <div class="card-body">
+      <div class="io-col left">
+        <div class="col-title">Inputs</div>
+        <ul class="io-list">
+          <li><code>requirements_text: str</code></li>
+          <li><code>kb_context: str</code> <span class="tag-opt">optional</span></li>
+          <li><code>force_fallback: bool</code></li>
+          <li><code>allow_decomposition: bool</code></li>
+          <li><code>allow_fallback: bool</code></li>
+        </ul>
+        <div class="sub-note">
+          <strong style="color:#8b5cf6aa">Sub-layers (in order):</strong><br>
+          1. Parse &amp; deduplicate requirements<br>
+          2. Rule-based decomposition<br>
+          3. LLM JSON generation (if enabled)<br>
+          4. Schema validation + repair<br>
+          5. Explainability annotation<br>
+          6. TechStack keyword scan
+        </div>
+      </div>
+      <div class="io-col">
+        <div class="col-title">Outputs</div>
+        <ul class="io-list">
+          <li>
+            <code>TaskList</code>
+            <ul class="type-tree">
+              <li>├─ id: T001–T999</li>
+              <li>├─ title: str (action verb)</li>
+              <li>├─ req_type: FR | NFR</li>
+              <li>├─ type_reason: str</li>
+              <li>├─ complexity: 1–5</li>
+              <li>├─ complexity_reason: str</li>
+              <li>├─ dependencies: list[str]</li>
+              <li>├─ confidence: high|medium|low</li>
+              <li>└─ optional: bool</li>
+            </ul>
+          </li>
+          <li style="margin-top:8px">
+            <code>TechStackReport</code>
+            <ul class="type-tree">
+              <li>├─ frontend: list[str]</li>
+              <li>├─ backend: list[str]</li>
+              <li>├─ database: list[str]</li>
+              <li>├─ devops: list[str]</li>
+              <li>└─ external_services: list[str]</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span class="disk-badge disk-write">💾 tasks.json</span>
+      <span class="footer-note">Fallback: rule-based only if LLM unavailable · last_used_fallback flag set</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <div class="vline"></div>
+    <div class="data-label">TaskList</div>
+    <div class="arrowhead">▼</div>
+  </div>
+
+  <!-- ═══ EFFORT ESTIMATOR ═══ -->
+  <div class="agent-card" style="--color:#06b6d4">
+    <div class="card-header">
+      <div class="agent-title">
+        <span class="agent-icon">⚖️</span>
+        <div>
+          <div class="agent-name">EffortEstimator</div>
+          <div class="agent-file">src/services/effort_estimator.py · enrich_task_list()</div>
+        </div>
+      </div>
+      <span class="badge badge-llm-none">⚪ No LLM</span>
+    </div>
+
+    <div class="card-body">
+      <div class="io-col left">
+        <div class="col-title">Inputs</div>
+        <ul class="io-list">
+          <li><code>TaskList</code></li>
+          <li>ChromaDB KB <span class="tag-opt">optional · RAG</span></li>
+        </ul>
+        <div class="sub-note">
+          <strong style="color:#06b6d4aa">RAG Blend ratio:</strong><br>
+          C1–C2: 65% rule-based / 35% KB<br>
+          C3+: &nbsp; 30% rule-based / 70% KB<br><br>
+          <strong style="color:#06b6d4aa">KB:</strong> SentenceTransformer<br>
+          all-MiniLM-L6-v2 · collection: pm_knowledge
+        </div>
+      </div>
+      <div class="io-col">
+        <div class="col-title">Outputs</div>
+        <ul class="io-list">
+          <li>
+            <code>TaskList</code> <span style="color:#475569;font-size:11px">(enriched)</span>
+          </li>
+        </ul>
+        <div class="sub-note" style="border-top:none;padding-top:0;margin-top:8px">
+          <strong style="color:#06b6d4aa">Added fields per Task:</strong><br>
+          <code style="font-size:11px">estimated_hours: int</code><br>
+          <code style="font-size:11px">estimated_days: int</code><br>
+          <code style="font-size:11px">skill_required: str</code><br>
+          <code style="font-size:11px">suggested_owner_role: str</code><br>
+          <code style="font-size:11px">recommended_team_size: int</code><br>
+          <code style="font-size:11px">estimation_breakdown: dict</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span class="disk-badge disk-read">📖 storage/chroma/</span>
+      <span class="footer-note">use_kb=False skips RAG · pure rule-based estimation used</span>
+    </div>
+  </div>
+
+  <!-- ─── split arrow ─── -->
+  <div class="arrow" style="padding:2px 0">
+    <div class="vline" style="height:14px"></div>
+    <div class="data-label">TaskList (+ estimated hours)</div>
+  </div>
+
+  <!-- ═══ SPLIT SECTION: Critic + DependencyGraph ═══ -->
+  <div class="split-section">
+
+    <div class="branch-down">
+      <div class="left-arm"></div>
+      <div class="right-arm"></div>
+    </div>
+
+    <div class="split-cards">
+
+      <!-- ── CriticAgent ── -->
+      <div class="agent-card" style="--color:#f59e0b">
+        <div class="card-header" style="flex-direction:column;align-items:flex-start;gap:6px">
+          <div class="agent-title">
+            <span class="agent-icon">🔍</span>
+            <div>
+              <div class="agent-name" style="font-size:15px">CriticAgent</div>
+              <div class="agent-file">src/agents/critic.py · review()</div>
+            </div>
+          </div>
+          <span class="badge badge-llm-opt" style="font-size:10px">🔵 LLM Optional</span>
+        </div>
+
+        <div style="padding:16px 20px;border-bottom:1px solid #334155">
+          <div class="col-title">Inputs</div>
+          <ul class="io-list">
+            <li><code>TaskList</code></li>
+          </ul>
+        </div>
+
+        <div style="padding:16px 20px;border-bottom:1px solid #334155">
+          <div class="col-title">Outputs</div>
+          <ul class="io-list">
+            <li><code>CriticReport</code></li>
+          </ul>
+          <div style="margin-top:8px;font-size:11px;color:#64748b;font-family:'Consolas',monospace;line-height:1.9">
+            status: approved | needs_revision | rejected<br>
+            score: 0.0 – 1.0<br>
+            issues[]: layer · severity · message<br>
+            suggestions[]: list[str]
+          </div>
+        </div>
+
+        <div style="padding:12px 20px;font-size:11px;color:#64748b;line-height:1.8;border-bottom:1px solid #334155">
+          <strong style="color:#f59e0baa">Layer 1</strong> Business rules (no LLM):<br>
+          · Cycle detection (DFS)<br>
+          · Duplicate IDs, unknown deps<br>
+          · FR/NFR ratio validation<br>
+          · Complexity outliers<br>
+          <strong style="color:#f59e0baa">Layer 2</strong> LLM holistic review:<br>
+          · Only if Layer 1 has no hard errors<br>
+          Penalty: error −0.20 / warn −0.05 / info −0.01
+        </div>
+
+        <div class="card-footer" style="padding:8px 20px">
+          <span class="disk-badge disk-write">💾 critic_report.json</span>
+        </div>
+      </div>
+
+      <!-- ── DependencyGraph ── -->
+      <div class="agent-card" style="--color:#10b981">
+        <div class="card-header" style="flex-direction:column;align-items:flex-start;gap:6px">
+          <div class="agent-title">
+            <span class="agent-icon">📊</span>
+            <div>
+              <div class="agent-name" style="font-size:15px">DependencyGraph</div>
+              <div class="agent-file">src/graph/dependency_graph.py</div>
+            </div>
+          </div>
+          <span class="badge badge-llm-none" style="font-size:10px">⚪ No LLM — NetworkX DAG</span>
+        </div>
+
+        <div style="padding:16px 20px;border-bottom:1px solid #334155">
+          <div class="col-title">Inputs</div>
+          <ul class="io-list">
+            <li><code>TaskList</code></li>
+          </ul>
+          <div style="margin-top:8px;font-size:11px;color:#475569;line-height:1.7">
+            Edge direction: dependency → task<br>
+            Edge weight: destination complexity
+          </div>
+        </div>
+
+        <div style="padding:16px 20px;border-bottom:1px solid #334155">
+          <div class="col-title">Outputs</div>
+          <ul class="io-list">
+            <li><code>graph_analytics: dict</code></li>
+          </ul>
+          <div style="margin-top:8px;font-size:11px;color:#64748b;font-family:'Consolas',monospace;line-height:1.9">
+            critical_path: list[str]<br>
+            bottlenecks: list[str]<br>
+            parallel_groups: list[list]<br>
+            longest_path_length: int<br>
+            total_nodes: int<br>
+            total_edges: int
+          </div>
+        </div>
+
+        <div style="padding:12px 20px;font-size:11px;color:#64748b;line-height:1.7;border-bottom:1px solid #334155">
+          Critical path = longest complexity-weighted path<br>
+          Bottlenecks = nodes with highest out-degree<br>
+          Parallel groups = topological generations
+        </div>
+
+        <div class="card-footer" style="padding:8px 20px">
+          <span class="disk-badge disk-write">💾 dependency_graph.json</span>
+        </div>
+      </div>
+
+    </div><!-- /split-cards -->
+
+    <div class="branch-up">
+      <div class="left-arm"></div>
+      <div class="right-arm"></div>
+    </div>
+
+  </div><!-- /split-section -->
+
+  <div class="arrow">
+    <div class="data-label">CriticReport + graph_analytics + plan_summary</div>
+    <div class="arrowhead">▼</div>
+  </div>
+
+  <!-- ═══ RISK ANALYZER ═══ -->
+  <div class="agent-card" style="--color:#ef4444">
+    <div class="card-header">
+      <div class="agent-title">
+        <span class="agent-icon">⚠️</span>
+        <div>
+          <div class="agent-name">RiskAnalyzer</div>
+          <div class="agent-file">src/agents/risk_analyzer.py · analyze()</div>
+        </div>
+      </div>
+      <span class="badge badge-llm-opt">🔵 LLM Optional</span>
+    </div>
+
+    <div class="card-body">
+      <div class="io-col left">
+        <div class="col-title">Inputs</div>
+        <ul class="io-list">
+          <li><code>TaskList</code></li>
+          <li><code>plan_summary: dict</code></li>
+          <li><code>CriticReport</code> <span class="tag-opt">optional</span></li>
+        </ul>
+        <div class="sub-note">
+          <strong style="color:#ef4444aa">6 Rule-based categories:</strong><br>
+          1. Bottleneck — 5+ downstream tasks<br>
+          2. Complexity — C5 on critical path<br>
+          3. Schedule — &gt;300h total / 7+ parallel<br>
+          4. Dependencies — inferred non-explicit<br>
+          5. Resources — &gt;60% effort one role<br>
+          6. Quality — critic score &lt; 0.80<br><br>
+          <strong style="color:#ef4444aa">+ LLM novelty layer:</strong><br>
+          2–3 novel risks not captured by rules<br>
+          Tagged source="llm"
+        </div>
+      </div>
+      <div class="io-col">
+        <div class="col-title">Outputs</div>
+        <ul class="io-list">
+          <li><code>RiskReport</code></li>
+        </ul>
+        <div style="margin-top:8px;font-size:11px;color:#64748b;font-family:'Consolas',monospace;line-height:1.9">
+          risk_level: low | medium | high | critical<br>
+          risk_score: 0.0 – 1.0<br>
+          total_risks: int<br>
+          risks[]: RiskItem<br>
+          &nbsp;&nbsp;├─ category: str<br>
+          &nbsp;&nbsp;├─ severity: critical|high|medium|low<br>
+          &nbsp;&nbsp;├─ message: str<br>
+          &nbsp;&nbsp;├─ affected_tasks: list[str]<br>
+          &nbsp;&nbsp;├─ mitigation: str<br>
+          &nbsp;&nbsp;└─ source: "rule" | "llm"<br>
+          mitigations[]: list[str]
+        </div>
+        <div class="sub-note">
+          <strong style="color:#ef4444aa">Risk score penalties:</strong><br>
+          critical +0.30 / high +0.15<br>
+          medium +0.05 / low +0.01<br><br>
+          <strong style="color:#ef4444aa">Level thresholds:</strong><br>
+          ≥ 0.70 → critical &nbsp;·&nbsp; ≥ 0.40 → high<br>
+          ≥ 0.20 → medium &nbsp;·&nbsp; else → low
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span class="disk-badge disk-write">💾 risk_report.json</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <div class="vline"></div>
+    <div class="data-label">RiskReport</div>
+    <div class="arrowhead">▼</div>
+  </div>
+
+  <!-- ═══ MONITOR AGENT ═══ -->
+  <div class="agent-card" style="--color:#64748b">
+    <div class="card-header">
+      <div class="agent-title">
+        <span class="agent-icon">📡</span>
+        <div>
+          <div class="agent-name">MonitorAgent</div>
+          <div class="agent-file">src/agents/monitor.py · track_progress()</div>
+        </div>
+      </div>
+      <span class="badge badge-llm-none">⚪ No LLM</span>
+    </div>
+
+    <div class="card-body">
+      <div class="io-col left">
+        <div class="col-title">Inputs</div>
+        <ul class="io-list">
+          <li><code>TaskList</code></li>
+          <li><code>repo_path: str</code> <span class="tag-opt">optional</span></li>
+          <li><code>commits: list[dict]</code> <span class="tag-opt">optional</span></li>
+        </ul>
+        <div class="sub-note">
+          <strong style="color:#94a3b8">Matching — Primary:</strong><br>
+          SentenceTransformer all-MiniLM-L6-v2<br>
+          Cosine similarity threshold: 0.65<br>
+          Skip commit if title &lt; 10 chars<br><br>
+          <strong style="color:#94a3b8">Matching — Fallback:</strong><br>
+          Keyword match (stop words filtered)<br>
+          Against commit msg + files_changed<br><br>
+          <strong style="color:#94a3b8">Status inference:</strong><br>
+          0 commits → not_started (0.0)<br>
+          1 commit + stale → in_progress (0.3)<br>
+          1 commit + recent → in_progress (0.5)<br>
+          1 commit + done-kw → completed (1.0)<br>
+          2 commits, no done-kw → in_progress (0.7)<br>
+          3+ commits → completed (1.0)
+        </div>
+      </div>
+      <div class="io-col">
+        <div class="col-title">Outputs</div>
+        <ul class="io-list">
+          <li><code>MonitorReport</code></li>
+        </ul>
+        <div style="margin-top:8px;font-size:11px;color:#64748b;font-family:'Consolas',monospace;line-height:1.9">
+          overall_progress: 0.0 – 1.0<br>
+          &nbsp;&nbsp;(weighted by task complexity)<br>
+          tasks_tracked: int<br>
+          tasks_completed: int<br>
+          tasks_in_progress: int<br>
+          tasks_not_started: int<br>
+          commits_analyzed: int<br>
+          task_progress[]: TaskProgress<br>
+          &nbsp;&nbsp;├─ task_id: str<br>
+          &nbsp;&nbsp;├─ status: not_started|in_progress|completed<br>
+          &nbsp;&nbsp;├─ completion_estimate: 0.0–1.0<br>
+          &nbsp;&nbsp;├─ matched_commits: list[sha]<br>
+          &nbsp;&nbsp;└─ evidence: list[commit_msg]<br>
+          behind_schedule[]: list[task_id]
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span class="disk-badge disk-read">📖 Git repo via subprocess git log</span>
+      <span class="disk-badge disk-write">💾 progress_report.json</span>
+      <span class="footer-note">Optional — only runs if repo_path provided</span>
+    </div>
+  </div>
+
+  <div class="arrow">
+    <div class="vline"></div>
+    <div class="data-label">MonitorReport</div>
+    <div class="arrowhead">▼</div>
+  </div>
+
+  <!-- ═══ OUTPUT FILES ═══ -->
+  <div class="end-node">
+    <div class="end-node-header">
+      📁 Output Files — <code style="font-size:13px;color:#fbbf24">data/processed/</code>
+    </div>
+    <div style="padding:16px 24px">
+      <table class="out-table">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Contents</th>
+            <th>Written by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>tasks.json</code></td>
+            <td style="color:#94a3b8">TaskList with TechStackReport</td>
+            <td><span class="writer-tag" style="color:#a78bfa;background:#a78bfa15;border:1px solid #a78bfa30">PlannerAgent</span></td>
+          </tr>
+          <tr>
+            <td><code>tasks_final.json</code></td>
+            <td style="color:#94a3b8">TaskList after Admin Review decisions</td>
+            <td><span class="writer-tag" style="color:#94a3b8;background:#33415515;border:1px solid #33415530">Admin Review API</span></td>
+          </tr>
+          <tr>
+            <td><code>critic_report.json</code></td>
+            <td style="color:#94a3b8">CriticReport (status, score, issues)</td>
+            <td><span class="writer-tag" style="color:#fbbf24;background:#fbbf2415;border:1px solid #fbbf2430">CriticAgent</span></td>
+          </tr>
+          <tr>
+            <td><code>dependency_graph.json</code></td>
+            <td style="color:#94a3b8">NetworkX node-link DAG format</td>
+            <td><span class="writer-tag" style="color:#34d399;background:#34d39915;border:1px solid #34d39930">DependencyGraph</span></td>
+          </tr>
+          <tr>
+            <td><code>plan_summary.json</code></td>
+            <td style="color:#94a3b8">Full analytics + sprint plan + LLM metadata</td>
+            <td><span class="writer-tag" style="color:#94a3b8;background:#33415515;border:1px solid #33415530">Pipeline</span></td>
+          </tr>
+          <tr>
+            <td><code>risk_report.json</code></td>
+            <td style="color:#94a3b8">RiskReport (rule-based + LLM risks)</td>
+            <td><span class="writer-tag" style="color:#f87171;background:#f8717115;border:1px solid #f8717130">RiskAnalyzer</span></td>
+          </tr>
+          <tr>
+            <td><code>admin_review_queue.json</code></td>
+            <td style="color:#94a3b8">Low-confidence / optional tasks flagged</td>
+            <td><span class="writer-tag" style="color:#94a3b8;background:#33415515;border:1px solid #33415530">Pipeline</span></td>
+          </tr>
+          <tr>
+            <td><code>progress_report.json</code></td>
+            <td style="color:#94a3b8">MonitorReport (git commit progress)</td>
+            <td><span class="writer-tag" style="color:#94a3b8;background:#33415515;border:1px solid #33415530">MonitorAgent</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /pipeline -->
+
+<!-- ═══ LEGEND ═══ -->
+<div class="legend" style="margin-left:auto;margin-right:auto">
+  <div class="legend-title">Legend</div>
+  <div class="legend-item">
+    <span class="badge badge-llm-opt">🔵 LLM Optional</span>
+    Calls Ollama if available, falls back to rules
+  </div>
+  <div class="legend-item">
+    <span class="badge badge-llm-none">⚪ No LLM</span>
+    Pure algorithmic / rule-based, no model call
+  </div>
+  <div class="legend-item">
+    <span class="disk-badge disk-write">💾 Writes</span>
+    Writes JSON file to data/processed/
+  </div>
+  <div class="legend-item">
+    <span class="disk-badge disk-read">📖 Reads</span>
+    Reads from ChromaDB or Git subprocess
+  </div>
+</div>
+
+<div style="text-align:center;color:#1e293b;font-size:12px;margin-top:28px;padding-bottom:20px">
+  CritiPlan · doc_to_tasks.py · Agents: PlannerAgent · EffortEstimator · CriticAgent · DependencyGraph · RiskAnalyzer · MonitorAgent
+</div>
+
+</body>
+</html>

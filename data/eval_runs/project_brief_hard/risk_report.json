@@ -1,0 +1,68 @@
+{
+  "risk_level": "critical",
+  "risk_score": 0.9,
+  "total_risks": 6,
+  "risks": [
+    {
+      "category": "bottleneck",
+      "severity": "critical",
+      "message": "T012 'Comply with local university data protection' blocks 5 tasks -- critical single point of failure",
+      "affected_tasks": [
+        "T012"
+      ],
+      "mitigation": "Split task or add a parallel implementation path",
+      "source": "rule"
+    },
+    {
+      "category": "bottleneck",
+      "severity": "high",
+      "message": "Foundational NFR gates (T009, T010, T013, T014) collectively gate 7 downstream tasks and should be front-loaded early",
+      "affected_tasks": [
+        "T009",
+        "T010",
+        "T013",
+        "T014"
+      ],
+      "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "7 tasks can start simultaneously -- high coordination overhead in first sprint",
+      "affected_tasks": [],
+      "mitigation": "Assign clear task owners before sprint starts",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "critical",
+      "message": "Total effort 372h is very high -- delivery risk",
+      "affected_tasks": [],
+      "mitigation": "Reduce scope to MVP or extend timeline significantly",
+      "source": "rule"
+    },
+    {
+      "category": "schedule",
+      "severity": "medium",
+      "message": "NFR work (190h) exceeds FR work (182h) -- quality engineering dominates timeline",
+      "affected_tasks": [],
+      "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
+      "source": "rule"
+    },
+    {
+      "category": "dependency",
+      "severity": "medium",
+      "message": "Dependency sequencing was inferred for some tasks -- not explicitly stated in requirements",
+      "affected_tasks": [],
+      "mitigation": "Verify inferred dependencies with stakeholders before sprint",
+      "source": "rule"
+    }
+  ],
+  "mitigations": [
+    "[CRITICAL] Split task or add a parallel implementation path",
+    "[HIGH] Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
+    "[CRITICAL] Reduce scope to MVP or extend timeline significantly"
+  ],
+  "generated_at": "2026-05-01T10:34:04.100650+00:00"
+}
