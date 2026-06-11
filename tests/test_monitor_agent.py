@@ -137,6 +137,45 @@ def test_keyword_mode_still_works() -> None:
     assert t001.status in {"in_progress", "completed"}
 
 
+def test_explicit_task_id_reference_matches_even_when_titles_differ() -> None:
+    task_list = TaskList(tasks=[
+        make_task("T001", "Implement user registration"),
+        make_task("T002", "Build analytics export"),
+    ])
+    commits = [
+        make_commit(
+            "id01",
+            "T001 scaffold persistence layer",
+            files=["src/backend/t001_registration_flow.py"],
+        )
+    ]
+
+    report = MonitorAgent(use_semantic=False).track_progress(task_list, commits=commits)
+
+    t001 = next(tp for tp in report.task_progress if tp.task_id == "T001")
+    t002 = next(tp for tp in report.task_progress if tp.task_id == "T002")
+    assert t001.matched_commits == ["id01"]
+    assert "task reference" in t001.match_reasons
+    assert t001.matched_files == ["src/backend/t001_registration_flow.py"]
+    assert t002.matched_commits == []
+
+
+def test_report_surfaces_unmatched_commits_and_hotspots() -> None:
+    commits = [
+        make_commit("abc1", "add user registration endpoint", files=["src/auth/register.py"]),
+        make_commit("abc2", "misc refactor for shared helpers", files=["src/shared/helpers.py"]),
+    ]
+
+    report = MonitorAgent(use_semantic=False).track_progress(three_tasks(), commits=commits)
+
+    assert [commit.sha for commit in report.unmatched_commits] == ["abc2"]
+    assert report.repository_hotspots
+    assert report.repository_hotspots[0].path in {
+        "src/auth/register.py",
+        "src/shared/helpers.py",
+    }
+
+
 def test_semantic_mode_initialises() -> None:
     """SemanticMatcher loads without error when sentence-transformers is available."""
     try:

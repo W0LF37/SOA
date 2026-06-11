@@ -12,6 +12,7 @@ env/
 node_modules/
 frontend/node_modules/
 frontend/dist/
+frontend/.critiplan-cache/
 
 # Local runtime and logs
 run_logs/
@@ -20,14 +21,21 @@ storage/logs/
 *.out
 *.err
 frontend/*.log
+frontend/*.out
+frontend/*.err
 
 # Generated/runtime storage
 tmp/
+tmp_dulwich_repo/
 case_study/
 storage/chroma/
 storage/*.log
 storage/*.err
 storage/*.json
+storage/messages.json
+poster_preview_original/
+poster_preview_edited/
+TTHF/
 
 # Large local model files
 models/*.gguf
@@ -42,3 +50,8 @@ frontend/.codex-frontend.out.log
 # Office/temp artifacts
 ~$*
 *.tmp
+*.db
+*.sqlite*
+*.rar
+*.zip
+*.7z

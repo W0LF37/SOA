@@ -115,10 +115,40 @@ export type PlanSummary = {
 
 export type MonitorReport = {
   overall_progress?: number;
+  tasks_tracked?: number;
   tasks_completed?: number;
   tasks_in_progress?: number;
   tasks_not_started?: number;
+  tasks_needs_review?: number;
   commits_analyzed?: number;
+  task_progress?: Array<{
+    task_id: string;
+    task_title: string;
+    status: "completed" | "in_progress" | "not_started" | "needs_review";
+    matched_commits: string[];
+    evidence?: string[];
+    matched_files?: string[];
+    match_reasons?: string[];
+    evidence_confidence?: "none" | "low" | "medium" | "high";
+    alignment_score?: number;
+    evidence_note?: string | null;
+    completion_estimate: number;
+  }>;
+  behind_schedule?: string[];
+  unmatched_commits?: Array<{
+    sha: string;
+    message: string;
+    author: string;
+    date: string;
+    files_changed?: string[];
+  }>;
+  repository_hotspots?: Array<{
+    path: string;
+    commit_count: number;
+    linked_task_ids?: string[];
+  }>;
+  tracked_repository?: string | null;
+  generated_at?: string;
 };
 
 export type DependencyGraph = {

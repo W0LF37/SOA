@@ -34,6 +34,11 @@ def _task_statuses(report: MonitorReport) -> list[dict]:
                 "task_title": task.task_title,
                 "status": task.status,
                 "completion_estimate": task.completion_estimate,
+                "matched_files": task.matched_files,
+                "match_reasons": task.match_reasons,
+                "evidence_confidence": task.evidence_confidence,
+                "alignment_score": task.alignment_score,
+                "evidence_note": task.evidence_note,
                 "evidence_commits": evidence_commits,
             }
         )

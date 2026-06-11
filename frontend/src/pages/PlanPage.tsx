@@ -1,35 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight, Calculator, ChevronDown, ChevronUp, Play } from "lucide-react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowRight, Calculator, ChevronDown, ChevronUp, Play, RefreshCw } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { getPipelineInput, pipelineEventsUrl, runPipeline } from "../lib/api";
+import { DEFAULT_PROJECT_BRIEF, DEMO_ALL_DATA } from "../lib/demoProject";
+import { buildExecutionRoadmap, buildPresentationSprints, buildPresentationTasks, sortPresentationSprints } from "../lib/presentation";
+import { buildShowcaseData, formatQualityGate } from "../lib/projectShowcase";
 import { useAppStore } from "../lib/store";
-
-const BRIEF_FALLBACK = `Project Title:
-Clinic Management System
-
-Project Overview:
-A web-based system to manage clinic operations including patient registration,
-appointments, consultations, and billing.
-
-Problem Statement:
-Clinic staff currently manage patient records and appointments on paper,
-leading to errors, duplicate records, and inefficient scheduling.
-
-Proposed Solution:
-Build a unified digital platform where receptionists, doctors, and billing
-staff can collaborate on a single patient record.
-
-Main Features:
-- Register new patients using national ID and contact details
-- Book and manage patient appointments for available doctors
-- Allow doctors to view patient history and record diagnosis
-- Generate itemized invoices for consultations and lab tests
-- Send automated email notifications for deadlines
-
-Constraints or Special Notes:
-- Must support both Arabic and English languages
-- System must respond within two seconds for all standard operations`;
 
 type PipelineEvent = {
   type?: string;
@@ -66,12 +43,134 @@ function complexityColor(level: number | undefined) {
   return "#64748b";
 }
 
+function SupervisorTaskList({
+  tasks,
+  expandedTask,
+  onToggleTask,
+}: {
+  tasks: Array<{
+    id?: string;
+    title?: string;
+    req_type?: string;
+    complexity?: number;
+    estimated_hours?: number | null;
+    suggested_owner_role?: string | null;
+    skill_required?: string | null;
+    description?: string;
+    dependencies?: string[];
+    estimated_days?: number | null;
+    recommended_team_size?: number | null;
+    confidence?: string;
+  }>;
+  expandedTask: string | null;
+  onToggleTask: (taskId: string) => void;
+}) {
+  if (!tasks.length) return null;
+
+  return (
+    <section className="card">
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+        <div>
+          <h2 className="page-title">Execution backlog</h2>
+          <p className="muted" style={{ marginTop: -6 }}>
+            Task-by-task execution review for the latest approved delivery baseline.
+          </p>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gap: 10 }}>
+        {tasks.map((task) => {
+          const id = task.id ?? task.title ?? "";
+          const isExpanded = expandedTask === id;
+          const color = complexityColor(task.complexity);
+
+          return (
+            <div
+              key={id}
+              onClick={() => onToggleTask(id)}
+              style={{
+                border: "1px solid #1e293b",
+                borderRadius: 14,
+                background: "rgba(15,23,42,0.78)",
+                padding: "14px 16px",
+                cursor: "pointer",
+              }}
+            >
+              <div style={{ display: "grid", gridTemplateColumns: "80px 1fr 76px 82px 72px 170px 28px", gap: 12, alignItems: "center" }}>
+                <span style={{ fontFamily: "monospace", background: "rgba(59,130,246,0.14)", color: "#93c5fd", padding: "5px 8px", borderRadius: 8, fontWeight: 800 }}>
+                  {task.id}
+                </span>
+                <div style={{ color: "#f8fafc", fontWeight: 700, lineHeight: 1.35 }}>{task.title}</div>
+                <span className={`badge ${task.req_type === "NFR" ? "badge-orange" : "badge-blue"}`}>{task.req_type}</span>
+                <span style={{ display: "inline-flex", justifyContent: "center", borderRadius: 999, padding: "4px 8px", background: `${color}22`, color, fontWeight: 900 }}>
+                  C{task.complexity}
+                </span>
+                <span style={{ color: "#cbd5e1", fontWeight: 800 }}>{task.estimated_hours ?? 0}h</span>
+                <span style={{ color: "#7dd3fc", fontSize: 12 }}>{task.suggested_owner_role ?? task.skill_required ?? "n/a"}</span>
+                {isExpanded ? <ChevronUp size={18} color="#94a3b8" /> : <ChevronDown size={18} color="#94a3b8" />}
+              </div>
+
+              {isExpanded && (
+                <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 14 }}>
+                  <div
+                    style={{
+                      background: "rgba(15,23,42,0.6)",
+                      border: "1px solid #334155",
+                      borderRadius: 10,
+                      padding: 14,
+                    }}
+                  >
+                    <div style={{ color: "#64748b", fontSize: 12, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>
+                      Description
+                    </div>
+                    <div style={{ color: "#cbd5e1", lineHeight: 1.6, fontSize: 13 }}>{task.description ?? "No description"}</div>
+                  </div>
+
+                  <div
+                    style={{
+                      background: "rgba(15,23,42,0.6)",
+                      border: "1px solid #334155",
+                      borderRadius: 10,
+                      padding: 14,
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#f8fafc", fontWeight: 800, marginBottom: 10 }}>
+                      <Calculator size={16} color="#93c5fd" /> Review details
+                    </div>
+                    {[
+                      ["Dependencies", task.dependencies?.length ? task.dependencies.join(", ") : "None"],
+                      ["Owner", task.suggested_owner_role ?? "n/a"],
+                      ["Skill", task.skill_required ?? "n/a"],
+                      ["Estimated days", task.estimated_days ?? "n/a"],
+                      ["Team size", task.recommended_team_size ?? "n/a"],
+                      ["Confidence", task.confidence ?? "n/a"],
+                    ].map(([label, value]) => (
+                      <div key={label} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: "1px solid rgba(51,65,85,0.55)", gap: 12 }}>
+                        <span style={{ color: "#7dd3fc" }}>{label}</span>
+                        <strong style={{ color: "#e2e8f0", textAlign: "right" }}>{value}</strong>
+                      </div>
+                    ))}
+                    <div style={{ marginTop: 10 }}>
+                      <span className="badge badge-gray">Supervisor review</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 export default function PlanPage() {
   const navigate = useNavigate();
   const role = useAppStore((state) => state.role);
   const data = useAppStore((state) => state.data);
+  const brief = useAppStore((state) => state.brief);
   const [gitUrl, setGitUrl] = useState("");
-  const [requirements, setRequirements] = useState(BRIEF_FALLBACK);
+  const [requirements, setRequirements] = useState(DEFAULT_PROJECT_BRIEF);
   const [useKb, setUseKb] = useState(true);
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState("idle");
@@ -84,12 +183,37 @@ export default function PlanPage() {
   const refreshAll = useAppStore((state) => state.refreshAll);
   const refreshBrief = useAppStore((state) => state.refreshBrief);
   const tasksData = useAppStore((state) => state.data?.tasks?.tasks);
-  const tasks = tasksData ?? [];
+  const rawTasks = tasksData?.length ? tasksData : DEMO_ALL_DATA.tasks?.tasks ?? [];
+  const tasks = useMemo(() => buildPresentationTasks(rawTasks), [rawTasks]);
+  const usingDemoTasks = !(tasksData?.length);
+  const summary = data?.summary ?? DEMO_ALL_DATA.summary;
+  const showcase = buildShowcaseData(data, brief);
+  const presentationSprints = useMemo(
+    () => sortPresentationSprints(buildPresentationSprints(summary?.sprint_plan, tasks)),
+    [summary?.sprint_plan, tasks],
+  );
+  const executionRoadmap = useMemo(
+    () => buildExecutionRoadmap(tasks),
+    [tasks],
+  );
 
   const totalHours = tasks.reduce((sum, task) => sum + numberValue(task.estimated_hours), 0);
   const frCount = tasks.filter((task) => task.req_type === "FR").length;
   const nfrCount = tasks.filter((task) => task.req_type === "NFR").length;
   const taskCount = completionData?.task_count ?? tasks.length;
+  const criticalPathIds = summary?.graph_analytics?.critical_path?.task_ids ?? [];
+  const ownerBreakdown = Array.from(
+    tasks.reduce((map, task) => {
+      const key = task.suggested_owner_role ?? task.skill_required ?? "Unassigned";
+      map.set(key, (map.get(key) ?? 0) + 1);
+      return map;
+    }, new Map<string, number>()),
+  )
+    .sort((left, right) => right[1] - left[1])
+    .slice(0, 5);
+  const supervisorRiskFocus = showcase.riskFocus.length
+    ? showcase.riskFocus
+    : ["Execution watch areas will appear here once the risk register is available."];
   const stages = ["Parse", "Plan", "Estimate", "Validate", "Analyze"];
   const wizardSteps = ["Project Brief", "Enter Requirements", "Repository & Options", "Review & Generate"];
   const requirementsLines = requirements.trim() ? requirements.trim().split(/\r?\n/).length : 0;
@@ -118,7 +242,7 @@ export default function PlanPage() {
     getPipelineInput()
       .then((payload) => {
         if (!isActive || hasEditedRequirements.current) return;
-        if (payload.text.trim()) {
+        if (payload.source === "default_sample" && payload.text.trim()) {
           setRequirements(payload.text);
         }
       })
@@ -131,6 +255,199 @@ export default function PlanPage() {
   }, []);
 
   if (role === "Supervisor") {
+    const supervisorTaskCount = tasks.length;
+    const supervisorTotalHours = totalHours;
+    const supervisorCriticScore =
+      (summary as { critic_score?: number; critic?: { score?: number } } | null)?.critic_score
+      ?? summary?.critic?.score;
+    const supervisorQualityGate = formatQualityGate(supervisorCriticScore);
+
+    return (
+      <section style={{ maxWidth: 1120, margin: "0 auto", padding: "32px 0" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 20, flexWrap: "wrap", marginBottom: 24 }}>
+          <div>
+            <div style={{ fontSize: 12, color: "#93c5fd", fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>
+              Execution Baseline
+            </div>
+            <h2 style={{ fontSize: "1.8rem", fontWeight: 900, color: "#f1f5f9", marginBottom: 8 }}>
+              Supervisor Delivery Plan
+            </h2>
+            <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.7, maxWidth: 760 }}>
+              This view uses the same project brief and generated task baseline shown to the student, but focuses on execution sequencing, ownership, and supervisor review checkpoints instead of committee storytelling.
+            </p>
+          </div>
+          <div
+            style={{
+              minWidth: 260,
+              borderRadius: 16,
+              border: "1px solid #1e293b",
+              background: "rgba(15,23,42,0.9)",
+              padding: 18,
+            }}
+          >
+            <div style={{ color: "#64748b", fontSize: 11, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 8 }}>
+              Baseline Source
+            </div>
+            <div style={{ color: "#f8fafc", fontSize: 22, fontWeight: 900, lineHeight: 1.25, marginBottom: 10 }}>
+              {showcase.title}
+            </div>
+            <div style={{ color: "#7dd3fc", fontSize: 13 }}>
+              Same brief alignment as the student workspace and supervisor dashboard.
+            </div>
+          </div>
+        </div>
+        {usingDemoTasks && (
+          <div style={{ marginBottom: 18, borderRadius: 14, padding: "14px 16px", border: "1px solid rgba(59,130,246,0.25)", background: "rgba(59,130,246,0.08)", color: "#bfdbfe", fontSize: 13, lineHeight: 1.6 }}>
+            Live plan data is unavailable, so this page is presenting the committee demo plan to keep the supervisor review complete and presentation-ready.
+          </div>
+        )}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 14, marginBottom: 24 }}>
+          <div className="metric-card"><div className="metric-value">{supervisorTaskCount}</div><div className="metric-label">Execution Tasks</div></div>
+          <div className="metric-card"><div className="metric-value">{Math.round(supervisorTotalHours)}h</div><div className="metric-label">Baseline Hours</div></div>
+          <div className="metric-card"><div className="metric-value">{frCount} / {nfrCount}</div><div className="metric-label">FR / NFR Mix</div></div>
+          <div className="metric-card"><div className="metric-value">{supervisorQualityGate}</div><div className="metric-label">Release Posture</div></div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1.35fr 1fr", gap: 16, marginBottom: 24 }}>
+          <section className="card" style={{ margin: 0 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", marginBottom: 14, flexWrap: "wrap" }}>
+              <div>
+                <h2 className="page-title">Delivery roadmap</h2>
+                <p className="muted" style={{ marginTop: -6 }}>
+                  Execution phases derived from the same student-approved scope and ordered by delivery value.
+                </p>
+              </div>
+            </div>
+            <div style={{ display: "grid", gap: 12 }}>
+              {executionRoadmap.length ? executionRoadmap.map((phase, index) => (
+                <div
+                  key={`${phase.key}-${index}`}
+                  style={{
+                    border: "1px solid #1e293b",
+                    borderRadius: 14,
+                    padding: 16,
+                    background: "rgba(15,23,42,0.78)",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start", marginBottom: 8, flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <span style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: 10,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        background: "rgba(59,130,246,0.16)",
+                        color: "#7dd3fc",
+                        fontWeight: 900,
+                      }}>
+                        {index + 1}
+                      </span>
+                      <div>
+                        <div style={{ color: "#f8fafc", fontWeight: 800 }}>{phase.title}</div>
+                        <div style={{ color: "#64748b", fontSize: 12 }}>{phase.goal}</div>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      <span className="stat-pill"><span style={{ color: "#7dd3fc", fontWeight: 900 }}>{phase.tasks.length}</span><span className="stat-label">tasks</span></span>
+                      <span className="stat-pill"><span style={{ color: "#22c55e", fontWeight: 900 }}>{phase.durationWeeks}w</span><span className="stat-label">duration</span></span>
+                      <span className="stat-pill"><span style={{ color: "#a78bfa", fontWeight: 900 }}>{Math.round(numberValue(phase.totalHours))}h</span><span className="stat-label">effort</span></span>
+                    </div>
+                  </div>
+                </div>
+              )) : (
+                <div style={{ color: "#64748b" }}>Sprint roadmap will appear here once the summary baseline is available.</div>
+              )}
+            </div>
+          </section>
+
+          <div style={{ display: "grid", gap: 16 }}>
+            <section className="card" style={{ margin: 0 }}>
+              <h2 className="page-title">Execution snapshot</h2>
+              <div style={{ display: "grid", gap: 12, marginTop: 12 }}>
+                {[
+                  ["Brief alignment", "Matches the same clinic and telemedicine demo brief shown in the student workspace."],
+                  ["Review signal", showcase.confidence],
+                  ["Dependency chain", criticalPathIds.length ? `${criticalPathIds.length} gated tasks in the delivery chain` : "Dependency chain available after graph analysis"],
+                  ["Sprint count", `${executionRoadmap.length || presentationSprints.length || summary?.sprint_plan?.length || 0} delivery sprint(s)`],
+                ].map(([label, value]) => (
+                  <div key={String(label)} style={{ paddingBottom: 12, borderBottom: "1px solid #1e293b" }}>
+                    <div style={{ color: "#64748b", fontSize: 12, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 6 }}>
+                      {label}
+                    </div>
+                    <div style={{ color: "#f8fafc", lineHeight: 1.6 }}>{value}</div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="card" style={{ margin: 0 }}>
+              <h2 className="page-title">Ownership coverage</h2>
+              <p className="muted" style={{ marginTop: -6 }}>
+                Execution ownership inferred from the generated task assignments.
+              </p>
+              <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                {ownerBreakdown.map(([owner, count]) => (
+                  <div
+                    key={owner}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "12px 14px",
+                      borderRadius: 12,
+                      background: "rgba(15,23,42,0.72)",
+                      border: "1px solid #1e293b",
+                    }}
+                  >
+                    <span style={{ color: "#f8fafc", fontWeight: 700 }}>{owner}</span>
+                    <span style={{ color: "#7dd3fc", fontWeight: 800 }}>{count} task(s)</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="card" style={{ margin: 0 }}>
+              <h2 className="page-title">Supervisor watch areas</h2>
+              <div style={{ display: "grid", gap: 10, marginTop: 12 }}>
+                {supervisorRiskFocus.map((item) => (
+                  <div
+                    key={item}
+                    style={{
+                      padding: "12px 14px",
+                      borderRadius: 12,
+                      background: "rgba(15,23,42,0.72)",
+                      border: "1px solid #1e293b",
+                      color: "#f8fafc",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}>
+          <button className="secondary-btn" onClick={() => void refreshAll()}>
+            <RefreshCw size={16} /> Refresh tasks
+          </button>
+          <button className="primary-btn" onClick={() => navigate("/dashboard")}>Open Supervisor Dashboard -&gt;</button>
+          <button className="secondary-btn" onClick={() => navigate("/gantt")}>Open Gantt View -&gt;</button>
+        </div>
+        <SupervisorTaskList
+          tasks={tasks}
+          expandedTask={expandedTask}
+          onToggleTask={(taskId) => setExpandedTask((current) => current === taskId ? null : taskId)}
+        />
+      </section>
+    );
+  }
+
+  /*
+  if (false && role === "Supervisor") {
     const taskCount = data?.tasks?.tasks?.length ?? 0;
     const totalHours = data?.tasks?.tasks?.reduce((sum, task) => sum + (task.estimated_hours ?? 0), 0) ?? 0;
     const criticScore =
@@ -155,6 +472,7 @@ export default function PlanPage() {
     );
   }
 
+  */
   function attachEvents() {
     eventSourceRef.current?.close();
     const source = new EventSource(pipelineEventsUrl());
@@ -291,8 +609,8 @@ export default function PlanPage() {
                       width: 34,
                       height: 34,
                       borderRadius: "50%",
-                      border: `2px solid ${completed ? "#22c55e" : current ? "#2563eb" : "#334155"}`,
-                      background: completed ? "#22c55e" : current ? "#2563eb" : "#0f172a",
+                      border: `2px solid ${completed ? "#22c55e" : current ? "#0284c7" : "#334155"}`,
+                      background: completed ? "#22c55e" : current ? "#0284c7" : "#0f172a",
                       color: "#fff",
                       display: "inline-flex",
                       alignItems: "center",
@@ -304,7 +622,7 @@ export default function PlanPage() {
                   >
                     {completed ? "OK" : stepNumber}
                   </span>
-                  <span style={{ color: completed ? "#4ade80" : current ? "#60a5fa" : "#64748b", fontSize: 12, fontWeight: 700, whiteSpace: "nowrap" }}>
+                  <span style={{ color: completed ? "#4ade80" : current ? "#94a3b8" : "#64748b", fontSize: 12, fontWeight: 700, whiteSpace: "nowrap" }}>
                     {label}
                   </span>
                 </button>
@@ -347,7 +665,7 @@ export default function PlanPage() {
                 <span style={{ color: "#93c5fd", fontSize: 12, fontWeight: 800 }}>Selected</span>
               </div>
               <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 8 }}>Free-form planning input</div>
-              <div style={{ color: "#94a3b8", lineHeight: 1.6 }}>
+              <div style={{ color: "#7dd3fc", lineHeight: 1.6 }}>
                 Describe goals, scope, constraints, and expected outcomes in plain text. Structured template mode is no longer used here.
               </div>
             </div>
@@ -425,8 +743,8 @@ export default function PlanPage() {
                 },
                 {
                   value: false,
-                  title: "Rule-based only",
-                  description: "Use fixed complexity-hour formulas without KB",
+                  title: "Direct planning mode",
+                  description: "Use local planning heuristics without knowledge-base calibration",
                 },
               ].map((option) => {
                 const selected = useKb === option.value;
@@ -437,7 +755,7 @@ export default function PlanPage() {
                     onClick={() => setUseKb(option.value)}
                     style={{
                       textAlign: "left",
-                      border: `1px solid ${selected ? "#2563eb" : "#1e293b"}`,
+                      border: `1px solid ${selected ? "#0284c7" : "#1e293b"}`,
                       background: selected ? "rgba(37,99,235,0.12)" : "rgba(15,23,42,0.72)",
                       borderRadius: 16,
                       padding: 18,
@@ -450,7 +768,7 @@ export default function PlanPage() {
                         <span style={{ color: "#93c5fd", fontSize: 12, fontWeight: 800 }}>Selected</span>
                       ) : null}
                     </div>
-                    <div style={{ color: "#94a3b8", lineHeight: 1.6 }}>{option.description}</div>
+                    <div style={{ color: "#7dd3fc", lineHeight: 1.6 }}>{option.description}</div>
                   </button>
                 );
               })}
@@ -481,7 +799,7 @@ export default function PlanPage() {
                 { label: "Format", value: "Project Brief" },
                 { label: "Requirements", value: `${requirementsLines} lines` },
                 { label: "Repository", value: gitUrl.trim() || "Not provided" },
-                { label: "Knowledge Base", value: useKb ? "Enable RAG" : "Rule-based only" },
+                { label: "Knowledge Base", value: useKb ? "Enable RAG" : "Direct planning mode" },
               ].map((row) => (
                 <div
                   key={row.label}
@@ -496,7 +814,7 @@ export default function PlanPage() {
                     border: "1px solid #1e293b",
                   }}
                 >
-                  <span style={{ color: "#94a3b8", fontSize: 13, fontWeight: 700 }}>{row.label}</span>
+                  <span style={{ color: "#7dd3fc", fontSize: 13, fontWeight: 700 }}>{row.label}</span>
                   <span style={{ color: "#f8fafc", fontWeight: 700, textAlign: "right" }}>{row.value}</span>
                 </div>
               ))}
@@ -521,9 +839,9 @@ export default function PlanPage() {
           <div className="terminal-dot" style={{ background: "#ef4444" }} />
           <div className="terminal-dot" style={{ background: "#fbbf24" }} />
           <div className="terminal-dot" style={{ background: "#22c55e" }} />
-          <span className="terminal-header-title">pipeline.log - CritiPlan</span>
+          <span className="terminal-header-title">pipeline.log - AI Project Manager</span>
           {status !== "idle" && status !== "starting" && (
-            <span style={{ marginLeft: "auto", fontSize: 11, color: status.startsWith("completed") ? "#4ade80" : "#60a5fa" }}>
+            <span style={{ marginLeft: "auto", fontSize: 11, color: status.startsWith("completed") ? "#4ade80" : "#7dd3fc" }}>
               {status.startsWith("completed") ? "done" : "running"}
             </span>
           )}
@@ -617,7 +935,7 @@ export default function PlanPage() {
                     C{task.complexity}
                   </span>
                   <span style={{ color: "#cbd5e1", fontWeight: 800 }}>{task.estimated_hours ?? 0}h</span>
-                  <span style={{ color: "#94a3b8", fontSize: 12 }}>{task.suggested_owner_role ?? task.skill_required ?? "n/a"}</span>
+                  <span style={{ color: "#7dd3fc", fontSize: 12 }}>{task.suggested_owner_role ?? task.skill_required ?? "n/a"}</span>
                   {isExpanded ? <ChevronUp size={18} color="#94a3b8" /> : <ChevronDown size={18} color="#94a3b8" />}
                 </div>
 
@@ -665,7 +983,7 @@ export default function PlanPage() {
                         ["Total", `${task.estimated_hours ?? 0}h`],
                       ].map(([label, value]) => (
                         <div key={label} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: "1px solid rgba(51,65,85,0.55)" }}>
-                          <span style={{ color: "#94a3b8" }}>{label}</span>
+                          <span style={{ color: "#7dd3fc" }}>{label}</span>
                           <strong style={{ color: "#e2e8f0" }}>{value}</strong>
                         </div>
                       ))}
@@ -685,3 +1003,4 @@ export default function PlanPage() {
     </>
   );
 }
+

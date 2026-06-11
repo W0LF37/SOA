@@ -1,34 +1,61 @@
 Project Title:
-Clinic Management System
+Smart Clinic & Telemedicine Platform
 
 Project Overview:
-A web-based system to manage clinic operations including patient registration,
-appointments, consultations, and billing.
+A bilingual web platform for outpatient clinics that unifies patient intake,
+appointment scheduling, telemedicine consultations, lab coordination, billing,
+and executive reporting in one secure workspace.
 
 Problem Statement:
-Clinic staff currently manage patient records and appointments on paper,
-leading to errors, duplicate records, and inefficient scheduling.
+Clinic teams currently split their work across paper files, spreadsheets, and
+chat messages. This creates appointment conflicts, slow patient onboarding,
+missing follow-up tasks, weak auditability, and delayed billing.
 
 Proposed Solution:
-Build a unified digital platform where receptionists, doctors, and billing
-staff can collaborate on a single patient record.
+Build a role-based digital platform where receptionists, doctors, nurses, lab
+staff, finance staff, and supervisors collaborate on the same patient journey
+from registration to consultation, payment, and reporting.
 
 Target Users:
 - Receptionist
 - Doctor
-- Billing Staff
+- Nurse
+- Lab Staff
+- Finance Staff
+- Clinic Manager
+- Patient
 
 Main Features:
-- Register new patients using national ID and contact details
-- Book and manage patient appointments for available doctors
-- Allow doctors to view patient history and record diagnosis
-- Generate itemized invoices for consultations and lab tests
-- Send appointment reminders to patients via email
+- Register patients using national ID, insurance details, emergency contacts,
+  and signed consent forms
+- Manage doctor schedules, room availability, triage priority, and appointment
+  reminders
+- Run telemedicine consultations with structured notes, diagnosis summaries,
+  prescriptions, and follow-up tasks
+- Create lab and radiology orders, track result status, and attach results to
+  the patient record
+- Generate invoices, manage insurance claims, record partial payments, and
+  monitor unpaid balances
+- Provide a bilingual patient portal for appointments, invoices, visit history,
+  and post-visit instructions
+- Give supervisors KPI dashboards for waiting time, no-show rate, doctor
+  utilization, clinic revenue, and patient satisfaction
 
-Expected Benefits:
-The system should be fast and reliable to ensure zero downtime during clinic
-hours. Patient data should be secure and accessible only to authorized users.
+Integrations:
+- SMS and email notifications
+- Secure payment gateway
+- Video consultation provider
+- Calendar synchronization for doctors
 
-Constraints or Special Notes:
-- Must support both Arabic and English languages
-- System must respond within two seconds for all standard operations
+Non-Functional Requirements:
+- Arabic and English interfaces with consistent terminology
+- Role-based access control with MFA for privileged staff
+- Encryption for sensitive patient and payment data
+- Immutable audit logs for critical clinical and financial actions
+- p95 response time below 2 seconds for standard operations
+- 99.9% service availability during clinic hours
+- Graceful continuity for reception workflows during short internet outages
+
+Expected Deliverables:
+The final output should include a task plan, sprint roadmap, dependency graph,
+risk register, team allocation view, and a supervisor-ready committee brief.

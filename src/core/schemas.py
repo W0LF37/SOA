@@ -221,14 +221,27 @@ class CommitInfo(BaseModel):
     files_changed: list[str] = Field(default_factory=list)
 
 
+class RepositoryHotspot(BaseModel):
+    """A frequently touched repository file surfaced for supervisor review."""
+
+    path: str
+    commit_count: int = Field(..., ge=0)
+    linked_task_ids: list[str] = Field(default_factory=list)
+
+
 class TaskProgress(BaseModel):
     """Progress status for a single task based on matched commits."""
 
     task_id: str
     task_title: str
-    status: Literal["not_started", "in_progress", "completed"]
+    status: Literal["not_started", "in_progress", "completed", "needs_review"]
     matched_commits: list[str] = Field(default_factory=list)
     evidence: list[str] = Field(default_factory=list)
+    matched_files: list[str] = Field(default_factory=list)
+    match_reasons: list[str] = Field(default_factory=list)
+    evidence_confidence: Literal["none", "low", "medium", "high"] = "none"
+    alignment_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    evidence_note: str | None = None
     completion_estimate: float = Field(..., ge=0.0, le=1.0)
 
 
@@ -240,9 +253,13 @@ class MonitorReport(BaseModel):
     tasks_completed: int
     tasks_in_progress: int
     tasks_not_started: int
+    tasks_needs_review: int = 0
     task_progress: list[TaskProgress]
     commits_analyzed: int
     behind_schedule: list[str] = Field(default_factory=list)
+    unmatched_commits: list[CommitInfo] = Field(default_factory=list)
+    repository_hotspots: list[RepositoryHotspot] = Field(default_factory=list)
+    tracked_repository: str | None = None
     generated_at: str = Field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )

@@ -2,49 +2,18 @@
   "tasks": [
     {
       "id": "T001",
-      "title": "Implement biometric login and two-factor authentication workflow",
-      "description": "The system should provide biometric login and two-factor authentication.",
-      "req_type": "FR",
-      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
-      "complexity": 3,
-      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
-      "dependencies": [
-        "T008"
-      ],
-      "source": "REQ-01",
-      "estimated_hours": 24,
-      "estimated_days": 3,
-      "recommended_team_size": 1,
-      "skill_required": "backend",
-      "suggested_owner_role": "Backend Engineer",
-      "risks": [
-        "Workflow edge cases need end-to-end validation"
-      ],
-      "estimation_breakdown": {
-        "base_hours": 24,
-        "type_multiplier": 1.0,
-        "integration_overhead": 0,
-        "rag_adjustment_pct": 0.0,
-        "confidence": "medium"
-      },
-      "optional": false,
-      "confidence": "high"
-    },
-    {
-      "id": "T002",
-      "title": "Implement account balance and transaction history workflow",
-      "description": "The system should provide account balance and transaction history.",
+      "title": "Enforce password hashing and complexity policy",
+      "description": "Actor: User — The user can register an account using email and password.",
       "req_type": "FR",
       "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
       "complexity": 2,
       "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
       "dependencies": [
-        "T001",
+        "T005",
         "T006",
-        "T007",
-        "T008"
+        "T007"
       ],
-      "source": "REQ-02",
+      "source": "REQ-01",
       "estimated_hours": 20,
       "estimated_days": 3,
       "recommended_team_size": 1,
@@ -57,25 +26,88 @@
         "base_hours": 20,
         "type_multiplier": 1.0,
         "integration_overhead": 0,
-        "rag_adjustment_pct": 0.0,
-        "confidence": "medium"
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T002",
+      "title": "Implement user can login and logout workflow",
+      "description": "Actor: User — The user can login and logout of the system securely.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 3,
+      "complexity_reason": "Requires security, compliance, or controlled validation logic.",
+      "dependencies": [
+        "T001",
+        "T005",
+        "T006",
+        "T007"
+      ],
+      "source": "REQ-02",
+      "estimated_hours": 24,
+      "estimated_days": 3,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 24,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
       },
       "optional": false,
       "confidence": "high"
     },
     {
       "id": "T003",
-      "title": "Implement fund transfers and scheduled payments workflow",
-      "description": "The system should provide fund transfers and scheduled payments.",
+      "title": "Implement role-based access control",
+      "description": "The system must support hospital role-based access control.",
+      "req_type": "FR",
+      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
+      "complexity": 4,
+      "complexity_reason": "Requires role-based access control across protected features.",
+      "dependencies": [
+        "T001"
+      ],
+      "source": "REQ-03",
+      "estimated_hours": 30,
+      "estimated_days": 4,
+      "recommended_team_size": 2,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Role-permission regressions can block downstream workflows"
+      ],
+      "estimation_breakdown": {
+        "base_hours": 30,
+        "type_multiplier": 1.0,
+        "integration_overhead": 0,
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
+      },
+      "optional": false,
+      "confidence": "high"
+    },
+    {
+      "id": "T004",
+      "title": "Implement users and permissions management workflow",
+      "description": "Admins can manage users and permissions under hospital policy.",
       "req_type": "FR",
       "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
       "complexity": 2,
       "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
       "dependencies": [
-        "T001",
+        "T003",
+        "T005",
         "T006",
-        "T007",
-        "T008"
+        "T007"
       ],
       "source": "REQ-03",
       "estimated_hours": 20,
@@ -90,89 +122,51 @@
         "base_hours": 20,
         "type_multiplier": 1.0,
         "integration_overhead": 0,
-        "rag_adjustment_pct": 0.0,
-        "confidence": "medium"
-      },
-      "optional": false,
-      "confidence": "high"
-    },
-    {
-      "id": "T004",
-      "title": "Implement bill payments and QR code transactions workflow",
-      "description": "The system should provide bill payments and QR code transactions.",
-      "req_type": "FR",
-      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
-      "complexity": 2,
-      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
-      "dependencies": [
-        "T001",
-        "T006",
-        "T007",
-        "T008"
-      ],
-      "source": "REQ-04",
-      "estimated_hours": 20,
-      "estimated_days": 3,
-      "recommended_team_size": 1,
-      "skill_required": "backend",
-      "suggested_owner_role": "Backend Engineer",
-      "risks": [
-        "Workflow edge cases need end-to-end validation"
-      ],
-      "estimation_breakdown": {
-        "base_hours": 20,
-        "type_multiplier": 1.0,
-        "integration_overhead": 0,
-        "rag_adjustment_pct": 0.0,
-        "confidence": "medium"
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
       },
       "optional": false,
       "confidence": "high"
     },
     {
       "id": "T005",
-      "title": "Implement spending analytics workflow",
-      "description": "The system should provide spending analytics and budget alerts.",
-      "req_type": "FR",
-      "type_reason": "Describes a user-visible feature or system action with an explicit behavior.",
-      "complexity": 2,
-      "complexity_reason": "Standard CRUD or transactional workflow with limited coordination.",
-      "dependencies": [
-        "T001",
-        "T004",
-        "T007",
-        "T008"
-      ],
-      "source": "REQ-05",
-      "estimated_hours": 20,
-      "estimated_days": 3,
-      "recommended_team_size": 1,
-      "skill_required": "data",
-      "suggested_owner_role": "Data Engineer",
+      "title": "Optimize respond to all requests performance constraints",
+      "description": "The system must respond to all requests within 2 seconds under normal load.",
+      "req_type": "NFR",
+      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
+      "complexity": 4,
+      "complexity_reason": "Requires advanced integration or architectural coordination.",
+      "dependencies": [],
+      "source": "REQ-04",
+      "estimated_hours": 38,
+      "estimated_days": 5,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
       "risks": [
-        "Aggregated outputs depend on clean source data"
+        "Performance targets require realistic load testing"
       ],
       "estimation_breakdown": {
-        "base_hours": 20,
-        "type_multiplier": 1.0,
+        "base_hours": 30,
+        "type_multiplier": 1.25,
         "integration_overhead": 0,
-        "rag_adjustment_pct": 0.0,
-        "confidence": "medium"
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
       },
       "optional": false,
       "confidence": "high"
     },
     {
       "id": "T006",
-      "title": "Enforce sensitive data encryption controls",
-      "description": "The system should encrypt sensitive data.",
+      "title": "Enforce encryption at rest for sensitive data",
+      "description": "All data must be encrypted at rest.",
       "req_type": "NFR",
       "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
       "complexity": 3,
       "complexity_reason": "Requires security, compliance, or controlled validation logic.",
       "dependencies": [],
-      "source": "REQ-06",
-      "estimated_hours": 29,
+      "source": "REQ-05",
+      "estimated_hours": 30,
       "estimated_days": 4,
       "recommended_team_size": 1,
       "skill_required": "security",
@@ -184,85 +178,49 @@
         "base_hours": 24,
         "type_multiplier": 1.25,
         "integration_overhead": 0,
-        "rag_adjustment_pct": -20.0,
-        "confidence": "medium"
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
       },
       "optional": false,
       "confidence": "high"
     },
     {
       "id": "T007",
-      "title": "Enable offline capability support",
-      "description": "The system should support offline capability.",
-      "req_type": "NFR",
-      "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
-      "complexity": 4,
-      "complexity_reason": "Requires advanced integration or architectural coordination.",
-      "dependencies": [],
-      "source": "REQ-07",
-      "estimated_hours": 37,
-      "estimated_days": 5,
-      "recommended_team_size": 2,
-      "skill_required": "platform",
-      "suggested_owner_role": "Platform Engineer",
-      "risks": [
-        "Offline caching, synchronization, and recovery paths need full test coverage"
-      ],
-      "estimation_breakdown": {
-        "base_hours": 30,
-        "type_multiplier": 1.25,
-        "integration_overhead": 0,
-        "rag_adjustment_pct": -21.1,
-        "confidence": "medium"
-      },
-      "optional": false,
-      "confidence": "high"
-    },
-    {
-      "id": "T008",
-      "title": "Establish PCI-DSS compliance controls",
-      "description": "The system should maintain PCI-DSS compliance.",
+      "title": "Enforce encryption in transit for sensitive data",
+      "description": "All data must be encrypted in transit using AES-256.",
       "req_type": "NFR",
       "type_reason": "Describes a quality attribute or operational constraint such as security, performance, availability, or compliance.",
       "complexity": 3,
       "complexity_reason": "Requires security, compliance, or controlled validation logic.",
       "dependencies": [],
-      "source": "REQ-08",
-      "estimated_hours": 40,
-      "estimated_days": 5,
+      "source": "REQ-05",
+      "estimated_hours": 30,
+      "estimated_days": 4,
       "recommended_team_size": 1,
       "skill_required": "security",
       "suggested_owner_role": "Security Engineer",
       "risks": [
-        "Compliance interpretation should be validated early"
+        "Key management and certificate rotation must be validated"
       ],
       "estimation_breakdown": {
         "base_hours": 24,
         "type_multiplier": 1.25,
         "integration_overhead": 0,
-        "rag_adjustment_pct": -20.0,
-        "confidence": "medium"
+        "rag_adjustment_pct": 0,
+        "confidence": "low"
       },
       "optional": false,
       "confidence": "high"
     }
   ],
   "tech_stack": {
-    "frontend": [
-      "mobile client"
-    ],
+    "frontend": [],
     "backend": [
-      "compliance controls",
       "auth and authorization"
     ],
-    "database": [
-      "relational database"
-    ],
+    "database": [],
     "devops": [],
-    "external_services": [
-      "payment gateway",
-      "messaging service"
-    ],
+    "external_services": [],
     "detected_from": "requirements+inferred"
   }
 }

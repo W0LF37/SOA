@@ -27,9 +27,9 @@ function statusBadgeStyle(planStatus: string) {
     };
   }
   return {
-    background: "rgba(59,130,246,0.16)",
-    color: "#60a5fa",
-    border: "1px solid rgba(59,130,246,0.24)",
+    background: "rgba(2,132,199,0.18)",
+    color: "#7dd3fc",
+    border: "1px solid rgba(2,132,199,0.30)",
   };
 }
 
@@ -221,7 +221,7 @@ export default function ChatPage() {
                   ✓ Plan Approved
                 </div>
                 {item.text ? (
-                  <div style={{ fontSize: 12, color: "#94a3b8", textAlign: "center", maxWidth: 460 }}>
+                  <div style={{ fontSize: 12, color: "#7dd3fc", textAlign: "center", maxWidth: 460 }}>
                     {item.text}
                   </div>
                 ) : null}
@@ -246,7 +246,7 @@ export default function ChatPage() {
                   ✗ Plan Rejected
                 </div>
                 {item.text ? (
-                  <div style={{ fontSize: 12, color: "#94a3b8", textAlign: "center", maxWidth: 460 }}>
+                  <div style={{ fontSize: 12, color: "#7dd3fc", textAlign: "center", maxWidth: 460 }}>
                     {item.text}
                   </div>
                 ) : null}
@@ -266,7 +266,7 @@ export default function ChatPage() {
             >
               <div
                 style={{
-                  background: studentMessage ? "#1d4ed8" : "#1e293b",
+                  background: studentMessage ? "#0369a1" : "#1e293b",
                   border: studentMessage ? "none" : "1px solid #334155",
                   borderRadius: studentMessage ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
                   padding: "10px 16px",

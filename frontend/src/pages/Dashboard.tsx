@@ -7,7 +7,6 @@ import {
   ListChecks,
   RefreshCw,
   ShieldAlert,
-  Sparkles,
   Timer,
 } from "lucide-react";
 import {
@@ -24,7 +23,11 @@ import {
 } from "recharts";
 import { useNavigate } from "react-router-dom";
 
-import { analyzeMonitor, explainItem, getChatMessages, type Task } from "../lib/api";
+import ProjectShowcase from "../components/ProjectShowcase";
+import { analyzeMonitor, getChatMessages, type Task } from "../lib/api";
+import { DEMO_ALL_DATA } from "../lib/demoProject";
+import { buildPresentationTasks } from "../lib/presentation";
+import { buildShowcaseData, formatQualityGate } from "../lib/projectShowcase";
 import { useAppStore } from "../lib/store";
 
 function numberValue(value: unknown) {
@@ -41,7 +44,7 @@ function riskMeta(level: string) {
   if (key === "high") return { color: "#f97316", bg: "rgba(249,115,22,0.16)", label: "HIGH" };
   if (key === "medium") return { color: "#eab308", bg: "rgba(234,179,8,0.16)", label: "MEDIUM" };
   if (key === "low") return { color: "#22c55e", bg: "rgba(34,197,94,0.16)", label: "LOW" };
-  return { color: "#94a3b8", bg: "rgba(148,163,184,0.14)", label: "UNKNOWN" };
+  return { color: "#7dd3fc", bg: "rgba(148,163,184,0.14)", label: "UNKNOWN" };
 }
 
 function complexityColor(level: number | undefined) {
@@ -105,21 +108,24 @@ function MetricCard({
 
 export default function Dashboard() {
   const data = useAppStore((state) => state.data);
+  const brief = useAppStore((state) => state.brief);
   const loading = useAppStore((state) => state.loading);
   const error = useAppStore((state) => state.error);
   const refreshAll = useAppStore((state) => state.refreshAll);
   const auth = useAppStore((state) => state.auth);
   const navigate = useNavigate();
   const [monitoring, setMonitoring] = useState(false);
-  const [aiInsights, setAiInsights] = useState<string | null>(null);
-  const [aiInsightsLoading, setAiInsightsLoading] = useState(false);
   const [planStatus, setPlanStatus] = useState<string | null>(null);
-  const isLoading = data === null;
+  const isLoading = data === null && !error;
+  const usingDemo = !(data?.tasks?.tasks?.length);
+  const showcase = buildShowcaseData(data, brief);
 
-  const tasks = useMemo(() => data?.tasks?.tasks ?? [], [data]);
-  const riskReport = data?.risks;
-  const summary = data?.summary;
-  const monitor = data?.monitor;
+  const tasks = useMemo(
+    () => buildPresentationTasks(data?.tasks?.tasks?.length ? data.tasks.tasks : DEMO_ALL_DATA.tasks?.tasks ?? []),
+    [data],
+  );
+  const riskReport = data?.risks ?? DEMO_ALL_DATA.risks ?? null;
+  const summary = data?.summary ?? DEMO_ALL_DATA.summary ?? null;
 
   const totalHours = tasks.reduce((sum, task) => sum + taskHours(task), 0);
   const frCount = tasks.filter((task) => task.req_type === "FR").length;
@@ -127,12 +133,12 @@ export default function Dashboard() {
   const riskLevel = riskReport?.risk_level ?? "unknown";
   const risk = riskMeta(riskLevel);
   const criticScore = summary?.critic?.score;
-  const progress = Math.round(numberValue(monitor?.overall_progress) * 100);
+  const qualityGateLabel = formatQualityGate(criticScore);
   const generatedAt = (summary as { generated_at?: string } | null)?.generated_at;
-  const projectName =
-    (summary as { project_name?: string; plan_highlights?: { project_name?: string } } | null)?.project_name
-    ?? (summary as { plan_highlights?: { project_name?: string } } | null)?.plan_highlights?.project_name
-    ?? "AI Project Manager";
+  const projectName = showcase.title
+    || (summary as { project_name?: string; plan_highlights?: { project_name?: string } } | null)?.project_name
+    || (summary as { plan_highlights?: { project_name?: string } } | null)?.plan_highlights?.project_name
+    || "Project Plan";
 
   const complexityData = [1, 2, 3, 4, 5].map((level) => ({
     level: `C${level}`,
@@ -150,22 +156,24 @@ export default function Dashboard() {
 
   const sprintCount = summary?.sprint_plan?.length ?? 0;
   const totalRisks = riskReport?.total_risks ?? riskReport?.risks?.length ?? 0;
-
-  async function loadAiInsights() {
-    setAiInsightsLoading(true);
-    try {
-      const response = await explainItem({
-        context_type: "critic",
-        item_id: "plan",
-        question: "Summarize this project plan in 3 bullet points for an academic supervisor. Focus on quality score, key risks, and critical path.",
-      });
-      setAiInsights(response.explanation);
-    } catch {
-      setAiInsights(null);
-    } finally {
-      setAiInsightsLoading(false);
-    }
-  }
+  const dependencyPathIds =
+    summary?.graph_analytics?.critical_path?.task_ids
+    ?? DEMO_ALL_DATA.summary?.graph_analytics?.critical_path?.task_ids
+    ?? [];
+  const dependencyPathTasks = dependencyPathIds
+    .map((taskId) => tasks.find((task) => task.id === taskId))
+    .filter((task): task is Task => Boolean(task));
+  const criticalPathCount = dependencyPathIds.length || dependencyPathTasks.length;
+  const riskFocusSummary = showcase.riskFocus.length
+    ? showcase.riskFocus.map((item) => item.replace(/\s*\(\d+\s+tasks?\)/i, "")).join("; ")
+    : "Security, integration, and performance remain the primary review watch areas.";
+  const supervisorHighlights = [
+    `${qualityGateLabel} quality gate across ${tasks.length} planned task(s) and ${sprintCount} delivery sprint(s).`,
+    criticalPathCount > 0
+      ? `Critical path spans ${criticalPathCount} dependency-gated tasks: ${dependencyPathTasks.map((task) => task.id).join(" -> ")}.`
+      : "Critical path is available in the task graph for dependency review.",
+    `Primary supervisor watch areas: ${riskFocusSummary}.`,
+  ];
 
   async function loadPlanStatus() {
     try {
@@ -184,7 +192,6 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    void loadAiInsights();
     void loadPlanStatus();
   }, []);
 
@@ -206,17 +213,17 @@ export default function Dashboard() {
               Welcome, {auth?.name ?? "Supervisor"}
             </div>
             <div style={{ fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#93c5fd", fontWeight: 800 }}>
-              Project Intelligence Dashboard
+              Supervisor Review Dashboard
             </div>
             <h1 style={{ margin: "8px 0 10px", fontSize: 34, color: "#f8fafc" }}>{projectName}</h1>
-            <div style={{ color: "#94a3b8", fontSize: 14, marginBottom: 14 }}>
+            <div style={{ color: "#7dd3fc", fontSize: 14, marginBottom: 14 }}>
               Generated: {generatedAt ? new Date(generatedAt).toLocaleString() : "n/a"}
             </div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <span className="stat-pill"><span style={{ color: "#60a5fa", fontWeight: 900 }}>{tasks.length}</span><span className="stat-label">tasks</span></span>
-              <span className="stat-pill"><span style={{ color: "#a78bfa", fontWeight: 900 }}>{totalHours}h</span><span className="stat-label">estimated</span></span>
-              <span className="stat-pill"><span style={{ color: risk.color, fontWeight: 900 }}>{risk.label}</span><span className="stat-label">risk</span></span>
+              <span className="stat-pill"><span style={{ color: "#7dd3fc", fontWeight: 900 }}>{tasks.length}</span><span className="stat-label">tasks</span></span>
+              <span className="stat-pill"><span style={{ color: "#7dd3fc", fontWeight: 900 }}>{totalHours}h</span><span className="stat-label">estimated</span></span>
               <span className="stat-pill"><span style={{ color: "#22c55e", fontWeight: 900 }}>{sprintCount}</span><span className="stat-label">sprints</span></span>
+              <span className="stat-pill"><span style={{ color: "#fca5a5", fontWeight: 900 }}>{criticalPathCount}</span><span className="stat-label">critical path</span></span>
             </div>
           </div>
           <div style={{
@@ -227,10 +234,10 @@ export default function Dashboard() {
             minWidth: 180,
           }}>
             <div style={{ color: "#64748b", fontSize: 12, fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-              Critic Score
+              Quality Gate
             </div>
             <div style={{ color: "#22c55e", fontSize: 28, fontWeight: 900 }}>
-              {typeof criticScore === "number" ? `${Math.round(criticScore * 100)}%` : "n/a"}
+              {qualityGateLabel}
             </div>
           </div>
         </div>
@@ -245,18 +252,25 @@ export default function Dashboard() {
         </button>
         <a
           href="http://localhost:8000/api/export/tasks"
-          download="critiplan_tasks.xlsx"
+          download="ai_project_manager_tasks.xlsx"
           style={{ display: "flex", alignItems: "center", gap: 6, background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 8, padding: "8px 14px", color: "#4ade80", fontSize: 13, fontWeight: 600, textDecoration: "none" }}
         >
-          ↓ Export Excel
+          Download Excel
         </a>
         <button className="primary-btn" disabled={monitoring} onClick={handleMonitor}>
-          <GitBranch size={16} /> {monitoring ? "Analyzing..." : "Analyze git progress"}
+          <GitBranch size={16} /> {monitoring ? "Refreshing..." : "Refresh project signals"}
         </button>
       </div>
 
       {loading ? <p className="muted">Loading project data...</p> : null}
       {error ? <p className="badge badge-red">{error}</p> : null}
+      {usingDemo && (
+        <div style={{ marginBottom: 14, borderRadius: 12, padding: "12px 16px", border: "1px solid rgba(59,130,246,0.25)", background: "rgba(59,130,246,0.08)", color: "#bfdbfe", fontSize: 13 }}>
+          Live project data is unavailable, so the dashboard is showing the committee demo brief, task plan, and analytics preview.
+        </div>
+      )}
+
+      <ProjectShowcase showcase={showcase} />
 
       {isLoading && (
         <div className="metrics-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16, marginBottom: 28 }}>
@@ -270,55 +284,28 @@ export default function Dashboard() {
         <section className="metrics-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16, marginBottom: 28 }}>
           <MetricCard label="Tasks Count" value={tasks.length} color="#3b82f6" icon={ListChecks} />
           <MetricCard label="Total Hours" value={totalHours} color="#a855f7" icon={Timer} />
-          <MetricCard label="Risk Level" value={risk.label} color={risk.color} icon={ShieldAlert} />
-          <MetricCard label="Progress" value={`${progress}%`} color="#22c55e" icon={CheckCircle2} />
+          <MetricCard label="Quality Gate" value={qualityGateLabel} color="#22c55e" icon={CheckCircle2} />
+          <MetricCard label="Key Risks" value={totalRisks} color={risk.color} icon={ShieldAlert} />
         </section>
       )}
 
-      {(aiInsightsLoading || aiInsights) ? (
-        <section style={{
-          background: "rgba(37,99,235,0.06)",
-          border: "1px solid rgba(37,99,235,0.2)",
-          borderRadius: 14,
-          padding: 18,
-          marginBottom: 14,
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-            <Sparkles size={17} color="#60a5fa" />
-            <span style={{ fontWeight: 700, color: "#f1f5f9" }}>AI Insights</span>
-            <button
-              onClick={() => void loadAiInsights()}
-              style={{
-                marginLeft: "auto",
-                width: 30,
-                height: 30,
-                borderRadius: 8,
-                border: "1px solid rgba(96,165,250,0.24)",
-                background: "transparent",
-                color: "#60a5fa",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-              }}
-            >
-              <RefreshCw size={14} />
-            </button>
-          </div>
-
-          {aiInsightsLoading ? (
-            <div style={{ display: "grid", gap: 10 }}>
-              <div className="skeleton" style={{ height: 14, borderRadius: 6, width: "100%" }} />
-              <div className="skeleton" style={{ height: 14, borderRadius: 6, width: "92%" }} />
-              <div className="skeleton" style={{ height: 14, borderRadius: 6, width: "84%" }} />
-            </div>
-          ) : (
-            <div style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
-              {aiInsights}
-            </div>
-          )}
-        </section>
-      ) : null}
+      <section style={{
+        background: "rgba(37,99,235,0.06)",
+        border: "1px solid rgba(37,99,235,0.2)",
+        borderRadius: 14,
+        padding: 18,
+        marginBottom: 14,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+          <CheckCircle2 size={17} color="#7dd3fc" />
+          <span style={{ fontWeight: 700, color: "#f1f5f9" }}>Supervisor Highlights</span>
+        </div>
+        <div style={{ color: "#7dd3fc", fontSize: 14, lineHeight: 1.8 }}>
+          {supervisorHighlights.map((line) => (
+            <div key={line}>* {line}</div>
+          ))}
+        </div>
+      </section>
 
       {(() => {
         const status = planStatus?.toLowerCase();
@@ -349,7 +336,7 @@ export default function Dashboard() {
                   fontWeight: 700,
                 }}
               >
-                Go to Chat →
+                Go to Chat -&gt;
               </button>
             </section>
           );
@@ -367,7 +354,7 @@ export default function Dashboard() {
               color: "#22c55e",
               marginBottom: 16,
             }}>
-              <span style={{ fontWeight: 700 }}>✓ Plan Approved — Ready for Committee Brief</span>
+              <span style={{ fontWeight: 700 }}>Plan Approved - Ready for Committee Brief</span>
               <button
                 onClick={() => navigate("/brief")}
                 style={{
@@ -381,7 +368,7 @@ export default function Dashboard() {
                   fontWeight: 700,
                 }}
               >
-                View Brief →
+                View Brief -&gt;
               </button>
             </section>
           );
@@ -429,8 +416,8 @@ export default function Dashboard() {
               <ResponsiveContainer width="100%" height={245}>
                 <BarChart data={complexityData}>
                   <CartesianGrid stroke="#334155" vertical={false} />
-                  <XAxis dataKey="level" stroke="#94a3b8" />
-                  <YAxis stroke="#94a3b8" allowDecimals={false} />
+                  <XAxis dataKey="level" stroke="#7dd3fc" />
+                  <YAxis stroke="#7dd3fc" allowDecimals={false} />
                   <Tooltip contentStyle={chartTooltip()} />
                   <Bar dataKey="tasks" radius={[6, 6, 0, 0]}>
                     {complexityData.map((item) => (
@@ -457,10 +444,10 @@ export default function Dashboard() {
           </div>
           <div style={{ display: "grid", gap: 13 }}>
             {[
-              ["Critic score", typeof criticScore === "number" ? `${Math.round(criticScore * 100)}%` : "n/a"],
-              ["LLM model", summary?.llm_model ?? "n/a"],
+              ["Review signal", showcase.confidence],
+              ["Critical path", `${criticalPathCount} dependency-gated tasks`],
               ["Sprint count", sprintCount],
-              ["Total risks", totalRisks],
+              ["Tracked risks", totalRisks],
             ].map(([label, value]) => (
               <div key={String(label)} style={{ display: "flex", justifyContent: "space-between", gap: 12, paddingBottom: 12, borderBottom: "1px solid #1e293b" }}>
                 <span style={{ color: "#64748b", fontSize: 13 }}>{label}</span>
@@ -477,7 +464,7 @@ export default function Dashboard() {
                 fontWeight: 800,
                 fontSize: 12,
               }}>
-                Risk: {risk.label}
+                Active watch: {totalRisks} area(s)
               </span>
             </div>
           </div>
@@ -497,8 +484,8 @@ export default function Dashboard() {
         <ResponsiveContainer width="100%" height={320}>
           <BarChart data={topTasks} layout="vertical" margin={{ left: 24, right: 30 }}>
             <CartesianGrid stroke="#334155" horizontal={false} />
-            <XAxis type="number" stroke="#94a3b8" />
-            <YAxis type="category" dataKey="name" stroke="#94a3b8" width={75} />
+            <XAxis type="number" stroke="#7dd3fc" />
+            <YAxis type="category" dataKey="name" stroke="#7dd3fc" width={75} />
             <Tooltip contentStyle={chartTooltip()} />
             <Bar dataKey="hours" fill="#a855f7" radius={[0, 7, 7, 0]} />
           </BarChart>
@@ -506,21 +493,19 @@ export default function Dashboard() {
       </section>
 
       {(() => {
-        const cpIds: string[] = data?.summary?.graph_analytics?.critical_path?.task_ids ?? [];
-        const cpTasks = tasks.filter(t => cpIds.includes(t.id ?? ""));
-        if (!cpTasks.length) return null;
+        if (!dependencyPathTasks.length) return null;
         return (
           <section style={{ background: "rgba(15,23,42,0.9)", border: "1px solid #1e293b", borderLeft: "4px solid #ef4444", borderRadius: 16, padding: 20, marginBottom: 16 }}>
             <div style={{ fontSize: "0.72rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#ef4444", fontWeight: 800, marginBottom: 12 }}>
-              ⚡ Critical Path — {cpTasks.length} tasks · longest dependency chain
+              Critical Path - {criticalPathCount} tasks | longest dependency chain
             </div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-              {cpTasks.map((t, i) => (
+              {dependencyPathTasks.map((t, i) => (
                 <React.Fragment key={t.id}>
                   <span style={{ fontFamily: "monospace", background: "rgba(239,68,68,0.12)", color: "#fca5a5", border: "1px solid rgba(239,68,68,0.25)", padding: "5px 10px", borderRadius: 8, fontSize: 12, fontWeight: 700 }}>
-                    {t.id}: {(t.title ?? "").slice(0, 30)}{(t.title ?? "").length > 30 ? "…" : ""}
+                    {t.id}: {(t.title ?? "").slice(0, 30)}{(t.title ?? "").length > 30 ? "..." : ""}
                   </span>
-                  {i < cpTasks.length - 1 && <span style={{ color: "#475569", fontSize: 16 }}>→</span>}
+                  {i < dependencyPathTasks.length - 1 && <span style={{ color: "#475569", fontSize: 16 }}>-&gt;</span>}
                 </React.Fragment>
               ))}
             </div>
@@ -550,7 +535,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {tasks.slice(0, 15).map((task, index) => (
+              {tasks.map((task, index) => (
                 <tr key={task.id ?? task.title} style={{ background: index % 2 === 0 ? "#0f172a" : "#0a0f1e", transition: "background 0.15s" }}>
                   <td>
                     <span style={{ fontFamily: "monospace", background: "rgba(59,130,246,0.14)", color: "#93c5fd", padding: "4px 8px", borderRadius: 8 }}>

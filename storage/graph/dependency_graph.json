@@ -4,26 +4,10 @@
   "graph": {},
   "nodes": [
     {
-      "title": "Implement biometric login and two-factor authentication workflow",
-      "req_type": "FR",
-      "complexity": 3,
-      "source": "REQ-01",
-      "optional": false,
-      "confidence": "high",
-      "estimated_hours": 24,
-      "recommended_team_size": 1,
-      "skill_required": "backend",
-      "suggested_owner_role": "Backend Engineer",
-      "risks": [
-        "Workflow edge cases need end-to-end validation"
-      ],
-      "id": "T001"
-    },
-    {
-      "title": "Implement account balance and transaction history workflow",
+      "title": "Enforce password hashing and complexity policy",
       "req_type": "FR",
       "complexity": 2,
-      "source": "REQ-02",
+      "source": "REQ-01",
       "optional": false,
       "confidence": "high",
       "estimated_hours": 20,
@@ -33,10 +17,42 @@
       "risks": [
         "Workflow edge cases need end-to-end validation"
       ],
+      "id": "T001"
+    },
+    {
+      "title": "Implement user can login and logout workflow",
+      "req_type": "FR",
+      "complexity": 3,
+      "source": "REQ-02",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 24,
+      "recommended_team_size": 1,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Workflow edge cases need end-to-end validation"
+      ],
       "id": "T002"
     },
     {
-      "title": "Implement fund transfers and scheduled payments workflow",
+      "title": "Implement role-based access control",
+      "req_type": "FR",
+      "complexity": 4,
+      "source": "REQ-03",
+      "optional": false,
+      "confidence": "high",
+      "estimated_hours": 30,
+      "recommended_team_size": 2,
+      "skill_required": "security",
+      "suggested_owner_role": "Security Engineer",
+      "risks": [
+        "Role-permission regressions can block downstream workflows"
+      ],
+      "id": "T003"
+    },
+    {
+      "title": "Implement users and permissions management workflow",
       "req_type": "FR",
       "complexity": 2,
       "source": "REQ-03",
@@ -49,48 +65,32 @@
       "risks": [
         "Workflow edge cases need end-to-end validation"
       ],
-      "id": "T003"
-    },
-    {
-      "title": "Implement bill payments and QR code transactions workflow",
-      "req_type": "FR",
-      "complexity": 2,
-      "source": "REQ-04",
-      "optional": false,
-      "confidence": "high",
-      "estimated_hours": 20,
-      "recommended_team_size": 1,
-      "skill_required": "backend",
-      "suggested_owner_role": "Backend Engineer",
-      "risks": [
-        "Workflow edge cases need end-to-end validation"
-      ],
       "id": "T004"
     },
     {
-      "title": "Implement spending analytics workflow",
-      "req_type": "FR",
-      "complexity": 2,
-      "source": "REQ-05",
+      "title": "Optimize respond to all requests performance constraints",
+      "req_type": "NFR",
+      "complexity": 4,
+      "source": "REQ-04",
       "optional": false,
       "confidence": "high",
-      "estimated_hours": 20,
-      "recommended_team_size": 1,
-      "skill_required": "data",
-      "suggested_owner_role": "Data Engineer",
+      "estimated_hours": 38,
+      "recommended_team_size": 2,
+      "skill_required": "platform",
+      "suggested_owner_role": "Platform Engineer",
       "risks": [
-        "Aggregated outputs depend on clean source data"
+        "Performance targets require realistic load testing"
       ],
       "id": "T005"
     },
     {
-      "title": "Enforce sensitive data encryption controls",
+      "title": "Enforce encryption at rest for sensitive data",
       "req_type": "NFR",
       "complexity": 3,
-      "source": "REQ-06",
+      "source": "REQ-05",
       "optional": false,
       "confidence": "high",
-      "estimated_hours": 29,
+      "estimated_hours": 30,
       "recommended_team_size": 1,
       "skill_required": "security",
       "suggested_owner_role": "Security Engineer",
@@ -100,123 +100,82 @@
       "id": "T006"
     },
     {
-      "title": "Enable offline capability support",
-      "req_type": "NFR",
-      "complexity": 4,
-      "source": "REQ-07",
-      "optional": false,
-      "confidence": "high",
-      "estimated_hours": 37,
-      "recommended_team_size": 2,
-      "skill_required": "platform",
-      "suggested_owner_role": "Platform Engineer",
-      "risks": [
-        "Offline caching, synchronization, and recovery paths need full test coverage"
-      ],
-      "id": "T007"
-    },
-    {
-      "title": "Establish PCI-DSS compliance controls",
+      "title": "Enforce encryption in transit for sensitive data",
       "req_type": "NFR",
       "complexity": 3,
-      "source": "REQ-08",
+      "source": "REQ-05",
       "optional": false,
       "confidence": "high",
-      "estimated_hours": 40,
+      "estimated_hours": 30,
       "recommended_team_size": 1,
       "skill_required": "security",
       "suggested_owner_role": "Security Engineer",
       "risks": [
-        "Compliance interpretation should be validated early"
+        "Key management and certificate rotation must be validated"
       ],
-      "id": "T008"
+      "id": "T007"
     }
   ],
   "edges": [
     {
-      "weight": 2,
-      "source": "T001",
-      "target": "T002"
-    },
-    {
-      "weight": 2,
-      "source": "T001",
-      "target": "T003"
-    },
-    {
-      "weight": 2,
-      "source": "T001",
-      "target": "T004"
-    },
-    {
-      "weight": 2,
-      "source": "T001",
-      "target": "T005"
-    },
-    {
-      "weight": 2,
-      "source": "T004",
-      "target": "T005"
-    },
-    {
-      "weight": 2,
-      "source": "T006",
-      "target": "T002"
-    },
-    {
-      "weight": 2,
-      "source": "T006",
-      "target": "T003"
-    },
-    {
-      "weight": 2,
-      "source": "T006",
-      "target": "T004"
-    },
-    {
-      "weight": 2,
-      "source": "T007",
-      "target": "T002"
-    },
-    {
-      "weight": 2,
-      "source": "T007",
-      "target": "T003"
-    },
-    {
-      "weight": 2,
-      "source": "T007",
-      "target": "T004"
-    },
-    {
-      "weight": 2,
-      "source": "T007",
-      "target": "T005"
-    },
-    {
       "weight": 3,
-      "source": "T008",
+      "source": "T001",
+      "target": "T002"
+    },
+    {
+      "weight": 4,
+      "source": "T001",
+      "target": "T003"
+    },
+    {
+      "weight": 2,
+      "source": "T003",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T005",
       "target": "T001"
     },
     {
-      "weight": 2,
-      "source": "T008",
+      "weight": 3,
+      "source": "T005",
       "target": "T002"
     },
     {
       "weight": 2,
-      "source": "T008",
-      "target": "T003"
-    },
-    {
-      "weight": 2,
-      "source": "T008",
+      "source": "T005",
       "target": "T004"
     },
     {
       "weight": 2,
-      "source": "T008",
-      "target": "T005"
+      "source": "T006",
+      "target": "T001"
+    },
+    {
+      "weight": 3,
+      "source": "T006",
+      "target": "T002"
+    },
+    {
+      "weight": 2,
+      "source": "T006",
+      "target": "T004"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T001"
+    },
+    {
+      "weight": 3,
+      "source": "T007",
+      "target": "T002"
+    },
+    {
+      "weight": 2,
+      "source": "T007",
+      "target": "T004"
     }
   ]
 }

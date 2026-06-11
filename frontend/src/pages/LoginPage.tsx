@@ -26,6 +26,7 @@ function normalizeCode(value: string) {
 export default function LoginPage() {
   const navigate = useNavigate();
   const login = useAppStore((s) => s.login);
+  const resetWorkspace = useAppStore((s) => s.resetWorkspace);
 
   const [tab, setTab] = useState<"Student" | "Supervisor">("Student");
   const [studentId, setStudentId] = useState("");
@@ -37,7 +38,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const isStudent = tab === "Student";
-  const roleColor = isStudent ? "#2563eb" : "#7c3aed";
+  const roleColor = isStudent ? "#0284c7" : "#1e40af";
 
   function handleTabSwitch(newTab: "Student" | "Supervisor") {
     setTab(newTab);
@@ -60,6 +61,7 @@ export default function LoginPage() {
           normalizeText(studentName) === normalizeText(CREDENTIALS.Student.name) &&
           normalizedPassword === CREDENTIALS.Student.password
         ) {
+          resetWorkspace();
           login({ loggedIn: true, role: "Student", name: studentName.trim() });
           navigate("/", { replace: true });
         } else {
@@ -71,6 +73,7 @@ export default function LoginPage() {
           normalizeCode(supCode) === CREDENTIALS.Supervisor.code &&
           normalizedPassword === CREDENTIALS.Supervisor.password
         ) {
+          resetWorkspace();
           login({ loggedIn: true, role: "Supervisor", name: "Dr. Supervisor" });
           navigate("/", { replace: true });
         } else {
@@ -83,49 +86,52 @@ export default function LoginPage() {
 
   return (
     <div
+      className="login-aurora-bg"
       style={{
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "radial-gradient(ellipse at 50% 0%, #1a1040 0%, #0f172a 60%)",
         padding: "24px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       <div
+        className="login-card fade-up"
         style={{
           width: "100%",
           maxWidth: 440,
-          background: "rgba(15,23,42,0.97)",
-          border: "1px solid #1e293b",
-          borderRadius: 20,
-          padding: "40px 36px 36px",
-          boxShadow: "0 25px 60px rgba(0,0,0,0.5)",
-        }}
+          borderRadius: 22,
+          padding: "44px 38px 38px",
+          position: "relative",
+          zIndex: 2,
+          ["--role-color" as string]: roleColor,
+        } as React.CSSProperties}
       >
         {/* Brand */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div
+            className="login-logo float-anim"
             style={{
-              width: 52,
-              height: 52,
-              borderRadius: 14,
-              background: `linear-gradient(135deg, ${roleColor}33, ${roleColor}11)`,
-              border: `1px solid ${roleColor}44`,
+              width: 58,
+              height: 58,
+              borderRadius: 16,
+              background: `linear-gradient(135deg, ${roleColor}, ${isStudent ? "#0369a1" : "#1e3a8a"})`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              margin: "0 auto 16px",
+              margin: "0 auto 18px",
               transition: "all 0.3s",
             }}
           >
-            <Sparkles size={24} color={roleColor} />
+            <Sparkles size={26} color="#ffffff" />
           </div>
-          <div style={{ fontSize: 22, fontWeight: 800, color: "#f1f5f9", letterSpacing: "-0.02em" }}>
-            CritiPlan
+          <div className="gradient-text" style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.02em" }}>
+            AI Project Manager
           </div>
-          <div style={{ fontSize: 13, color: "#64748b", marginTop: 4 }}>
-            AI Project Manager · Powered by Ollama
+          <div style={{ fontSize: 13, color: "#94a3b8", marginTop: 6, letterSpacing: "0.02em" }}>
+            Local Multi-Agent Planning · Powered by Ollama
           </div>
         </div>
 
@@ -159,12 +165,12 @@ export default function LoginPage() {
                 gap: 8,
                 transition: "all 0.2s",
                 background: tab === t
-                  ? (t === "Student" ? "#2563eb" : "#7c3aed")
+                  ? (t === "Student" ? "#0284c7" : "#1e40af")
                   : "transparent",
                 color: tab === t ? "#fff" : "#64748b",
                 borderTop: t === "Student"
-                  ? (tab === t ? "2px solid #2563eb" : "2px solid transparent")
-                  : (tab === t ? "2px solid #7c3aed" : "2px solid transparent"),
+                  ? (tab === t ? "2px solid #0284c7" : "2px solid transparent")
+                  : (tab === t ? "2px solid #1e40af" : "2px solid transparent"),
               }}
             >
               {t === "Student" ? <GraduationCap size={18} /> : <UserCog size={18} />}
@@ -236,20 +242,23 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
+            className={loading ? undefined : "login-cta"}
             style={{
-              marginTop: 4,
-              padding: "13px 0",
-              borderRadius: 10,
+              marginTop: 6,
+              padding: "14px 0",
+              borderRadius: 11,
               border: "none",
               cursor: loading ? "not-allowed" : "pointer",
-              fontWeight: 700,
+              fontWeight: 800,
               fontSize: 14,
               background: loading
                 ? "#1e293b"
-                : `linear-gradient(135deg, ${roleColor}, ${isStudent ? "#1d4ed8" : "#6d28d9"})`,
+                : `linear-gradient(135deg, ${roleColor}, ${isStudent ? "#0369a1" : "#1e3a8a"})`,
               color: loading ? "#475569" : "#fff",
-              letterSpacing: "0.01em",
-              transition: "all 0.2s",
+              letterSpacing: "0.02em",
+              transition: "all 0.25s cubic-bezier(.2,.7,.3,1)",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
             {loading
@@ -260,7 +269,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div style={{ textAlign: "center", marginTop: 24, fontSize: 12, color: "#334155" }}>
+        <div style={{ textAlign: "center", marginTop: 24, fontSize: 12, color: "#475569" }}>
           Demo account: {isStudent ? "STU-2024 / Ahmed Khalid" : "SUPER-ADM"} · password hidden
         </div>
       </div>

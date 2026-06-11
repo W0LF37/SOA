@@ -17,7 +17,7 @@ if not defined RUNTIME_DIR set "RUNTIME_DIR=%ROOT%run_logs\runtime"
 set "CRITIPLAN_RUNTIME_DIR=%RUNTIME_DIR%"
 set "API_HOST=127.0.0.1"
 set "API_PORT=8000"
-set "FRONTEND_HOST=localhost"
+set "FRONTEND_HOST=127.0.0.1"
 set "FRONTEND_PORT=5173"
 set "STREAMLIT_HOST=127.0.0.1"
 set "STREAMLIT_PORT=8501"
@@ -220,7 +220,8 @@ exit /b %ERRORLEVEL%
 
 :child_ui
 cd /d "%FRONTEND_DIR%"
-call npm run dev -- --host %FRONTEND_HOST% --port %FRONTEND_PORT% --strictPort --configLoader runner 1>> "%LOG_DIR%\frontend_stdout.log" 2>> "%LOG_DIR%\frontend_stderr.log"
+set "CRITIPLAN_VITE_CACHE_DIR=%RUNTIME_DIR%\vite-ui-%FRONTEND_PORT%-%RANDOM%-%RANDOM%"
+call npm run dev -- --host %FRONTEND_HOST% --port %FRONTEND_PORT% --strictPort 1>> "%LOG_DIR%\frontend_stdout.log" 2>> "%LOG_DIR%\frontend_stderr.log"
 exit /b %ERRORLEVEL%
 
 :child_streamlit

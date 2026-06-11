@@ -30,22 +30,16 @@ import {
   sendChatMessage,
   type ChatMessage,
 } from "../lib/api";
-import { useAppStore } from "../lib/store";
 import ExplainPopup from "../components/ExplainPopup";
+import ProjectShowcase from "../components/ProjectShowcase";
+import { DEFAULT_PROJECT_BRIEF, DEMO_ALL_DATA, PROJECT_SAMPLES } from "../lib/demoProject";
+import { buildPresentationSprints, buildPresentationTasks, sortPresentationSprints } from "../lib/presentation";
+import { buildShowcaseData, formatQualityGate } from "../lib/projectShowcase";
+import { useAppStore } from "../lib/store";
 
 // ── Sample briefs ────────────────────────────────────────────────────────────
 
-const SAMPLES: Record<string, string> = {
-  "Clinic System": `Project Title:\nClinic Management System\n\nProject Overview:\nA web-based system to manage clinic operations including patient registration,\nappointments, consultations, and billing.\n\nProblem Statement:\nClinic staff currently manage patient records and appointments on paper,\nleading to errors, duplicate records, and inefficient scheduling.\n\nProposed Solution:\nBuild a unified digital platform where receptionists, doctors, and billing\nstaff can collaborate on a single patient record.\n\nTarget Users:\n- Receptionist\n- Doctor\n- Billing Staff\n\nMain Features:\n- Register new patients using national ID and contact details\n- Book and manage patient appointments for available doctors\n- Allow doctors to view patient history and record diagnosis\n- Generate itemized invoices for consultations and lab tests\n- Send appointment reminders to patients via email\n\nExpected Benefits:\nThe system should be fast and reliable to ensure zero downtime during clinic\nhours. Patient data should be secure and accessible only to authorized users.\n\nConstraints or Special Notes:\n- Must support both Arabic and English languages\n- System must respond within two seconds for all standard operations`,
-
-  "University Portal": `Project Title:\nUniversity Student Portal\n\nProject Overview:\nA web-based platform for course enrollment, grade tracking, tuition payments, and advisor communication.\n\nMain Features:\n- Register and enroll in available courses\n- Upload grades and course materials\n- Generate tuition invoices and process online payments\n- Send automated email notifications for deadlines\n\nExpected Benefits:\nThe system must be highly available, encrypted, mobile-friendly, and responsive under peak load.`,
-
-  "Hospital System": `Project Title:\nHospital Management System\n\nProject Overview:\nA comprehensive platform for managing patient records, appointments, billing, and pharmacy inventory.\n\nMain Features:\n- Patient registration with national ID and insurance\n- Doctor scheduling and appointment booking\n- Electronic medical records (EMR)\n- Pharmacy stock management and prescriptions\n- Billing and insurance claim processing\n\nNon-Functional Requirements:\nHIPAA-compliant data security, 99.9% uptime, sub-2s response time.`,
-
-  "E-commerce": `Project Title:\nE-Commerce Platform\n\nProject Overview:\nAn online shopping platform supporting product listings, cart management, secure checkout, and order tracking.\n\nMain Features:\n- Product catalog with search and filters\n- Shopping cart and wishlist\n- Multi-payment gateway integration\n- Order tracking and notifications\n- Seller dashboard and inventory management\n\nNon-Functional Requirements:\nScalable to 10,000 concurrent users, PCI-DSS compliant, mobile-first.`,
-
-  "Mobile Banking": `Project Title:\nMobile Banking Application\n\nProject Overview:\nA secure mobile app enabling customers to manage accounts, transfer funds, pay bills, and access financial insights.\n\nMain Features:\n- Biometric login and two-factor authentication\n- Account balance and transaction history\n- Fund transfers and scheduled payments\n- Bill payments and QR code transactions\n- Spending analytics and budget alerts\n\nNon-Functional Requirements:\nBank-grade encryption, offline capability, PCI-DSS level 1.`,
-};
+const SAMPLES: Record<string, string> = PROJECT_SAMPLES;
 
 // ── Pipeline stage detection ─────────────────────────────────────────────────
 
@@ -101,7 +95,7 @@ function riskColor(level: string) {
   if (key === "high") return "#f97316";
   if (key === "medium") return "#eab308";
   if (key === "low") return "#22c55e";
-  return "#94a3b8";
+  return "#7dd3fc";
 }
 
 // ── Step indicator ───────────────────────────────────────────────────────────
@@ -119,21 +113,21 @@ function StepIndicator({ current }: { current: "input" | "analyzing" | "results"
       {steps.map((step, i) => {
         const done = i < idx;
         const active = i === idx;
-        const color = done ? "#22c55e" : active ? "#2563eb" : "#334155";
+        const color = done ? "#22c55e" : active ? "#0284c7" : "#334155";
         return (
           <React.Fragment key={step.key}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
               <div
                 style={{
                   width: 32, height: 32, borderRadius: "50%",
-                  background: done ? "#22c55e" : active ? "#2563eb" : "#1e293b",
+                  background: done ? "#22c55e" : active ? "#0284c7" : "#1e293b",
                   border: `2px solid ${color}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontWeight: 800, fontSize: 13, color: done || active ? "#fff" : "#475569",
                   transition: "all 0.3s",
                 }}
               >
-                {done ? "✓" : i + 1}
+                {done ? "OK" : i + 1}
               </div>
               <span style={{ fontSize: 11, fontWeight: 600, color, whiteSpace: "nowrap" }}>
                 {step.label}
@@ -154,23 +148,25 @@ function StepIndicator({ current }: { current: "input" | "analyzing" | "results"
 export default function StudentWorkspace() {
   const navigate = useNavigate();
   const logout = useAppStore((s) => s.logout);
+  const resetWorkspace = useAppStore((s) => s.resetWorkspace);
   const auth = useAppStore((s) => s.auth);
+  const data = useAppStore((s) => s.data);
+  const brief = useAppStore((s) => s.brief);
   const refreshAll = useAppStore((s) => s.refreshAll);
   const refreshBrief = useAppStore((s) => s.refreshBrief);
-  const tasksData = useAppStore((s) => s.data?.tasks?.tasks);
-  const tasks = tasksData ?? [];
-  const riskLevel = useAppStore((s) => s.data?.risks?.risk_level ?? "unknown");
-  const techStack = useAppStore((s) => s.data?.tasks?.tech_stack);
+  const liveTasks = useAppStore((s) => s.data?.tasks?.tasks);
+  const riskLevel = useAppStore((s) => s.data?.risks?.risk_level ?? DEMO_ALL_DATA.risks?.risk_level ?? "unknown");
+  const riskCount = useAppStore((s) => s.data?.risks?.total_risks ?? DEMO_ALL_DATA.risks?.total_risks ?? 0);
+  const techStack = useAppStore((s) => s.data?.tasks?.tech_stack ?? DEMO_ALL_DATA.tasks?.tech_stack ?? null);
   const sprintPlanData = useAppStore((s) => s.data?.summary?.sprint_plan);
-  const sprintPlan = sprintPlanData ?? [];
-  const totalHours = tasks.reduce((sum, t) => sum + numberValue(t.estimated_hours), 0);
+  const criticScore = useAppStore((s) => s.data?.summary?.critic?.score ?? DEMO_ALL_DATA.summary?.critic?.score ?? null);
 
   // wizard state
   type WizardStep = "input" | "analyzing" | "results";
-  const [step, setStep] = useState<WizardStep>(tasks.length > 0 ? "results" : "input");
+  const [step, setStep] = useState<WizardStep>("input");
 
   // input step
-  const [requirements, setRequirements] = useState(SAMPLES["Clinic System"]);
+  const [requirements, setRequirements] = useState(DEFAULT_PROJECT_BRIEF);
   const [pipelineError, setPipelineError] = useState<string | null>(null);
   const hasEditedRequirements = useRef(false);
 
@@ -188,7 +184,8 @@ export default function StudentWorkspace() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [planStatus, setPlanStatus] = useState("pending");
   const chatBottomRef = useRef<HTMLDivElement | null>(null);
-  const [isRuleBasedMode, setIsRuleBasedMode] = useState(false);
+  const chatSectionRef = useRef<HTMLDivElement | null>(null);
+  const [, setIsRuleBasedMode] = useState(false);
   const [taskRatings, setTaskRatings] = useState<Record<string, number>>({});
   const [ratingLoading, setRatingLoading] = useState<string | null>(null);
   const [taskProgress, setTaskProgress] = useState<Record<string, string>>({});
@@ -229,7 +226,7 @@ export default function StudentWorkspace() {
     getPipelineInput()
       .then((payload) => {
         if (!isActive || hasEditedRequirements.current) return;
-        if (payload.text.trim()) {
+        if (payload.source === "default_sample" && payload.text.trim()) {
           setRequirements(payload.text);
         }
       })
@@ -246,11 +243,6 @@ export default function StudentWorkspace() {
   }, [chatMessages]);
 
   useEffect(() => () => eventSourceRef.current?.close(), []);
-
-  // if tasks loaded externally (refresh), go to results
-  useEffect(() => {
-    if (tasks.length > 0 && step === "input") setStep("results");
-  }, [tasks.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fallback: if all stages are done but SSE complete event was missed, force transition
   useEffect(() => {
@@ -345,7 +337,13 @@ export default function StudentWorkspace() {
       await sendChatMessage("Student", "My plan is ready for your review. Please check the Supervisor Dashboard.");
       setChatOpen(true);
       await refreshChat();
+      setTimeout(() => chatSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
     } catch { /* silent */ }
+  }
+
+  function openCommunicationPanel() {
+    setChatOpen(true);
+    setTimeout(() => chatSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }
 
   async function handleChatSend() {
@@ -382,6 +380,27 @@ export default function StudentWorkspace() {
     navigate("/login", { replace: true });
   }
 
+  function handleStartOver() {
+    eventSourceRef.current?.close();
+    resetWorkspace();
+    hasEditedRequirements.current = false;
+    setRequirements(DEFAULT_PROJECT_BRIEF);
+    setPipelineError(null);
+    setLastLog("");
+    setCurrentStageId(null);
+    setDoneStages([]);
+    setExpandedTask(null);
+    setChatOpen(false);
+    setChatMessage("");
+    setChatError(null);
+    setExplainTarget(null);
+    setTaskRatings({});
+    setTaskProgress({});
+    setIsRuleBasedMode(false);
+    setStep("input");
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
   // ── RENDER: Step 1 ──────────────────────────────────────────────────────────
   if (step === "input") {
     return (
@@ -389,16 +408,16 @@ export default function StudentWorkspace() {
         {/* header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: 760, margin: "0 auto 40px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(37,99,235,0.2)", border: "1px solid #2563eb44", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Sparkles size={18} color="#60a5fa" />
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(2,132,199,0.2)", border: "1px solid #0284c744", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Sparkles size={18} color="#7dd3fc" />
             </div>
             <div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: "#f1f5f9" }}>CritiPlan</div>
-              <div style={{ fontSize: 11, color: "#64748b" }}>AI Project Manager</div>
+              <div style={{ fontSize: 15, fontWeight: 800, color: "#f1f5f9" }}>AI Project Manager</div>
+              <div style={{ fontSize: 11, color: "#64748b" }}>Committee-ready planning</div>
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ fontSize: 13, color: "#64748b" }}>👋 {auth?.name}</span>
+            <span style={{ fontSize: 13, color: "#64748b" }}>User: {auth?.name}</span>
             <button onClick={handleLogout} style={{ background: "transparent", border: "1px solid #334155", borderRadius: 7, padding: "6px 10px", cursor: "pointer", color: "#64748b", display: "flex", alignItems: "center", gap: 5, fontSize: 12 }}>
               <LogOut size={13} /> Sign Out
             </button>
@@ -427,12 +446,12 @@ export default function StudentWorkspace() {
                     setRequirements(SAMPLES[name]);
                   }}
                   style={{
-                    background: requirements === SAMPLES[name] ? "rgba(37,99,235,0.2)" : "rgba(255,255,255,0.04)",
-                    border: `1px solid ${requirements === SAMPLES[name] ? "#2563eb66" : "#334155"}`,
+                    background: requirements === SAMPLES[name] ? "rgba(2,132,199,0.2)" : "rgba(255,255,255,0.04)",
+                    border: `1px solid ${requirements === SAMPLES[name] ? "#0284c766" : "#334155"}`,
                     borderRadius: 999,
                     padding: "5px 14px",
                     fontSize: 12,
-                    color: requirements === SAMPLES[name] ? "#93c5fd" : "#94a3b8",
+                    color: requirements === SAMPLES[name] ? "#93c5fd" : "#7dd3fc",
                     cursor: "pointer",
                     transition: "all 0.2s",
                   }}
@@ -481,12 +500,12 @@ export default function StudentWorkspace() {
                 cursor: "pointer",
                 fontWeight: 800,
                 fontSize: 15,
-                background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
+                background: "linear-gradient(135deg, #0284c7, #1e40af)",
                 color: "#fff",
                 letterSpacing: "0.01em",
               }}
             >
-              Generate My Plan →
+              Generate My Plan -&gt;
             </button>
           </div>
         </div>
@@ -503,9 +522,9 @@ export default function StudentWorkspace() {
 
           <div style={{ background: "rgba(15,23,42,0.97)", border: "1px solid #1e293b", borderRadius: 20, padding: "40px 36px", textAlign: "center" }}>
             {/* spinner */}
-            <div style={{ width: 56, height: 56, borderRadius: "50%", border: "3px solid #1e293b", borderTop: "3px solid #2563eb", margin: "0 auto 24px", animation: "spin 1s linear infinite" }} />
+            <div style={{ width: 56, height: 56, borderRadius: "50%", border: "3px solid #1e293b", borderTop: "3px solid #0284c7", margin: "0 auto 24px", animation: "spin 1s linear infinite" }} />
             <h2 style={{ fontSize: 20, fontWeight: 800, color: "#f1f5f9", margin: "0 0 6px" }}>AI Analysis in Progress</h2>
-            <p style={{ color: "#64748b", margin: "0 0 32px", fontSize: 13 }}>Generating your project plan…</p>
+            <p style={{ color: "#64748b", margin: "0 0 32px", fontSize: 13 }}>Generating your project plan...</p>
 
             {/* stage list */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, textAlign: "left", marginBottom: 28 }}>
@@ -518,32 +537,26 @@ export default function StudentWorkspace() {
                     <div
                       style={{
                         width: 32, height: 32, borderRadius: "50%",
-                        background: done ? "rgba(34,197,94,0.15)" : active ? "rgba(37,99,235,0.15)" : "rgba(255,255,255,0.03)",
-                        border: `2px solid ${done ? "#22c55e" : active ? "#2563eb" : "#1e293b"}`,
+                        background: done ? "rgba(34,197,94,0.15)" : active ? "rgba(2,132,199,0.15)" : "rgba(255,255,255,0.03)",
+                        border: `2px solid ${done ? "#22c55e" : active ? "#0284c7" : "#1e293b"}`,
                         display: "flex", alignItems: "center", justifyContent: "center",
                         flexShrink: 0, transition: "all 0.3s",
                       }}
                     >
                       {done
-                        ? <span style={{ color: "#22c55e", fontSize: 14, fontWeight: 800 }}>✓</span>
-                        : <Icon size={15} color={active ? "#60a5fa" : "#475569"} />}
+                        ? <span style={{ color: "#22c55e", fontSize: 14, fontWeight: 800 }}>OK</span>
+                        : <Icon size={15} color={active ? "#7dd3fc" : "#475569"} />}
                     </div>
                     <span style={{ fontSize: 14, fontWeight: 600, color: done ? "#22c55e" : active ? "#f1f5f9" : "#475569", transition: "all 0.3s" }}>
                       {stage.label}
                     </span>
                     {active && (
-                      <div style={{ marginLeft: "auto", width: 8, height: 8, borderRadius: "50%", background: "#2563eb", animation: "pulse 1.2s ease-in-out infinite" }} />
+                      <div style={{ marginLeft: "auto", width: 8, height: 8, borderRadius: "50%", background: "#0284c7", animation: "pulse 1.2s ease-in-out infinite" }} />
                     )}
                   </div>
                 );
               })}
             </div>
-
-            {isRuleBasedMode && (
-              <div style={{ background: "rgba(234,179,8,0.12)", border: "1px solid rgba(234,179,8,0.3)", borderRadius: 10, padding: "10px 14px", display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#fbbf24", marginTop: 12, marginBottom: 12 }}>
-                <AlertTriangle size={15} /> AI model unavailable - using rule-based planning
-              </div>
-            )}
 
             {lastLog && (
               <div style={{ background: "#0a1120", border: "1px solid #1e293b", borderRadius: 8, padding: "10px 14px", fontSize: 12, color: "#475569", textAlign: "left", fontFamily: "monospace", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -562,28 +575,43 @@ export default function StudentWorkspace() {
   }
 
   // ── RENDER: Step 3 ──────────────────────────────────────────────────────────
+  const rawTasks = Array.isArray(liveTasks) && liveTasks.length ? liveTasks : DEMO_ALL_DATA.tasks?.tasks ?? [];
+  const tasks = buildPresentationTasks(rawTasks);
+  const rawSprintPlan = Array.isArray(sprintPlanData) && sprintPlanData.length
+    ? sprintPlanData
+    : DEMO_ALL_DATA.summary?.sprint_plan ?? [];
+  const sprintPlan = buildPresentationSprints(rawSprintPlan, rawTasks);
+  const totalHours = tasks.reduce((sum, t) => sum + numberValue(t.estimated_hours), 0);
+  const showcase = buildShowcaseData(data, brief);
+  const committeeSprintPlan = sortPresentationSprints(sprintPlan);
   const riskAccent = riskColor(riskLevel);
   const sprintCount = sprintPlan.length;
   const totalCount = tasks.length;
   const completedCount = tasks.filter((task) => task.id && taskProgress[task.id] === "completed").length;
   const progressPercentage = totalCount ? Math.round((completedCount / totalCount) * 100) : 0;
+  const qualityGateLabel = formatQualityGate(criticScore);
+  const trackingTitle = completedCount > 0 ? "Implementation Tracking" : "Implementation Baseline";
+  const trackingSummary = completedCount > 0
+    ? `${completedCount}/${totalCount} tasks completed`
+    : `${totalCount} tasks ready for execution`;
+  const showSupervisorChat = true;
 
   return (
     <div style={{ minHeight: "100vh", background: "#0f172a", padding: "32px 24px 64px" }}>
       {/* header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", maxWidth: 960, margin: "0 auto 32px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(37,99,235,0.2)", border: "1px solid #2563eb44", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Sparkles size={18} color="#60a5fa" />
+          <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(2,132,199,0.2)", border: "1px solid #0284c744", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Sparkles size={18} color="#7dd3fc" />
           </div>
           <div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: "#f1f5f9" }}>CritiPlan</div>
-            <div style={{ fontSize: 11, color: "#64748b" }}>AI Project Manager</div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#f1f5f9" }}>AI Project Manager</div>
+            <div style={{ fontSize: 11, color: "#64748b" }}>Committee-ready planning</div>
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button
-            onClick={() => { setStep("input"); setPipelineError(null); }}
+            onClick={handleStartOver}
             style={{ background: "transparent", border: "1px solid #334155", borderRadius: 7, padding: "7px 12px", cursor: "pointer", color: "#64748b", fontSize: 12 }}
           >
             <RefreshCw size={13} style={{ display: "inline", marginRight: 5 }} />
@@ -603,23 +631,31 @@ export default function StudentWorkspace() {
           <CheckCircle size={20} color="#22c55e" />
           <div>
             <div style={{ fontSize: 14, fontWeight: 700, color: "#22c55e" }}>AI Analysis Complete</div>
-            <div style={{ fontSize: 12, color: "#64748b" }}>Your project plan has been generated and validated by the critic agent.</div>
+            <div style={{ fontSize: 12, color: "#64748b" }}>Your project plan is ready, and the supervisor communication channel stays open during review and sign-off.</div>
           </div>
           <button
-            onClick={() => void handleSubmitToSupervisor()}
-            style={{ marginLeft: "auto", background: "linear-gradient(135deg,#2563eb,#1d4ed8)", border: "none", borderRadius: 9, padding: "9px 18px", cursor: "pointer", color: "#fff", fontWeight: 700, fontSize: 13, whiteSpace: "nowrap" }}
+            onClick={openCommunicationPanel}
+            style={{ background: "transparent", border: "1px solid #334155", borderRadius: 9, padding: "9px 14px", cursor: "pointer", color: "#cbd5e1", fontWeight: 700, fontSize: 13, whiteSpace: "nowrap" }}
           >
-            Submit to Supervisor →
+            Open Communication
+          </button>
+          <button
+            onClick={() => void handleSubmitToSupervisor()}
+            style={{ marginLeft: "auto", background: "linear-gradient(135deg,#475569,#334155)", border: "none", borderRadius: 9, padding: "9px 18px", cursor: "pointer", color: "#fff", fontWeight: 700, fontSize: 13, whiteSpace: "nowrap" }}
+          >
+            Submit to Supervisor -&gt;
           </button>
         </div>
+
+        <ProjectShowcase showcase={showcase} />
 
         {/* metric cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12, marginBottom: 24 }}>
           {[
             { label: "Tasks", value: tasks.length, color: "#3b82f6", Icon: ListChecks },
             { label: "Total Hours", value: `${totalHours}h`, color: "#14b8a6", Icon: Timer },
-            { label: "Sprints", value: sprintCount || "—", color: "#7c3aed", Icon: Calendar },
-            { label: "Risk Level", value: riskLevel.toUpperCase(), color: riskAccent || "#ef4444", Icon: ShieldAlert },
+            { label: "Sprints", value: sprintCount || "n/a", color: "#475569", Icon: Calendar },
+            { label: "Quality Gate", value: criticScore != null ? qualityGateLabel : `${riskCount} risks`, color: criticScore != null ? "#22c55e" : riskAccent || "#ef4444", Icon: criticScore != null ? CheckCircle : ShieldAlert },
           ].map(({ label, value, color, Icon }) => (
             <div key={label} style={{ background: "rgba(15,23,42,0.97)", border: "1px solid #1e293b", borderRadius: 16, padding: "18px 20px", borderTop: `2px solid ${color}` }}>
               <div style={{ width: 36, height: 36, borderRadius: 10, background: `${color}22`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
@@ -629,20 +665,15 @@ export default function StudentWorkspace() {
               <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 6 }}>{label}</div>
             </div>
           ))}
-          {isRuleBasedMode && (
-            <div style={{ background: "rgba(234,179,8,0.1)", border: "1px solid rgba(234,179,8,0.25)", borderRadius: 10, padding: "8px 14px", fontSize: 12, color: "#fbbf24", display: "flex", alignItems: "center", gap: 6 }}>
-              <AlertTriangle size={13} /> Rule-Based Mode
-            </div>
-          )}
         </div>
 
         <div style={{ background: "#0f1e35", border: "1px solid #1e293b", borderRadius: 10, padding: "12px 16px", marginBottom: 16 }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-            <span style={{ fontSize: 12, color: "#64748b" }}>Your Progress</span>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "#f1f5f9" }}>{completedCount}/{totalCount} tasks</span>
+            <span style={{ fontSize: 12, color: "#64748b" }}>{trackingTitle}</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "#f1f5f9" }}>{trackingSummary}</span>
           </div>
           <div style={{ height: 6, background: "#1e293b", borderRadius: 99 }}>
-            <div style={{ height: "100%", width: `${progressPercentage}%`, background: "linear-gradient(90deg, #2563eb, #7c3aed)", borderRadius: 99, transition: "width 0.5s" }} />
+            <div style={{ height: "100%", width: `${progressPercentage}%`, background: "linear-gradient(90deg, #0284c7, #22c55e)", borderRadius: 99, transition: "width 0.5s" }} />
           </div>
         </div>
 
@@ -656,7 +687,7 @@ export default function StudentWorkspace() {
               {(["frontend", "backend", "database", "devops", "external_services"] as const).flatMap((cat) =>
                 (techStack[cat] ?? []).map((tech) => {
                   const colors: Record<string, { bg: string; fg: string }> = {
-                    frontend:          { bg: "rgba(37,99,235,0.15)",   fg: "#93c5fd" },
+                    frontend:          { bg: "rgba(2,132,199,0.15)",   fg: "#93c5fd" },
                     backend:           { bg: "rgba(124,58,237,0.15)",  fg: "#c4b5fd" },
                     database:          { bg: "rgba(8,145,178,0.15)",   fg: "#67e8f9" },
                     devops:            { bg: "rgba(234,179,8,0.15)",   fg: "#fde68a" },
@@ -683,23 +714,23 @@ export default function StudentWorkspace() {
         )}
 
         {/* sprint summary */}
-        {sprintPlan.length > 0 && (
+        {committeeSprintPlan.length > 0 && (
           <div style={{ background: "rgba(15,23,42,0.97)", border: "1px solid #1e293b", borderRadius: 16, padding: 20, marginBottom: 24 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>Sprint Summary</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>Delivery Storyline</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {sprintPlan.map((sp) => (
-                <div key={sp.sprint} style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 16px", background: "#0a1120", border: "1px solid #1e293b", borderRadius: 10 }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(37,99,235,0.15)", border: "1px solid #2563eb33", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 13, color: "#60a5fa", flexShrink: 0 }}>
-                    {sp.sprint}
+              {committeeSprintPlan.map((sp) => (
+                <div key={`${sp.sprint}-${sp.displayName}`} style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 16px", background: "#0a1120", border: "1px solid #1e293b", borderRadius: 10 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: 8, background: "rgba(2,132,199,0.15)", border: "1px solid #0284c733", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 13, color: "#7dd3fc", flexShrink: 0 }}>
+                    {sp.displaySprint}
                   </div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 700, color: "#f1f5f9", fontSize: 14 }}>{sp.name ?? `Sprint ${sp.sprint}`}</div>
-                    {sp.goal && <div style={{ fontSize: 12, color: "#64748b", marginTop: 2 }}>{sp.goal}</div>}
+                    <div style={{ fontWeight: 700, color: "#f1f5f9", fontSize: 14 }}>{sp.displayName ?? sp.name ?? `Sprint ${sp.sprint}`}</div>
+                    {(sp.displayGoal ?? sp.goal) && <div style={{ fontSize: 12, color: "#64748b", marginTop: 2 }}>{sp.displayGoal ?? sp.goal}</div>}
                   </div>
                   <div style={{ display: "flex", gap: 16, fontSize: 12, color: "#64748b" }}>
-                    <span><strong style={{ color: "#94a3b8" }}>{sp.tasks?.length ?? 0}</strong> tasks</span>
-                    <span><strong style={{ color: "#94a3b8" }}>{sp.duration_weeks ?? "?"}</strong>w</span>
-                    <span><strong style={{ color: "#94a3b8" }}>{sp.total_estimated_hours ?? 0}</strong>h</span>
+                    <span><strong style={{ color: "#7dd3fc" }}>{sp.tasks?.length ?? 0}</strong> tasks</span>
+                    <span><strong style={{ color: "#7dd3fc" }}>{sp.duration_weeks ?? "?"}</strong>w</span>
+                    <span><strong style={{ color: "#7dd3fc" }}>{sp.total_estimated_hours ?? 0}</strong>h</span>
                   </div>
                 </div>
               ))}
@@ -734,7 +765,7 @@ export default function StudentWorkspace() {
                     <div style={{ flex: 1, fontWeight: 600, color: "#f1f5f9", fontSize: 14 }}>{task.title}</div>
                     <span className={`badge ${task.req_type === "NFR" ? "badge-orange" : "badge-blue"}`} style={{ flexShrink: 0 }}>{task.req_type}</span>
                     <span style={{ borderRadius: 999, padding: "3px 8px", background: `${color}22`, color, fontWeight: 800, fontSize: 12, flexShrink: 0 }}>C{task.complexity}</span>
-                    <span style={{ color: "#94a3b8", fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{task.estimated_hours ?? 0}h</span>
+                    <span style={{ color: "#7dd3fc", fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{task.estimated_hours ?? 0}h</span>
                     <div style={{ display: "flex", gap: 4 }} onClick={(e) => e.stopPropagation()}>
                       {(["not_started", "in_progress", "completed"] as const).map((statusKey) => {
                         const active = task.id ? taskProgress[task.id] === statusKey : false;
@@ -752,14 +783,14 @@ export default function StudentWorkspace() {
                                   ? "rgba(34,197,94,0.2)"
                                   : statusKey === "in_progress"
                                   ? "rgba(59,130,246,0.2)"
-                                  : "rgba(100,116,139,0.2)"
+                                  : "rgba(2,132,199,0.2)"
                                 : "transparent",
                               color: active
                                 ? statusKey === "completed"
                                   ? "#4ade80"
                                   : statusKey === "in_progress"
-                                  ? "#60a5fa"
-                                  : "#94a3b8"
+                                  ? "#7dd3fc"
+                                  : "#7dd3fc"
                                 : "#334155",
                               borderColor: "currentColor",
                               cursor: task.id ? "pointer" : "default",
@@ -781,11 +812,11 @@ export default function StudentWorkspace() {
                       <div style={{ paddingTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                         <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 8, padding: 12 }}>
                           <div style={{ fontSize: 11, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Details</div>
-                          <div style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.5, marginBottom: 8 }}>{task.description ?? "—"}</div>
-                          <div style={{ fontSize: 12, color: "#64748b" }}>Owner: <strong style={{ color: "#94a3b8" }}>{task.suggested_owner_role ?? task.skill_required ?? "N/A"}</strong></div>
+                          <div style={{ fontSize: 13, color: "#7dd3fc", lineHeight: 1.5, marginBottom: 8 }}>{task.description ?? "n/a"}</div>
+                          <div style={{ fontSize: 12, color: "#64748b" }}>Owner: <strong style={{ color: "#7dd3fc" }}>{task.suggested_owner_role ?? task.skill_required ?? "N/A"}</strong></div>
                           <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-                            <div style={{ background: "rgba(37,99,235,0.08)", border: "1px solid rgba(37,99,235,0.18)", borderRadius: 8, padding: "8px 10px" }}>
-                              <div style={{ fontSize: 10, fontWeight: 700, color: "#60a5fa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Type Reason</div>
+                            <div style={{ background: "rgba(100,116,139,0.08)", border: "1px solid rgba(100,116,139,0.18)", borderRadius: 8, padding: "8px 10px" }}>
+                              <div style={{ fontSize: 10, fontWeight: 700, color: "#7dd3fc", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Type Reason</div>
                               <div style={{ fontSize: 12, color: "#cbd5e1", lineHeight: 1.6 }}>{task.type_reason ?? "Describes a user-facing feature or quality requirement inferred by the planner."}</div>
                             </div>
                             <div style={{ background: "rgba(20,184,166,0.08)", border: "1px solid rgba(20,184,166,0.18)", borderRadius: 8, padding: "8px 10px" }}>
@@ -796,7 +827,7 @@ export default function StudentWorkspace() {
                           {task.dependencies?.length ? (
                             <div style={{ marginTop: 8, fontSize: 12, color: "#64748b" }}>
                               Depends on: {task.dependencies.map((d) => (
-                                <span key={d} style={{ fontFamily: "monospace", background: "rgba(255,255,255,0.05)", color: "#94a3b8", padding: "2px 6px", borderRadius: 4, marginLeft: 4 }}>{d}</span>
+                                <span key={d} style={{ fontFamily: "monospace", background: "rgba(255,255,255,0.05)", color: "#7dd3fc", padding: "2px 6px", borderRadius: 4, marginLeft: 4 }}>{d}</span>
                               ))}
                             </div>
                           ) : null}
@@ -812,7 +843,7 @@ export default function StudentWorkspace() {
                           ].map(([lbl, val]) => (
                             <div key={lbl} style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", borderBottom: "1px solid #1e293b", fontSize: 12 }}>
                               <span style={{ color: "#64748b" }}>{lbl}</span>
-                              <strong style={{ color: "#94a3b8" }}>{val}</strong>
+                              <strong style={{ color: "#7dd3fc" }}>{val}</strong>
                             </div>
                           ))}
                         </div>
@@ -824,9 +855,9 @@ export default function StudentWorkspace() {
                           e.stopPropagation();
                           setExplainTarget({ contextType: "task", itemId: task.id ?? "", title: task.title ?? "" });
                         }}
-                        style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(37,99,235,0.12)", border: "1px solid rgba(37,99,235,0.3)", borderRadius: 8, padding: "8px 14px", cursor: "pointer", color: "#93c5fd", fontSize: 13, fontWeight: 600 }}
+                        style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(100,116,139,0.12)", border: "1px solid rgba(100,116,139,0.3)", borderRadius: 8, padding: "8px 14px", cursor: "pointer", color: "#93c5fd", fontSize: 13, fontWeight: 600 }}
                       >
-                        <Sparkles size={14} color="#60a5fa" />
+                        <Sparkles size={14} color="#7dd3fc" />
                         Ask AI: Why was this task created?
                       </button>
                       {task.id && (
@@ -866,17 +897,18 @@ export default function StudentWorkspace() {
         </div>
 
         {/* chat section (collapsible) */}
-        <div style={{ background: "rgba(15,23,42,0.97)", border: "1px solid #1e293b", borderRadius: 16, overflow: "hidden" }}>
+        {showSupervisorChat && (
+        <div ref={chatSectionRef} style={{ background: "rgba(15,23,42,0.97)", border: "1px solid #1e293b", borderRadius: 16, overflow: "hidden" }}>
           <button
             onClick={() => setChatOpen((o) => !o)}
             style={{ width: "100%", background: "transparent", border: "none", padding: "14px 20px", display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
           >
-            <MessageSquare size={16} color="#60a5fa" />
-            <span style={{ fontWeight: 700, fontSize: 14, color: "#f1f5f9" }}>Supervisor Chat</span>
+            <MessageSquare size={16} color="#7dd3fc" />
+            <span style={{ fontWeight: 700, fontSize: 14, color: "#f1f5f9" }}>Communication With Supervisor</span>
             <span style={{
               marginLeft: 8, fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 999,
               background: planStatus === "approved" ? "rgba(34,197,94,0.15)" : planStatus === "rejected" ? "rgba(239,68,68,0.15)" : "rgba(59,130,246,0.15)",
-              color: planStatus === "approved" ? "#4ade80" : planStatus === "rejected" ? "#f87171" : "#60a5fa",
+              color: planStatus === "approved" ? "#4ade80" : planStatus === "rejected" ? "#f87171" : "#7dd3fc",
             }}>
               {planStatus.toUpperCase()}
             </span>
@@ -892,15 +924,15 @@ export default function StudentWorkspace() {
                     return (
                       <div key={msg.id} style={{ display: "flex", justifyContent: "center" }}>
                         <div style={{ background: approved ? "rgba(34,197,94,0.16)" : "rgba(239,68,68,0.16)", color: approved ? "#4ade80" : "#f87171", border: `1px solid ${approved ? "rgba(34,197,94,0.24)" : "rgba(239,68,68,0.24)"}`, borderRadius: 999, padding: "8px 14px", fontSize: 13, fontWeight: 700 }}>
-                          {approved ? "✓ Plan Approved" : "✗ Plan Rejected"}
+                          {approved ? "Plan Approved" : "Plan Rejected"}
                         </div>
                       </div>
                     );
                   }
                   return (
                     <div key={msg.id} style={{ display: "flex", justifyContent: msg.role === "Student" ? "flex-end" : "flex-start" }}>
-                      <div style={{ maxWidth: "80%", background: msg.role === "Student" ? "#1d4ed8" : "#1e293b", border: msg.role === "Supervisor" ? "1px solid #334155" : "none", borderRadius: msg.role === "Student" ? "14px 14px 2px 14px" : "14px 14px 14px 2px", padding: "8px 12px" }}>
-                        <div style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>{msg.role} · {new Date(msg.created_at).toLocaleTimeString()}</div>
+                      <div style={{ maxWidth: "80%", background: msg.role === "Student" ? "#334155" : "#1e293b", border: msg.role === "Supervisor" ? "1px solid #334155" : "none", borderRadius: msg.role === "Student" ? "14px 14px 2px 14px" : "14px 14px 14px 2px", padding: "8px 12px" }}>
+                        <div style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>{msg.role} | {new Date(msg.created_at).toLocaleTimeString()}</div>
                         <div style={{ color: "#f1f5f9", fontSize: 13, lineHeight: 1.5 }}>{msg.text}</div>
                       </div>
                     </div>
@@ -908,7 +940,7 @@ export default function StudentWorkspace() {
                 }) : (
                   <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 8, opacity: 0.4 }}>
                     <MessageSquare size={36} color="#64748b" />
-                    <span style={{ color: "#64748b", fontSize: 13 }}>No messages yet</span>
+                    <span style={{ color: "#64748b", fontSize: 13, textAlign: "center", maxWidth: 420 }}>No messages yet. Use this channel to submit the plan, ask questions, and receive supervisor approval or revision notes.</span>
                   </div>
                 )}
                 <div ref={chatBottomRef} />
@@ -919,10 +951,10 @@ export default function StudentWorkspace() {
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
                   onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void handleChatSend(); } }}
-                  placeholder="Write a message to your supervisor…"
+                  placeholder="Write a message to your supervisor..."
                   style={{ flex: 1, background: "#020617", border: "1px solid #334155", borderRadius: 8, color: "#f8fafc", padding: "8px 10px", fontSize: 12, resize: "none", fontFamily: "inherit" }}
                 />
-                <button onClick={() => void handleChatSend()} style={{ background: "#2563eb", border: "none", borderRadius: 8, padding: "0 14px", cursor: "pointer", color: "#fff" }}>
+                <button onClick={() => void handleChatSend()} style={{ background: "#0284c7", border: "none", borderRadius: 8, padding: "0 14px", cursor: "pointer", color: "#fff" }}>
                   <Send size={15} />
                 </button>
               </div>
@@ -932,6 +964,7 @@ export default function StudentWorkspace() {
             </>
           )}
         </div>
+        )}
       </div>
 
       {/* explain popup */}
@@ -947,3 +980,4 @@ export default function StudentWorkspace() {
     </div>
   );
 }
+

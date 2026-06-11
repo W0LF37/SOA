@@ -361,14 +361,14 @@ export default function EvaluatePage() {
 
               {llmAvgScore != null && fallbackAvgScore != null && (
                 <div className="bg-gray-700/40 border border-gray-600 rounded-xl p-4">
-                  <div className="text-sm font-bold text-white mb-3">LLM vs Rule-Based</div>
+                  <div className="text-sm font-bold text-white mb-3">AI Planning vs Direct Planning</div>
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="bg-gray-900/50 rounded-lg p-3">
                       <div className="text-xs text-gray-400 mb-1">LLM Samples Avg</div>
                       <div className="text-lg font-bold text-blue-300">{(llmAvgScore * 100).toFixed(1)}%</div>
                     </div>
                     <div className="bg-gray-900/50 rounded-lg p-3">
-                      <div className="text-xs text-gray-400 mb-1">Fallback Avg</div>
+                      <div className="text-xs text-gray-400 mb-1">Direct Planning Avg</div>
                       <div className="text-lg font-bold text-yellow-300">{(fallbackAvgScore * 100).toFixed(1)}%</div>
                     </div>
                     <div className="bg-gray-900/50 rounded-lg p-3">

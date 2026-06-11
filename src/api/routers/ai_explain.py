@@ -38,6 +38,67 @@ def _strip_think(text: str) -> str:
     return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL | re.IGNORECASE).strip()
 
 
+def _normalize_text_key(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip()).lower()
+
+
+def _cleanup_explanation(text: str, question: str) -> str:
+    cleaned = _strip_think(text)
+    question_key = _normalize_text_key(question)
+
+    filtered_lines: list[str] = []
+    for raw_line in cleaned.splitlines():
+        line = raw_line.strip()
+        key = _normalize_text_key(line)
+        if not key:
+            filtered_lines.append("")
+            continue
+        if key == question_key:
+            continue
+        if key.startswith(("question:", "user's question:", "student's question:")):
+            continue
+        if key.startswith("answer in "):
+            continue
+        filtered_lines.append(line)
+
+    deduped_lines: list[str] = []
+    previous_key = ""
+    for line in filtered_lines:
+        key = _normalize_text_key(line)
+        if line == "":
+            if deduped_lines and deduped_lines[-1] != "":
+                deduped_lines.append("")
+            previous_key = ""
+            continue
+        if key and key == previous_key:
+            continue
+        deduped_lines.append(line)
+        previous_key = key
+
+    paragraphs: list[str] = []
+    current: list[str] = []
+    for line in deduped_lines:
+        if line == "":
+            if current:
+                paragraphs.append("\n".join(current))
+                current = []
+            continue
+        current.append(line)
+    if current:
+        paragraphs.append("\n".join(current))
+
+    seen: set[str] = set()
+    unique_paragraphs: list[str] = []
+    for paragraph in paragraphs:
+        key = _normalize_text_key(paragraph)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        unique_paragraphs.append(paragraph)
+
+    return "\n\n".join(unique_paragraphs).strip()
+
+
 def _call_ollama(prompt: str) -> str:
     payload = {
         "model": OLLAMA_MODEL,
@@ -65,6 +126,48 @@ def _load_json(path: Path) -> dict:
         raise HTTPException(status_code=404, detail=f"File not found: {path.name}. Run the pipeline first.")
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def _build_critic_summary() -> str:
+    summary = _load_json(SUMMARY_PATH)
+    risks = _load_json(RISK_PATH)
+    tasks = _load_json(TASKS_PATH).get("tasks", [])
+
+    critic = summary.get("critic", {})
+    committee_brief = summary.get("committee_brief", {}) or summary.get("plan_highlights", {}).get("committee_brief", {})
+    graph = summary.get("graph_analytics", {})
+    critical_path = graph.get("critical_path", {})
+    critical_ids = critical_path.get("task_ids", []) or []
+
+    score = critic.get("score")
+    score_text = f"{float(score):.2f}" if isinstance(score, (int, float)) else "n/a"
+    issues_count = int(critic.get("issues_count", 0) or 0)
+    status = str(critic.get("status", "unknown")).replace("_", " ")
+    task_count = len(tasks)
+
+    if critical_ids:
+        path_text = " -> ".join(critical_ids[:6])
+    else:
+        path_text = "No critical path data was produced."
+
+    risk_items = risks.get("risks", [])[:2]
+    risk_messages = [str(item.get("message", "")).strip() for item in risk_items if item.get("message")]
+    risk_text = "; ".join(risk_messages) if risk_messages else "No major risks were flagged in the current report."
+
+    used_fallback = bool(summary.get("used_fallback"))
+    if used_fallback:
+        confidence_text = (
+            "The plan passed critic validation, and this run used a validated fallback planning mode "
+            "after the first draft was rejected by automated quality checks."
+        )
+    else:
+        confidence_text = committee_brief.get("confidence_signal") or "The plan passed validation with no extra confidence warnings."
+
+    return "\n".join([
+        f"* Quality: Critic status is {status} with score {score_text} and {issues_count} issue(s) across {task_count} planned task(s).",
+        f"* Critical path: {path_text}. This is the sequence that most directly controls delivery timing.",
+        f"* Risks and confidence: {risk_text} {confidence_text}".strip(),
+    ])
 
 
 def _build_prompt(req: ExplainRequest) -> str:
@@ -128,6 +231,9 @@ def _build_prompt(req: ExplainRequest) -> str:
 
 @router.post("/explain", response_model=ExplainResponse)
 def explain(req: ExplainRequest) -> ExplainResponse:
-    prompt = _build_prompt(req)
-    explanation = _call_ollama(prompt)
+    if req.context_type == "critic":
+        explanation = _build_critic_summary()
+    else:
+        prompt = _build_prompt(req)
+        explanation = _cleanup_explanation(_call_ollama(prompt), req.question)
     return ExplainResponse(explanation=explanation, item_id=req.item_id, context_type=req.context_type)

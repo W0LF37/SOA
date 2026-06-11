@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import stat
-import subprocess
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from dulwich import porcelain
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -19,63 +21,38 @@ AUTHORS = [
     ("Lina Nasser", "lina@example.com"),
 ]
 
-COMPLETED_COUNTS = {
-    "T001": 5,
-    "T003": 4,
-    "T004": 4,
-    "T005": 4,
-    "T009": 5,
-    "T010": 5,
-    "T012": 5,
-    "T013": 5,
-}
-IN_PROGRESS = {"T002", "T006", "T007", "T011", "T014"}
-NOT_STARTED = {"T008", "T015"}
-
-TASK_KEYWORDS = {
-    "T001": "registration",
-    "T002": "grades",
-    "T003": "advisors",
-    "T004": "tuition invoices",
-    "T005": "payment",
-    "T006": "notification",
-    "T007": "registrar schedules",
-    "T008": "transcript",
-    "T009": "learning system",
-    "T010": "available SLA",
-    "T011": "response time",
-    "T012": "multilingual",
-    "T013": "compliance",
-    "T014": "five hundred",
-    "T015": "mobile interface",
+STOP_WORDS = {
+    "implement",
+    "enable",
+    "enforce",
+    "optimize",
+    "workflow",
+    "support",
+    "controls",
+    "system",
+    "process",
+    "online",
+    "creation",
+    "available",
+    "course",
+    "should",
+    "maintain",
+    "under",
+    "friendly",
 }
 
-COMPLETED_STEPS = [
-    "completed slice alpha",
-    "completed slice beta",
-    "completed slice gamma",
-    "completed slice delta",
-    "completed slice epsilon",
+SKILL_FOLDERS = {
+    "backend": Path("src/backend"),
+    "platform": Path("src/platform"),
+    "security": Path("src/security"),
+}
+
+COMPLETED_MESSAGES = [
+    "scaffold core flow",
+    "integrate validation and persistence",
+    "completed end to end",
 ]
-
-WIP_STEP = "draft slice"
-
-
-def run_git(args: list[str], *, env: dict[str, str] | None = None) -> None:
-    result = subprocess.run(
-        ["git", *args],
-        cwd=REPO_PATH,
-        env=env,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        timeout=60,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(
-            f"git {' '.join(args)} failed\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
-        )
+IN_PROGRESS_MESSAGE = "draft integration slice"
 
 
 def safe_reset_repo() -> None:
@@ -83,95 +60,165 @@ def safe_reset_repo() -> None:
     root = PROJECT_ROOT.resolve()
     if resolved == root or root not in resolved.parents:
         raise RuntimeError(f"Refusing to reset unsafe path: {resolved}")
+
     if REPO_PATH.exists():
         def clear_readonly(function, path, _excinfo) -> None:  # noqa: ANN001
             os.chmod(path, stat.S_IWRITE)
             function(path)
 
         shutil.rmtree(REPO_PATH, onexc=clear_readonly)
-    (REPO_PATH / "src").mkdir(parents=True)
-    (REPO_PATH / "tests").mkdir()
-    run_git(["init"])
-    run_git(["config", "user.name", AUTHORS[0][0]])
-    run_git(["config", "user.email", AUTHORS[0][1]])
+
+    for relative in ("src/backend", "src/platform", "src/security", "tests", "docs"):
+        (REPO_PATH / relative).mkdir(parents=True, exist_ok=True)
+
+    porcelain.init(str(REPO_PATH))
 
 
-def task_title(task_id: str) -> str:
+def load_tasks() -> list[dict]:
     if not TASKS_PATH.exists():
-        return TASK_KEYWORDS[task_id]
-    tasks = json.loads(TASKS_PATH.read_text(encoding="utf-8")).get("tasks", [])
-    for task in tasks:
-        if task.get("id") == task_id:
-            return str(task.get("title") or TASK_KEYWORDS[task_id])
-    return TASK_KEYWORDS[task_id]
+        raise RuntimeError(f"Tasks file not found: {TASKS_PATH}")
+    payload = json.loads(TASKS_PATH.read_text(encoding="utf-8"))
+    tasks = payload.get("tasks", [])
+    if not tasks:
+        raise RuntimeError("tasks.json has no tasks. Run the pipeline first.")
+    return tasks
 
 
-def commit_file(task_id: str, index: int, message: str, commit_no: int) -> None:
-    slug = TASK_KEYWORDS[task_id].replace(" ", "_")
-    folder = REPO_PATH / ("tests" if "tests" in message else "src")
-    path = folder / f"{task_id.lower()}_{slug}_{index:02d}.py"
-    path.write_text(
-        "\n".join(
-            [
-                f'"""Demo implementation artifact for {task_id}."""',
-                "",
-                f'TASK_ID = "{task_id}"',
-                f'TASK_TITLE = "{task_title(task_id)}"',
-                f'COMMIT_MESSAGE = "{message}"',
-                "",
-                "def marker() -> str:",
-                f'    return "{task_id}:{index}:{commit_no}"',
-                "",
-            ]
-        ),
-        encoding="utf-8",
-    )
-    run_git(["add", str(path.relative_to(REPO_PATH))])
+def task_keywords(task: dict) -> list[str]:
+    text = f"{task.get('title', '')} {task.get('description', '')}".lower()
+    words = re.findall(r"[a-z0-9]+", text)
+    filtered: list[str] = []
+    for word in words:
+        if len(word) <= 2 or word in STOP_WORDS:
+            continue
+        if word not in filtered:
+            filtered.append(word)
+    return filtered[:6] or [str(task.get("id", "task")).lower()]
 
 
-def commit(task_id: str, message: str, commit_no: int) -> None:
+def task_slug(task: dict) -> str:
+    return "_".join(task_keywords(task)[:4])
+
+
+def task_topic(task: dict) -> str:
+    return " ".join(task_keywords(task)[:3])
+
+
+def build_status_plan(tasks: list[dict]) -> dict[str, str]:
+    roots = [task for task in tasks if not task.get("dependencies")]
+    dependents = [task for task in tasks if task.get("dependencies")]
+    plan: dict[str, str] = {}
+
+    if roots:
+        root_completed = max(1, len(roots) // 2)
+        for index, task in enumerate(roots):
+            plan[task["id"]] = "completed" if index < root_completed else "in_progress"
+
+    if dependents:
+        dependent_completed = max(1, len(dependents) // 2)
+        for index, task in enumerate(dependents):
+            if index < dependent_completed:
+                plan[task["id"]] = "completed"
+            elif index == dependent_completed:
+                plan[task["id"]] = "in_progress"
+            else:
+                plan[task["id"]] = "not_started"
+
+    if not plan:
+        for index, task in enumerate(tasks):
+            if index == 0:
+                plan[task["id"]] = "completed"
+            elif index == 1:
+                plan[task["id"]] = "in_progress"
+            else:
+                plan[task["id"]] = "not_started"
+
+    if "not_started" not in plan.values() and len(tasks) > 2:
+        plan[tasks[-1]["id"]] = "not_started"
+
+    if "in_progress" not in plan.values() and len(tasks) > 1:
+        plan[tasks[1]["id"]] = "in_progress"
+
+    return plan
+
+
+def repo_file_for_task(task: dict) -> Path:
+    skill = str(task.get("skill_required") or "").lower()
+    folder = SKILL_FOLDERS.get(skill, Path("src/backend"))
+    return REPO_PATH / folder / f"{str(task['id']).lower()}_{task_slug(task)}.py"
+
+
+def write_task_file(task: dict, step_no: int, message: str) -> Path:
+    path = repo_file_for_task(task)
+    existing = path.read_text(encoding="utf-8") if path.exists() else ""
+    block = [
+        f"# {task['id']} - {task.get('title', '')}",
+        f'TASK_ID = "{task["id"]}"',
+        f'TASK_TITLE = "{task.get("title", "")}"',
+        f'TASK_TYPE = "{task.get("req_type", "")}"',
+        f'TASK_STEP = {step_no}',
+        "",
+        "def progress_marker() -> str:",
+        f'    return "{task["id"]}:{step_no}:{message}"',
+        "",
+    ]
+    content = existing + ("\n" if existing else "") + "\n".join(block)
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
+def commit_task_step(task: dict, step_no: int, message: str, commit_no: int) -> None:
     author_name, author_email = AUTHORS[commit_no % len(AUTHORS)]
-    when = datetime(2026, 4, 1, 9, 0, tzinfo=timezone.utc) + timedelta(hours=commit_no * 5)
-    env = os.environ.copy()
-    env.update(
-        {
-            "GIT_AUTHOR_NAME": author_name,
-            "GIT_AUTHOR_EMAIL": author_email,
-            "GIT_AUTHOR_DATE": when.isoformat(),
-            "GIT_COMMITTER_NAME": author_name,
-            "GIT_COMMITTER_EMAIL": author_email,
-            "GIT_COMMITTER_DATE": when.isoformat(),
-        }
+    author = f"{author_name} <{author_email}>".encode("utf-8")
+    when = datetime(2026, 4, 1, 9, 0, tzinfo=timezone.utc) + timedelta(hours=commit_no * 6)
+    timestamp = when.timestamp()
+
+    path = write_task_file(task, step_no, message)
+    porcelain.add(str(REPO_PATH), paths=[str(path.relative_to(REPO_PATH))])
+    porcelain.commit(
+        str(REPO_PATH),
+        message=message.encode("utf-8"),
+        author=author,
+        committer=author,
+        author_timestamp=timestamp,
+        commit_timestamp=timestamp,
+        author_timezone=0,
+        commit_timezone=0,
     )
-    commit_file(task_id, commit_no, message, commit_no)
-    run_git(["commit", "-m", message], env=env)
 
 
-def build_commit_plan() -> list[tuple[str, str]]:
-    plan: list[tuple[str, str]] = []
-    for task_id, count in COMPLETED_COUNTS.items():
-        keywords = TASK_KEYWORDS[task_id]
-        for index in range(count):
-            step = COMPLETED_STEPS[index % len(COMPLETED_STEPS)]
-            plan.append((task_id, f"{task_id} {keywords}: {step}"))
-    for task_id in sorted(IN_PROGRESS):
-        plan.append((task_id, f"{task_id} {TASK_KEYWORDS[task_id]}: {WIP_STEP}"))
+def build_commit_plan(tasks: list[dict], statuses: dict[str, str]) -> list[tuple[dict, int, str]]:
+    plan: list[tuple[dict, int, str]] = []
+    for task in tasks:
+        status = statuses[task["id"]]
+        topic = task_topic(task)
+        if status == "completed":
+            for index, suffix in enumerate(COMPLETED_MESSAGES, start=1):
+                plan.append((task, index, f"{task['id']} {topic}: {suffix}"))
+        elif status == "in_progress":
+            plan.append((task, 1, f"{task['id']} {topic}: {IN_PROGRESS_MESSAGE}"))
     return plan
 
 
 def main() -> int:
+    tasks = load_tasks()
     safe_reset_repo()
-    plan = build_commit_plan()
-    for commit_no, (task_id, message) in enumerate(plan, start=1):
-        commit(task_id, message, commit_no)
+    statuses = build_status_plan(tasks)
+    commit_plan = build_commit_plan(tasks, statuses)
 
-    run_git(["status", "--short"])
+    for commit_no, (task, step_no, message) in enumerate(commit_plan, start=1):
+        commit_task_step(task, step_no, message, commit_no)
+
+    status_groups = {"completed": [], "in_progress": [], "not_started": []}
+    for task in tasks:
+        status_groups[statuses[task["id"]]].append(task["id"])
+
     print(f"Generated demo repo: {REPO_PATH}")
-    print(f"Commits created: {len(plan)}")
-    print(f"Authors: {', '.join(name for name, _ in AUTHORS)}")
-    print(f"Completed tasks: {', '.join(COMPLETED_COUNTS)}")
-    print(f"In-progress tasks: {', '.join(sorted(IN_PROGRESS))}")
-    print(f"Not-started tasks: {', '.join(sorted(NOT_STARTED))}")
+    print(f"Tasks source       : {TASKS_PATH}")
+    print(f"Commits created    : {len(commit_plan)}")
+    print(f"Completed tasks    : {', '.join(status_groups['completed']) or 'none'}")
+    print(f"In-progress tasks  : {', '.join(status_groups['in_progress']) or 'none'}")
+    print(f"Not-started tasks  : {', '.join(status_groups['not_started']) or 'none'}")
     return 0
 
 

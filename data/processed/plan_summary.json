@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-05-04T19:09:41.865329+00:00",
+  "generated_at": "2026-06-06T22:43:00.449418+00:00",
   "model": "ai-project-manager-planner",
   "provider": "ollama",
-  "generation_mode": "rule_based_fallback_after_llm_failure",
+  "generation_mode": "rule_based_fallback_forced",
   "llm_used": false,
-  "llm_attempted": true,
+  "llm_attempted": false,
   "llm_accepted": false,
   "llm_model": "rule-based-fallback",
   "used_fallback": true,
-  "fallback_reason": "Rule-based fallback was used after LLM planning failed: ValueError: Quality check failed: 1:1 mapping violated: expected 8 tasks, got 2",
-  "retrieved_kb_context": "## Retrieved KB Context for LLM Planning\nUse these similar projects as calibration signals for task scope, FR/NFR classification, complexity levels, and dependency hints. Do not copy tasks unless they are implied by the new requirements.\nHard constraints for this run: emit one task per requirement line, do not merge repeated source lines, keep security/performance/compliance/availability/mobile/localization/privacy constraints as NFRs, and keep titles action-oriented (Implement/Integrate for FR; Enforce/Optimize/Enable for NFR).\n\n### FINTECH project, critic_score=0.92:\n  - Implement KYC Verification Workflow (FR, C4)\n  - Implement Wallet Funding Flow (FR, C4)\n  - Integrate Payment Gateway (FR, C4)\n  - Implement Fraud Review Queue (FR, C4)\n  - Implement Settlement Reporting (FR, C3)\n  - Implement Customer Notification Events (FR, C3)\n  - PCI-DSS Security Controls NFR (NFR, C5)\n  - Payment Service Availability NFR (NFR, C4)\n\n### IOT project, critic_score=0.9:\n  - Implement Device Registry (FR, C3)\n  - Implement MQTT Data Ingestion (FR, C4)\n  - Implement Real-Time Sensor Dashboard (FR, C4)\n  - Implement Alert Policy Engine (FR, C4)\n  - Implement Historical Trend Charts (FR, C3)\n  - Implement Device Authentication (FR, C3)\n  - Telemetry Throughput NFR (NFR, C4)\n  - Sensor Data Retention NFR (NFR, C3)\n\nApply similar FR/NFR classification and complexity levels to the new requirements below, while preserving exact source references and the one-line-to-one-task mapping.",
-  "kb_document_count": 100,
+  "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
+  "retrieved_kb_context": "",
+  "kb_document_count": 0,
   "llm_planning_trace": {
     "role": "LLM Planning Reasoner",
-    "attempted": true,
+    "attempted": false,
     "accepted": false,
     "used_fallback": true,
-    "fallback_reason": "Rule-based fallback was used after LLM planning failed: ValueError: Quality check failed: 1:1 mapping violated: expected 8 tasks, got 2",
+    "fallback_reason": "Rule-based fallback was forced by pipeline configuration.",
     "kb_enabled": true,
-    "retrieved_kb_context_chars": 1486,
-    "kb_document_count": 100
+    "retrieved_kb_context_chars": 0,
+    "kb_document_count": 0
   },
   "critic": {
     "status": "approved",
@@ -27,56 +27,62 @@
     "issues_count": 0,
     "report_file": "data/processed/critic_report.json"
   },
-  "input_file": "data/processed/api_input.txt",
+  "input_file": "data/raw/docs/requirements_template_sample.txt",
   "tasks_file": "data/processed/tasks.json",
   "graph_file": "storage/graph/dependency_graph.json",
   "pipeline_config": {
     "allow_fallback": true,
-    "allow_decomposition": false,
-    "force_fallback": false,
+    "allow_decomposition": true,
+    "force_fallback": true,
     "use_kb": true
   },
   "plan_highlights": {
-    "requirement_count": 8,
-    "task_count": 8,
-    "atomic_task_ratio": 1.0,
+    "requirement_count": 5,
+    "task_count": 7,
+    "atomic_task_ratio": 1.4,
     "theme_breakdown": [
       {
-        "theme": "crud",
+        "theme": "security",
         "count": 3
       },
       {
-        "theme": "view",
-        "count": 2
+        "theme": "identity",
+        "count": 1
+      },
+      {
+        "theme": "notification",
+        "count": 1
       },
       {
         "theme": "auth",
         "count": 1
       },
       {
-        "theme": "reporting",
+        "theme": "access_control",
         "count": 1
       },
       {
-        "theme": "security",
-        "count": 1
-      },
-      {
-        "theme": "offline_operation",
+        "theme": "crud",
         "count": 1
       }
     ],
     "high_complexity_tasks": [
       {
-        "id": "T007",
-        "title": "Enable offline capability support",
+        "id": "T003",
+        "title": "Implement role-based access control",
         "complexity": 4,
-        "source": "REQ-07"
+        "source": "REQ-03"
+      },
+      {
+        "id": "T005",
+        "title": "Optimize respond to all requests performance constraints",
+        "complexity": 4,
+        "source": "REQ-04"
       }
     ],
     "optional_scope": {
       "task_count": 0,
-      "confirmed_task_count": 8,
+      "confirmed_task_count": 7,
       "task_ids": [],
       "titles": [],
       "sources": []
@@ -84,103 +90,60 @@
     "coverage_by_requirement": [
       {
         "source": "REQ-01",
-        "original_requirement": "The system should provide biometric login and two-factor authentication.",
+        "original_requirement": "Actor: User — The user can register an account using email and password",
         "task_count": 1,
         "task_ids": [
           "T001"
         ],
         "task_titles": [
-          "Implement biometric login and two-factor authentication workflow"
+          "Enforce password hashing and complexity policy"
         ],
         "req_types": [
           "FR"
         ],
-        "max_complexity": 3
+        "max_complexity": 2
       },
       {
         "source": "REQ-02",
-        "original_requirement": "The system should provide account balance and transaction history.",
+        "original_requirement": "Actor: User — The user can login and logout of the system securely",
         "task_count": 1,
         "task_ids": [
           "T002"
         ],
         "task_titles": [
-          "Implement account balance and transaction history workflow"
+          "Implement user can login and logout workflow"
         ],
         "req_types": [
           "FR"
         ],
-        "max_complexity": 2
+        "max_complexity": 3
       },
       {
         "source": "REQ-03",
-        "original_requirement": "The system should provide fund transfers and scheduled payments.",
-        "task_count": 1,
+        "original_requirement": "Actor: Admin — The admin can manage user accounts including suspend and reactivate",
+        "task_count": 2,
         "task_ids": [
-          "T003"
-        ],
-        "task_titles": [
-          "Implement fund transfers and scheduled payments workflow"
-        ],
-        "req_types": [
-          "FR"
-        ],
-        "max_complexity": 2
-      },
-      {
-        "source": "REQ-04",
-        "original_requirement": "The system should provide bill payments and QR code transactions.",
-        "task_count": 1,
-        "task_ids": [
+          "T003",
           "T004"
         ],
         "task_titles": [
-          "Implement bill payments and QR code transactions workflow"
+          "Implement role-based access control",
+          "Implement users and permissions management workflow"
         ],
         "req_types": [
           "FR"
         ],
-        "max_complexity": 2
+        "max_complexity": 4
       },
       {
-        "source": "REQ-05",
-        "original_requirement": "The system should provide spending analytics and budget alerts.",
+        "source": "REQ-04",
+        "original_requirement": "The system must respond to all requests within 2 seconds under normal load",
         "task_count": 1,
         "task_ids": [
           "T005"
         ],
         "task_titles": [
-          "Implement spending analytics workflow"
-        ],
-        "req_types": [
-          "FR"
-        ],
-        "max_complexity": 2
-      },
-      {
-        "source": "REQ-06",
-        "original_requirement": "The system should encrypt sensitive data.",
-        "task_count": 1,
-        "task_ids": [
-          "T006"
-        ],
-        "task_titles": [
-          "Enforce sensitive data encryption controls"
-        ],
-        "req_types": [
-          "NFR"
-        ],
-        "max_complexity": 3
-      },
-      {
-        "source": "REQ-07",
-        "original_requirement": "The system should support offline capability.",
-        "task_count": 1,
-        "task_ids": [
-          "T007"
-        ],
-        "task_titles": [
-          "Enable offline capability support"
+          "Optimize respond to all requests performance constraints"
         ],
         "req_types": [
           "NFR"
@@ -188,14 +151,16 @@
         "max_complexity": 4
       },
       {
-        "source": "REQ-08",
-        "original_requirement": "The system should maintain PCI-DSS compliance.",
-        "task_count": 1,
+        "source": "REQ-05",
+        "original_requirement": "All user data must be encrypted at rest and in transit using AES-256",
+        "task_count": 2,
         "task_ids": [
-          "T008"
+          "T006",
+          "T007"
         ],
         "task_titles": [
-          "Establish PCI-DSS compliance controls"
+          "Enforce encryption at rest for sensitive data",
+          "Enforce encryption in transit for sensitive data"
         ],
         "req_types": [
           "NFR"
@@ -208,20 +173,19 @@
         "stage": 1,
         "task_count": 3,
         "task_ids": [
+          "T005",
           "T006",
-          "T007",
-          "T008"
+          "T007"
         ],
-        "headline": "Stage 1 hardens offline resilience and synchronization constraints",
+        "headline": "Stage 1 hardens platform security controls",
         "dominant_themes": [
           "security",
-          "offline_operation",
-          "compliance"
+          "performance"
         ],
         "titles": [
-          "Enforce sensitive data encryption controls",
-          "Enable offline capability support",
-          "Establish PCI-DSS compliance controls"
+          "Optimize respond to all requests performance constraints",
+          "Enforce encryption at rest for sensitive data",
+          "Enforce encryption in transit for sensitive data"
         ]
       },
       {
@@ -230,75 +194,73 @@
         "task_ids": [
           "T001"
         ],
-        "headline": "Stage 2 hardens authentication and account security",
+        "headline": "Stage 2 establishes account and identity foundations",
         "dominant_themes": [
-          "auth"
+          "identity",
+          "notification"
         ],
         "titles": [
-          "Implement biometric login and two-factor authentication workflow"
+          "Enforce password hashing and complexity policy"
         ]
       },
       {
         "stage": 3,
-        "task_count": 3,
+        "task_count": 2,
         "task_ids": [
           "T002",
-          "T003",
-          "T004"
+          "T003"
         ],
-        "headline": "Stage 3 delivers core product workflows",
+        "headline": "Stage 3 hardens authentication and account security",
         "dominant_themes": [
-          "crud",
-          "view"
+          "security",
+          "auth",
+          "access_control"
         ],
         "titles": [
-          "Implement account balance and transaction history workflow",
-          "Implement fund transfers and scheduled payments workflow",
-          "Implement bill payments and QR code transactions workflow"
+          "Implement user can login and logout workflow",
+          "Implement role-based access control"
         ]
       },
       {
         "stage": 4,
         "task_count": 1,
         "task_ids": [
-          "T005"
+          "T004"
         ],
-        "headline": "Stage 4 delivers analytics and reporting visibility",
+        "headline": "Stage 4 delivers core product workflows",
         "dominant_themes": [
-          "reporting",
-          "view"
+          "crud",
+          "user_management"
         ],
         "titles": [
-          "Implement spending analytics workflow"
+          "Implement users and permissions management workflow"
         ]
       }
     ],
     "risk_signals": [
-      "Offline capability requires secure local storage, synchronization, and recovery-path validation.",
-      "Compliance-oriented requirements are present and should be validated early to avoid late rework.",
       "Non-functional scope is substantial, so quality engineering should run in parallel with feature delivery.",
-      "1 high-complexity tasks sit on the roadmap and deserve early prototyping."
+      "2 high-complexity tasks sit on the roadmap and deserve early prototyping."
     ],
     "committee_brief": {
-      "domain_inference": "Likely domain: fintech, payments, and billing operations.",
-      "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+      "domain_inference": "Likely domain: multi-role business workflow application.",
+      "scope_assessment": "Scope includes 4 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
       "ambiguity_register": [],
       "assumption_log": [
-        "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+        "Dependency sequencing was inferred for 4 task(s) to produce an executable implementation order beyond the raw prose order."
       ],
       "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
-      "graph_summary": "8 requirements -> 8 atomic tasks across 4 delivery sprints. Critical delivery path: T008 -> T001 -> T004 -> T005 (4 hops, ~10 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Establish PCI-DSS compliance controls blocks 5 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. Operational constraint: 1 offline requirement should be validated for secure caching, synchronization, and recovery behavior before release. Effort breakdown: 210 estimated hours | FR: 104h | NFR: 106h."
+      "graph_summary": "5 requirements -> 7 atomic tasks across 4 delivery sprints. Critical delivery path: T005 -> T001 -> T003 -> T004 (4 hops, ~12 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize respond to all requests performance constraints blocks 3 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. Effort breakdown: 192 estimated hours | FR: 94h | NFR: 98h."
     }
   },
   "committee_brief": {
-    "domain_inference": "Likely domain: fintech, payments, and billing operations.",
-    "scope_assessment": "Scope includes 5 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
+    "domain_inference": "Likely domain: multi-role business workflow application.",
+    "scope_assessment": "Scope includes 4 functional task(s) and 3 non-functional task(s); 0 task(s) sit outside the confirmed baseline because they are optional or low-confidence.",
     "ambiguity_register": [],
     "assumption_log": [
-      "Dependency sequencing was inferred for 5 task(s) to produce an executable implementation order beyond the raw prose order."
+      "Dependency sequencing was inferred for 4 task(s) to produce an executable implementation order beyond the raw prose order."
     ],
     "confidence_signal": "Planning confidence is high: no low-confidence tasks were detected in the current plan.",
-    "graph_summary": "8 requirements -> 8 atomic tasks across 4 delivery sprints. Critical delivery path: T008 -> T001 -> T004 -> T005 (4 hops, ~10 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Establish PCI-DSS compliance controls blocks 5 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. Operational constraint: 1 offline requirement should be validated for secure caching, synchronization, and recovery behavior before release. Effort breakdown: 210 estimated hours | FR: 104h | NFR: 106h."
+    "graph_summary": "5 requirements -> 7 atomic tasks across 4 delivery sprints. Critical delivery path: T005 -> T001 -> T003 -> T004 (4 hops, ~12 story points, estimated 5 weeks with a 2-person team). Coordination hotspot: Optimize respond to all requests performance constraints blocks 3 downstream tasks and should be closed by Sprint 1. Parallel execution opportunity: 3 tasks can start immediately in Sprint 1. Effort breakdown: 192 estimated hours | FR: 94h | NFR: 98h."
   },
   "sprint_plan": [
     {
@@ -306,11 +268,11 @@
       "name": "Security & Compliance Readiness",
       "goal": "Security, privacy, and compliance controls are validated for the planned scope",
       "tasks": [
+        "T005",
         "T006",
-        "T007",
-        "T008"
+        "T007"
       ],
-      "total_estimated_hours": 106,
+      "total_estimated_hours": 98,
       "total_points": 10,
       "duration_weeks": 2,
       "owner_roles": [
@@ -319,45 +281,45 @@
       ],
       "focus_themes": [
         "security",
-        "offline_operation",
-        "compliance"
+        "performance"
       ]
     },
     {
       "sprint": 2,
-      "name": "Authentication & Access Control",
-      "goal": "Authentication and role-based access controls are enforced before protected workflows proceed",
+      "name": "Integrations & Notifications",
+      "goal": "Account identity, authentication, and permission foundations are ready for downstream workflows",
       "tasks": [
         "T001"
       ],
-      "total_estimated_hours": 24,
-      "total_points": 3,
+      "total_estimated_hours": 20,
+      "total_points": 2,
       "duration_weeks": 1,
       "owner_roles": [
         "Backend Engineer"
       ],
       "focus_themes": [
-        "auth"
+        "identity",
+        "notification"
       ]
     },
     {
       "sprint": 3,
-      "name": "Core Workflow Delivery",
-      "goal": "Core user-facing workflows are implemented and usable end-to-end",
+      "name": "Authentication & Access Control",
+      "goal": "Authentication and role-based access controls are enforced before protected workflows proceed",
       "tasks": [
         "T002",
-        "T003",
-        "T004"
+        "T003"
       ],
-      "total_estimated_hours": 60,
-      "total_points": 6,
+      "total_estimated_hours": 54,
+      "total_points": 7,
       "duration_weeks": 1,
       "owner_roles": [
-        "Backend Engineer"
+        "Security Engineer"
       ],
       "focus_themes": [
-        "crud",
-        "view"
+        "security",
+        "auth",
+        "access_control"
       ]
     },
     {
@@ -365,202 +327,184 @@
       "name": "Core Workflow Delivery",
       "goal": "Core user-facing workflows are implemented and usable end-to-end",
       "tasks": [
-        "T005"
+        "T004"
       ],
       "total_estimated_hours": 20,
       "total_points": 2,
       "duration_weeks": 1,
       "owner_roles": [
-        "Data Engineer"
+        "Backend Engineer"
       ],
       "focus_themes": [
-        "reporting",
-        "view"
+        "crud",
+        "user_management"
       ]
     }
   ],
   "effort_summary": {
-    "total_estimated_hours": 210,
-    "total_estimated_days": 27,
-    "fr_estimated_hours": 104,
-    "nfr_estimated_hours": 106
+    "total_estimated_hours": 192,
+    "total_estimated_days": 24,
+    "fr_estimated_hours": 94,
+    "nfr_estimated_hours": 98
   },
   "team_allocation": [
+    {
+      "role": "Security Engineer",
+      "task_ids": [
+        "T002",
+        "T003",
+        "T006",
+        "T007"
+      ],
+      "task_count": 4,
+      "estimated_hours": 114,
+      "focus": "security, authentication, access control"
+    },
     {
       "role": "Backend Engineer",
       "task_ids": [
         "T001",
-        "T002",
-        "T003",
         "T004"
       ],
-      "task_count": 4,
-      "estimated_hours": 84,
-      "focus": "core workflows, authentication, information access"
-    },
-    {
-      "role": "Security Engineer",
-      "task_ids": [
-        "T006",
-        "T008"
-      ],
       "task_count": 2,
-      "estimated_hours": 69,
-      "focus": "security, compliance"
+      "estimated_hours": 40,
+      "focus": "identity, communications, core workflows"
     },
     {
       "role": "Platform Engineer",
       "task_ids": [
-        "T007"
-      ],
-      "task_count": 1,
-      "estimated_hours": 37,
-      "focus": "offline operation"
-    },
-    {
-      "role": "Data Engineer",
-      "task_ids": [
         "T005"
       ],
       "task_count": 1,
-      "estimated_hours": 20,
-      "focus": "reporting, information access"
+      "estimated_hours": 38,
+      "focus": "performance"
     }
   ],
   "risk_register": [
     {
       "risk": "Workflow edge cases need end-to-end validation",
-      "task_count": 4,
+      "task_count": 3,
       "task_ids": [
         "T001",
         "T002",
-        "T003",
         "T004"
       ]
     },
     {
-      "risk": "Aggregated outputs depend on clean source data",
-      "task_count": 1,
-      "task_ids": [
-        "T005"
-      ]
-    },
-    {
       "risk": "Key management and certificate rotation must be validated",
-      "task_count": 1,
+      "task_count": 2,
       "task_ids": [
-        "T006"
-      ]
-    },
-    {
-      "risk": "Offline caching, synchronization, and recovery paths need full test coverage",
-      "task_count": 1,
-      "task_ids": [
+        "T006",
         "T007"
       ]
     },
     {
-      "risk": "Compliance interpretation should be validated early",
+      "risk": "Role-permission regressions can block downstream workflows",
       "task_count": 1,
       "task_ids": [
-        "T008"
+        "T003"
+      ]
+    },
+    {
+      "risk": "Performance targets require realistic load testing",
+      "task_count": 1,
+      "task_ids": [
+        "T005"
       ]
     }
   ],
   "graph_analytics": {
-    "total_tasks": 8,
-    "total_dependencies": 17,
-    "fr_count": 5,
+    "total_tasks": 7,
+    "total_dependencies": 12,
+    "fr_count": 4,
     "nfr_count": 3,
-    "avg_complexity": 2.62,
+    "avg_complexity": 3.0,
     "complexity_distribution": {
       "1": 0,
-      "2": 4,
+      "2": 2,
       "3": 3,
-      "4": 1,
+      "4": 2,
       "5": 0
     },
     "optional_task_count": 0,
-    "confirmed_task_count": 8,
+    "confirmed_task_count": 7,
     "low_confidence_tasks": [],
     "is_valid_dag": true,
     "cycle_issues": [],
     "critical_path": {
       "task_ids": [
-        "T008",
+        "T005",
         "T001",
-        "T004",
-        "T005"
+        "T003",
+        "T004"
       ],
       "titles": [
-        "Establish PCI-DSS compliance controls",
-        "Implement biometric login and two-factor authentication workflow",
-        "Implement bill payments and QR code transactions workflow",
-        "Implement spending analytics workflow"
+        "Optimize respond to all requests performance constraints",
+        "Enforce password hashing and complexity policy",
+        "Implement role-based access control",
+        "Implement users and permissions management workflow"
       ],
-      "total_weight": 7,
+      "total_weight": 8,
       "length": 4
     },
     "bottleneck_tasks": [
       {
-        "id": "T008",
-        "title": "Establish PCI-DSS compliance controls",
-        "blocks": 5,
-        "complexity": 3
-      },
-      {
-        "id": "T007",
-        "title": "Enable offline capability support",
-        "blocks": 4,
+        "id": "T005",
+        "title": "Optimize respond to all requests performance constraints",
+        "blocks": 3,
         "complexity": 4
       },
       {
-        "id": "T001",
-        "title": "Implement biometric login and two-factor authentication workflow",
-        "blocks": 4,
-        "complexity": 3
-      },
-      {
         "id": "T006",
-        "title": "Enforce sensitive data encryption controls",
+        "title": "Enforce encryption at rest for sensitive data",
         "blocks": 3,
         "complexity": 3
       },
       {
-        "id": "T004",
-        "title": "Implement bill payments and QR code transactions workflow",
-        "blocks": 1,
+        "id": "T007",
+        "title": "Enforce encryption in transit for sensitive data",
+        "blocks": 3,
+        "complexity": 3
+      },
+      {
+        "id": "T001",
+        "title": "Enforce password hashing and complexity policy",
+        "blocks": 2,
         "complexity": 2
+      },
+      {
+        "id": "T003",
+        "title": "Implement role-based access control",
+        "blocks": 1,
+        "complexity": 4
       }
     ],
     "root_tasks": [
+      "T005",
       "T006",
-      "T007",
-      "T008"
+      "T007"
     ],
     "leaf_tasks": [
       "T002",
-      "T003",
-      "T005"
+      "T004"
     ],
     "suspicious_isolated_tasks": [],
     "validation_warnings": [],
     "parallel_groups": [
       [
+        "T005",
         "T006",
-        "T007",
-        "T008"
+        "T007"
       ],
       [
         "T001"
       ],
       [
         "T002",
-        "T003",
-        "T004"
+        "T003"
       ],
       [
-        "T005"
+        "T004"
       ]
     ],
     "parallel_group_count": 4

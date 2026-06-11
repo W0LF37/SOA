@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Calendar, Network,
-  Activity, AlertTriangle, MessageSquare, Sparkles,
-  ClipboardCheck, FileText, LogOut, Database, BarChart2,
-  GraduationCap, UserCog,
+  AlertTriangle, MessageSquare, Sparkles,
+  ClipboardCheck, FileText, LogOut,
+  GraduationCap, UserCog, Activity,
 } from "lucide-react";
 import { getChatMessages } from "./lib/api";
 
@@ -24,6 +24,80 @@ const EvaluatePage = React.lazy(() => import("./pages/EvaluatePage"));
 const StudentWorkspace = React.lazy(() => import("./pages/StudentWorkspace"));
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 
+type RouteErrorBoundaryState = {
+  hasError: boolean;
+  message: string;
+};
+
+class RouteErrorBoundary extends React.Component<{ children: React.ReactNode }, RouteErrorBoundaryState> {
+  state: RouteErrorBoundaryState = {
+    hasError: false,
+    message: "",
+  };
+
+  static getDerivedStateFromError(error: Error): RouteErrorBoundaryState {
+    return {
+      hasError: true,
+      message: error.message || "Unexpected UI error.",
+    };
+  }
+
+  componentDidCatch(error: Error) {
+    console.error("Route render failed:", error);
+  }
+
+  render() {
+    if (!this.state.hasError) {
+      return this.props.children;
+    }
+
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "#0f172a",
+          color: "#e2e8f0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 24,
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 720,
+            background: "rgba(15,23,42,0.96)",
+            border: "1px solid #7f1d1d",
+            borderRadius: 18,
+            padding: 24,
+          }}
+        >
+          <div style={{ fontSize: 20, fontWeight: 800, color: "#f8fafc", marginBottom: 10 }}>
+            Workspace failed to render
+          </div>
+          <div style={{ fontSize: 14, color: "#fca5a5", lineHeight: 1.7, marginBottom: 16 }}>
+            {this.state.message}
+          </div>
+          <button
+            onClick={() => window.location.reload()}
+            style={{
+              background: "linear-gradient(135deg, #0284c7, #1e40af)",
+              border: "none",
+              borderRadius: 10,
+              color: "#fff",
+              padding: "10px 16px",
+              fontWeight: 700,
+            }}
+          >
+            Reload page
+          </button>
+        </div>
+      </div>
+    );
+  }
+}
+
 const NAV_SUPERVISOR = [
   {
     title: "Overview",
@@ -37,23 +111,16 @@ const NAV_SUPERVISOR = [
     items: [
       { to: "/gantt", icon: Calendar, label: "Gantt Chart" },
       { to: "/graph", icon: Network, label: "Task Graph" },
-      { to: "/monitor", icon: Activity, label: "Git Monitor" },
       { to: "/risks", icon: AlertTriangle, label: "Risk Indicators" },
+      { to: "/monitor", icon: Activity, label: "Repository Gate" },
     ],
   },
   {
     title: "Review",
     items: [
       { to: "/brief", icon: FileText, label: "Committee Brief" },
-      { to: "/admin", icon: ClipboardCheck, label: "Admin Review" },
+      { to: "/admin", icon: ClipboardCheck, label: "Supervisor Review" },
       { to: "/chat", icon: MessageSquare, label: "Communication" },
-    ],
-  },
-  {
-    title: "System",
-    items: [
-      { to: "/kb", icon: Database, label: "Knowledge Base" },
-      { to: "/evaluate", icon: BarChart2, label: "Evaluation" },
     ],
   },
 ] as const;
@@ -90,15 +157,15 @@ function Sidebar() {
   return (
     <aside
       className="sidebar"
-      style={{ "--role-color": role === "Student" ? "#2563eb" : "#7c3aed" } as React.CSSProperties}
+      style={{ "--role-color": role === "Student" ? "#0284c7" : "#1e40af" } as React.CSSProperties}
     >
       <div className="sidebar-brand">
         <div className="sidebar-logo">
           <Sparkles size={18} />
         </div>
         <div>
-          <div className="sidebar-title">CritiPlan</div>
-          <div className="sidebar-sub">AI Project Manager</div>
+          <div className="sidebar-title">AI Project Manager</div>
+          <div className="sidebar-sub">Local · Ollama</div>
         </div>
       </div>
 
@@ -214,36 +281,40 @@ function AppShell() {
 
   if (role === "Student") {
     return (
-      <div style={{ minHeight: "100vh", background: "inherit" }}>
-        <React.Suspense fallback={<RouteFallback />}>
-          <StudentWorkspace />
-        </React.Suspense>
-      </div>
+      <RouteErrorBoundary>
+        <div style={{ minHeight: "100vh", background: "inherit" }}>
+          <React.Suspense fallback={<RouteFallback />}>
+            <StudentWorkspace />
+          </React.Suspense>
+        </div>
+      </RouteErrorBoundary>
     );
   }
 
   return (
-    <div className="app-shell">
-      <Sidebar />
-      <main className="content">
-        <React.Suspense fallback={<RouteFallback />}>
-          <Routes>
-            <Route path="/"           element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard"  element={<Dashboard />} />
-            <Route path="/plan"       element={<PlanPage />} />
-            <Route path="/gantt"      element={<GanttPage />} />
-            <Route path="/graph"      element={<GraphPage />} />
-            <Route path="/monitor"    element={<MonitorPage />} />
-            <Route path="/risks"      element={<RisksPage />} />
-            <Route path="/chat"       element={<ChatPage />} />
-            <Route path="/brief"      element={<BriefPage />} />
-            <Route path="/admin"      element={<AdminReviewPage />} />
-            <Route path="/kb"         element={<KBPage />} />
-            <Route path="/evaluate"   element={<EvaluatePage />} />
-          </Routes>
-        </React.Suspense>
-      </main>
-    </div>
+    <RouteErrorBoundary>
+      <div className="app-shell">
+        <Sidebar />
+        <main className="content">
+          <React.Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/"           element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard"  element={<Dashboard />} />
+              <Route path="/plan"       element={<PlanPage />} />
+              <Route path="/gantt"      element={<GanttPage />} />
+              <Route path="/graph"      element={<GraphPage />} />
+              <Route path="/monitor"    element={<MonitorPage />} />
+              <Route path="/risks"      element={<RisksPage />} />
+              <Route path="/chat"       element={<ChatPage />} />
+              <Route path="/brief"      element={<BriefPage />} />
+              <Route path="/admin"      element={<AdminReviewPage />} />
+              <Route path="/kb"         element={<KBPage />} />
+              <Route path="/evaluate"   element={<EvaluatePage />} />
+            </Routes>
+          </React.Suspense>
+        </main>
+      </div>
+    </RouteErrorBoundary>
   );
 }
 

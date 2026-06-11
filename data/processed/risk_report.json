@@ -1,34 +1,14 @@
 {
-  "risk_level": "critical",
-  "risk_score": 0.9,
-  "total_risks": 7,
+  "risk_level": "medium",
+  "risk_score": 0.3,
+  "total_risks": 4,
   "risks": [
     {
       "category": "bottleneck",
-      "severity": "critical",
-      "message": "T008 'Establish PCI-DSS compliance controls' blocks 5 tasks -- critical single point of failure",
-      "affected_tasks": [
-        "T008"
-      ],
-      "mitigation": "Split task or add a parallel implementation path",
-      "source": "rule"
-    },
-    {
-      "category": "bottleneck",
       "severity": "high",
-      "message": "T007 'Enable offline capability support' blocks 4 downstream tasks",
+      "message": "T005 'Optimize respond to all requests performance constraints' blocks 3 downstream tasks",
       "affected_tasks": [
-        "T007"
-      ],
-      "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
-      "source": "rule"
-    },
-    {
-      "category": "bottleneck",
-      "severity": "high",
-      "message": "T001 'Implement biometric login and two-factor authentication workflow' blocks 4 downstream tasks",
-      "affected_tasks": [
-        "T001"
+        "T005"
       ],
       "mitigation": "Prioritize early delivery; unblock dependencies ASAP",
       "source": "rule"
@@ -36,25 +16,18 @@
     {
       "category": "bottleneck",
       "severity": "medium",
-      "message": "Foundational NFR gates (T006) collectively gate 3 downstream tasks and should be front-loaded early",
+      "message": "Foundational NFR gates (T006, T007) collectively gate 3 downstream tasks and should be front-loaded early",
       "affected_tasks": [
-        "T006"
+        "T006",
+        "T007"
       ],
       "mitigation": "Schedule foundational NFR tasks as parallel early work and validate them incrementally rather than treating each as an isolated blocker",
       "source": "rule"
     },
     {
       "category": "schedule",
-      "severity": "high",
-      "message": "Total effort 210h may exceed team capacity",
-      "affected_tasks": [],
-      "mitigation": "Review scope or negotiate timeline with stakeholders",
-      "source": "rule"
-    },
-    {
-      "category": "schedule",
       "severity": "medium",
-      "message": "NFR work (106h) exceeds FR work (104h) -- quality engineering dominates timeline",
+      "message": "NFR work (98h) exceeds FR work (94h) -- quality engineering dominates timeline",
       "affected_tasks": [],
       "mitigation": "Consider deferring lower-priority NFR tasks to a later phase",
       "source": "rule"
@@ -69,9 +42,7 @@
     }
   ],
   "mitigations": [
-    "[CRITICAL] Split task or add a parallel implementation path",
-    "[HIGH] Prioritize early delivery; unblock dependencies ASAP",
-    "[HIGH] Review scope or negotiate timeline with stakeholders"
+    "[HIGH] Prioritize early delivery; unblock dependencies ASAP"
   ],
-  "generated_at": "2026-05-04T19:09:41.868054+00:00"
+  "generated_at": "2026-06-06T22:43:00.452007+00:00"
 }

@@ -40,6 +40,7 @@ type AppState = {
   auth: AuthSession | null;
   login: (session: AuthSession) => void;
   logout: () => void;
+  resetWorkspace: () => void;
   loading: boolean;
   error: string | null;
   refreshAll: () => Promise<void>;
@@ -73,6 +74,17 @@ export const useAppStore = create<AppState>((set) => ({
   logout: () => {
     localStorage.removeItem(SESSION_KEY);
     set({ auth: null, role: "Supervisor" });
+  },
+
+  resetWorkspace: () => {
+    set({
+      data: null,
+      brief: null,
+      evaluation: null,
+      kbStats: null,
+      loading: false,
+      error: null,
+    });
   },
 
   refreshAll: async () => {

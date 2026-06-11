@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "vite --configLoader runner",
+    "build": "tsc -b && vite build --configLoader runner",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --configLoader runner"
   },
   "dependencies": {
     "@xyflow/react": "^12.10.2",

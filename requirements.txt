@@ -12,3 +12,4 @@ sse-starlette
 streamlit
 streamlit-autorefresh
 openpyxl
+dulwich

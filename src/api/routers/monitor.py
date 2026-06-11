@@ -15,6 +15,7 @@ from src.core.runtime_paths import prepare_writable_file_path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 TASKS_PATH = prepare_writable_file_path(PROJECT_ROOT, "data/processed/tasks.json")
 MONITOR_PATH = prepare_writable_file_path(PROJECT_ROOT, "data/processed/monitor_report.json")
+DEFAULT_DEMO_REPO = PROJECT_ROOT / "case_study"
 
 router = APIRouter()
 
@@ -40,6 +41,8 @@ def analyze(payload: MonitorRequest) -> dict[str, Any]:
             if not candidate.exists():
                 raise HTTPException(status_code=400, detail=f"Repository path does not exist: {payload.repo_path}")
             repo_path = str(candidate)
+        elif (DEFAULT_DEMO_REPO / ".git").exists():
+            repo_path = str(DEFAULT_DEMO_REPO)
         task_list = TaskList.model_validate(tasks_data)
         report = MonitorAgent(use_semantic=payload.use_semantic).track_progress(
             task_list,
